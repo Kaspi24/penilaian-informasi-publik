@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('whatsapp')->nullable();
             $table->foreignIdFor(WorkUnit::class)->constrained()->cascadeOnDelete();
-            $table->string('role')->comment('ADMIN;JURY;UNIT');
+            $table->string('role')->comment('ADMIN;JURY;RESPONDENT');
             $table->string('password');
             $table->string('profile_picture')->nullable();
             $table->timestamp('email_verified_at')->nullable();
