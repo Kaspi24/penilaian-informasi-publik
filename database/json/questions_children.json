@@ -1,0 +1,57 @@
+[
+    {
+        "id"            : 1,
+        "question_id"   : 9,
+        "text"          : "Jumlah permohonan informasi yang diminta"
+    },
+    {
+        "id"            : 2,
+        "question_id"   : 9,
+        "text"          : "Waktu yang diperlukan dalam memenuhi setiap permohonan informasi"
+    },
+    {
+        "id"            : 3,
+        "question_id"   : 9,
+        "text"          : "Jumlah permohonan informasi publik yang dikabulkan baik sebagian atau seluruhnya dan yang ditolak"
+    },
+    {
+        "id"            : 4,
+        "question_id"   : 9,
+        "text"          : "Alasan penolakan permohonan informasi"
+    },
+    {
+        "id"            : 5,
+        "question_id"   : 21,
+        "text"          : "Laporan Tahunan tahun 2023"
+    },
+    {
+        "id"            : 6,
+        "question_id"   : 21,
+        "text"          : "Rencana Kerja tahun 2024"
+    },
+    {
+        "id"            : 7,
+        "question_id"   : 23,
+        "text"          : "Alamat kantor lengkap unit kerja (bukan alamat kantor PPID)"
+    },
+    {
+        "id"            : 8,
+        "question_id"   : 23,
+        "text"          : "Tugas Fungsi"
+    },
+    {
+        "id"            : 9,
+        "question_id"   : 23,
+        "text"          : "Struktur Organisasi"
+    },
+    {
+        "id"            : 10,
+        "question_id"   : 28,
+        "text"          : "Kepegawaian"
+    },
+    {
+        "id"            : 11,
+        "question_id"   : 28,
+        "text"          : "Keuangan"
+    }
+]
