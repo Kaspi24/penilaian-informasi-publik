@@ -1,0 +1,2728 @@
+[
+    {
+        "id"        : "1",
+        "name"      : "PUSAT",
+        "category"  : "PUSAT"
+    },
+    {
+        "id"        : "2",
+        "name"      : "Sekretariat Inspektorat Jenderal",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "3",
+        "name"      : "Setditjen Perhubungan Darat",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "4",
+        "name"      : "Setditjen Perhubungan Laut",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "5",
+        "name"      : "Setditjen Perhubungan Udara",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "6",
+        "name"      : "Setditjen Perkeretaapian",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "7",
+        "name"      : "Sekretariat Badan Kebijakan Transportasi",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "8",
+        "name"      : "Sekretariat Badan Pengembangan SDM Perhubungan",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "9",
+        "name"      : "Sekretariat Badan Pengelola Transportasi Jabodetabek",
+        "category"  : "PELAKSANA"
+    },
+    {
+        "id"        : "10",
+        "name"      : "Balai Pengujian Laik Jalan Dan Sertifikasi Kendaraan Bermotor",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "11",
+        "name"      : "BPTD Kelas II Aceh",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "12",
+        "name"      : "BPTD Kelas II Sumatera Utara",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "13",
+        "name"      : "Kesyahbandar Dan Otoritas Pelabuhan Penyeberangan Danau Toba",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "14",
+        "name"      : "BPTD Kelas II Sumatera Barat",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "15",
+        "name"      : "BPTD Kelas II Riau",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "16",
+        "name"      : "BPTD Kelas II Kepulauan Riau",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "17",
+        "name"      : "BPTD Kelas II Jambi",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "18",
+        "name"      : "BPTD Kelas II Bengkulu",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "19",
+        "name"      : "BPTD Kelas II Sumatera Selatan",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "20",
+        "name"      : "BPTD Kelas II Bangka Belitung",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "21",
+        "name"      : "BPTD Kelas II Lampung",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "22",
+        "name"      : "BPTD Kelas II Banten",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "23",
+        "name"      : "BPTD Kelas II Jawa Barat",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "24",
+        "name"      : "BPTD Kelas II Jawa Tengah",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "25",
+        "name"      : "BPTD Kelas III DI Yogyakarta",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "26",
+        "name"      : "BPTD Kelas II Jawa Timur",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "27",
+        "name"      : "BPTD Kelas II Bali",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "28",
+        "name"      : "BPTD Kelas II Nusa Tenggara Barat",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "29",
+        "name"      : "BPTD Kelas II Nusa Tenggara Timur",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "30",
+        "name"      : "BPTD Kelas II Kalimantan Barat",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "31",
+        "name"      : "BPTD Kelas II Kalimantan Selatan",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "32",
+        "name"      : "BPTD Kelas II Kalimantan Tengah",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "33",
+        "name"      : "BPTD Kelas II Kalimantan Timur",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "34",
+        "name"      : "BPTD Kelas III Kalimantan Utara",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "35",
+        "name"      : "BPTD Kelas II Sulawesi Tenggara",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "36",
+        "name"      : "BPTD Kelas II Sulawesi Selatan",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "37",
+        "name"      : "BPTD Kelas III Sulawesi Barat",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "38",
+        "name"      : "BPTD Kelas II Sulawesi Tengah",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "39",
+        "name"      : "BPTD Kelas II Gorontalo",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "40",
+        "name"      : "BPTD Kelas II Sulawesi Utara",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "41",
+        "name"      : "BPTD Kelas II Maluku",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "42",
+        "name"      : "BPTD Kelas II Maluku Utara",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "43",
+        "name"      : "BPTD Kelas II Papua",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "44",
+        "name"      : "BPTD Kelas II Papua Barat",
+        "category"  : "DARAT"
+    },
+    {
+        "id"        : "45",
+        "name"      : "DISNAV TIPE A KELAS II SABANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "46",
+        "name"      : "KSOP KELAS IV SABANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "47",
+        "name"      : "KSOP KELAS IV KUALA LANGSA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "48",
+        "name"      : "KSOP KELAS IV MEULABOH",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "49",
+        "name"      : "KSOP KELAS IV LHOKSUMAWE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "50",
+        "name"      : "KSOP KELAS IV MALAHAYATI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "51",
+        "name"      : "KUPP KELAS III TAPAK TUAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "52",
+        "name"      : "KUPP KELAS III SINGKIL",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "53",
+        "name"      : "KUPP KELAS III SINABANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "54",
+        "name"      : "KUPP KELAS III CALANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "55",
+        "name"      : "KUPP KELAS III SUSOH",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "56",
+        "name"      : "KSOP UTAMA BELAWAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "57",
+        "name"      : "DISNAV TIPE A KELAS I BELAWAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "58",
+        "name"      : "KSOP KELAS III KUALA TANJUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "59",
+        "name"      : "DISNAV TIPE A KELAS III SIBOLGA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "60",
+        "name"      : "KSOP KELAS IV PANGKALAN SUSU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "61",
+        "name"      : "KSOP KELAS IV SIBOLGA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "62",
+        "name"      : "KSOP KELAS IV TANJUNG BALAI ASAHAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "63",
+        "name"      : "KSOP KELAS IV GUNUNG SITOLI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "64",
+        "name"      : "KUPP KELAS II TANJUNG BERINGIN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "65",
+        "name"      : "KUPP KELAS III TELUK DALAM",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "66",
+        "name"      : "KUPP KELAS III SIROMBU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "67",
+        "name"      : "KUPP KELAS III LAHEWA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "68",
+        "name"      : "KUPP KELAS III PULAU TELLO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "69",
+        "name"      : "KUPP KELAS III LEIDONG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "70",
+        "name"      : "KUPP KELAS III TANJUNG SARANG ELANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "71",
+        "name"      : "KUPP KELAS III BARUS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "72",
+        "name"      : "KUPP KELAS III BATAHAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "73",
+        "name"      : "KSOP KELAS II TELUK BAYUR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "74",
+        "name"      : "DISNAV TIPE A KELAS II TELUK BAYUR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "75",
+        "name"      : "KUPP KELAS III SIUBAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "76",
+        "name"      : "KUPP KELAS III MUARA SIBERUT",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "77",
+        "name"      : "KUPP KELAS III SIKAKAP",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "78",
+        "name"      : "KSOP KELAS I DUMAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "79",
+        "name"      : "DISNAV TIPE A KELAS I DUMAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "80",
+        "name"      : "KSOP KELAS II TANJUNG BUTON",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "81",
+        "name"      : "KSOP KELAS II PEKANBARU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "82",
+        "name"      : "KSOP KELAS IV BAGAN SIAPI-API",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "83",
+        "name"      : "KSOP KELAS IV BENGKALIS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "84",
+        "name"      : "KSOP KELAS IV KUALA CINAKU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "85",
+        "name"      : "KSOP KELAS IV KUALA ENOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "86",
+        "name"      : "KSOP KELAS IV TEMBILAHAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "87",
+        "name"      : "KSOP KELAS IV SELAT PANJANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "88",
+        "name"      : "KUPP KELAS III KUALA GAUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "89",
+        "name"      : "KUPP KELAS III TANJUNG MEDANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "90",
+        "name"      : "KUPP KELAS III PANIPAHAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "91",
+        "name"      : "KUPP KELAS III SUNGAI GUNTUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "92",
+        "name"      : "KSOP KHUSUS BATAM",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "93",
+        "name"      : "KSOP KELAS I TANJUNG BALAI KARIMUN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "94",
+        "name"      : "DISNAV TIPE A KELAS I TANJUNG PINANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "95",
+        "name"      : "KSOP KELAS II TANJUNG PINANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "96",
+        "name"      : "PANGKALAN PLP KELAS II TANJUNG UBAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "97",
+        "name"      : "KSOP KELAS III KIJANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "98",
+        "name"      : "KUPP KELAS I TANJUNG UBAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "99",
+        "name"      : "KUPP KELAS II TAREMPA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "100",
+        "name"      : "KUPP KELAS III DABO SINGKEP",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "101",
+        "name"      : "KUPP KELAS III SENAYANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "102",
+        "name"      : "KSOP KELAS III TALANG DUKU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "103",
+        "name"      : "KSOP KELAS IV KUALA TUNGKAL",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "104",
+        "name"      : "KSOP KELAS IV MUARA SABAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "105",
+        "name"      : "KUPP KELAS III KUALA MENDAHARA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "106",
+        "name"      : "KUPP KELAS III NIPAH PANJANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "107",
+        "name"      : "KSOP KELAS III PULAU BAAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "108",
+        "name"      : "KUPP KELAS II LINAU BINTUHAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "109",
+        "name"      : "KUPP KELAS III MALAKONI ENGGANO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "110",
+        "name"      : "KSOP KELAS II PALEMBANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "111",
+        "name"      : "DISNAV TIPE A KELAS I PALEMBANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "112",
+        "name"      : "KUPP KELAS III SUNGAI LUMPUR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "113",
+        "name"      : "KSOP KELAS IV PANGKAL BALAM",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "114",
+        "name"      : "KSOP KELAS IV TANJUNG PANDAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "115",
+        "name"      : "KSOP KELAS IV MUNTOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "116",
+        "name"      : "KUPP KELAS III MANGGAR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "117",
+        "name"      : "KUPP KELAS III SADAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "118",
+        "name"      : "KSOP KELAS I PANJANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "119",
+        "name"      : "",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "120",
+        "name"      : "KSOP KELAS IV BAKAUHENI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "121",
+        "name"      : "KUPP KELAS III KOTA AGUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "122",
+        "name"      : "KUPP KELAS III LABUHAN MARINGGAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "123",
+        "name"      : "KUPP KELAS III MENGGALA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "124",
+        "name"      : "KUPP KELAS III MESUJI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "125",
+        "name"      : "KSOP KELAS I BANTEN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "126",
+        "name"      : "KUPP KELAS III KARANGANTU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "127",
+        "name"      : "KUPP KELAS III LABUAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "128",
+        "name"      : "KSOP UTAMA TANJUNG PRIOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "129",
+        "name"      : "DISNAV TIPE B TANJUNG PRIOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "130",
+        "name"      : "KSOP KELAS IV MARUNDA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "131",
+        "name"      : "PANGKALAN PLP KELAS I TANJUNG PRIOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "132",
+        "name"      : "BALAI KESELAMATAN TEKNOLOGI PELAYARAN (BTKP)",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "133",
+        "name"      : "BALAI KESEHATAN KERJA PELAYARAN (BKKP)",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "134",
+        "name"      : "KSOP KELAS III SUNDA KELAPA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "135",
+        "name"      : "KSOP KELAS IV KEPULAUN SERIBU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "136",
+        "name"      : "KSOP KELAS IV MUARA ANGKE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "137",
+        "name"      : "KSOP KELAS II CIREBON",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "138",
+        "name"      : "KSOP KELAS II PATIMBAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "139",
+        "name"      : "KUPP KELAS III INDRAMAYU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "140",
+        "name"      : "KUPP KELAS III PELABUHAN RATU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "141",
+        "name"      : "KUPP KELAS III PANGANDARAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "142",
+        "name"      : "KSOP KELAS I TANJUNG EMAS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "143",
+        "name"      : "KSOP KELAS II CILACAP",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "144",
+        "name"      : "DISNAV TIPE A KELAS II TANJUNG EMAS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "145",
+        "name"      : "DISNAV TIPE A KELAS III TANJUNG INTAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "146",
+        "name"      : "KUPP KELAS II JEPARA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "147",
+        "name"      : "KUPP KELAS III REMBANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "148",
+        "name"      : "KUPP KELAS III JUWANA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "149",
+        "name"      : "KUPP KELAS III BATANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "150",
+        "name"      : "KUPP KELAS III KARIMUN JAWA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "151",
+        "name"      : "KSOP UTAMA TANJUNG PERAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "152",
+        "name"      : "DISNAV TIPE A KELAS I TANJUNG PERAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "153",
+        "name"      : "KSOP KELAS II GRESIK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "154",
+        "name"      : "PANGKALAN PLP KELAS II TANJUNG PERAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "155",
+        "name"      : "KSOP KELAS III TANJUNG WANGI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "156",
+        "name"      : "KSOP KELAS III TANJUNG PAKIS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "157",
+        "name"      : "KSOP KELAS IV PROBOLINGGO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "158",
+        "name"      : "KSOP KELAS IV KALIANGET",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "159",
+        "name"      : "KSOP KELAS IV PANARUKAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "160",
+        "name"      : "KUPP KELAS II BRANTA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "161",
+        "name"      : "KUPP KELAS III TELAGA BIRU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "162",
+        "name"      : "KUPP KELAS III BAWEAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "163",
+        "name"      : "KUPP KELAS III SAPUDI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "164",
+        "name"      : "KUPP KELAS III SAPEKEN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "165",
+        "name"      : "KUPP KELAS III MASALEMBO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "166",
+        "name"      : "KSOP KELAS II BENOA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "167",
+        "name"      : "DISNAV TIPE A KELAS II BENOA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "168",
+        "name"      : "KSOP KELAS IV PADANGBAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "169",
+        "name"      : "KSOP KELAS IV CELUKAN BAWANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "170",
+        "name"      : "KUPP KELAS II GILIMANUK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "171",
+        "name"      : "KUPP KELAS II NUSA PENIDA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "172",
+        "name"      : "KSOP KELAS III LEMBAR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "173",
+        "name"      : "KSOP KELAS IV BADAS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "174",
+        "name"      : "KSOP KELAS IV BIMA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "175",
+        "name"      : "KUPP KELAS II BENETE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "176",
+        "name"      : "KUPP KELAS II PEMENANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "177",
+        "name"      : "KUPP KELAS III LABUHAN LOMBOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "178",
+        "name"      : "KUPP KELAS III SAPE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "179",
+        "name"      : "KUPP KELAS III CALABAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "180",
+        "name"      : "KSOP KELAS III KUPANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "181",
+        "name"      : "DISNAV TIPE A KELAS II KUPANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "182",
+        "name"      : "KSOP KELAS III LABUAN BAJO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "183",
+        "name"      : "KSOP KELAS IV LAURENTIUS SAY",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "184",
+        "name"      : "KSOP KELAS IV ENDE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "185",
+        "name"      : "KSOP KELAS IV KALABAHI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "186",
+        "name"      : "KSOP KELAS IV WAINGAPU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "187",
+        "name"      : "KUPP KELAS II REO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "188",
+        "name"      : "KUPP KELAS II LARANTUKA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "189",
+        "name"      : "KUPP KELAS III ATAPUPU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "190",
+        "name"      : "KUPP KELAS III BAA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "191",
+        "name"      : "KUPP KELAS III WAIKELO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "192",
+        "name"      : "KUPP KELAS III MARAPOKOT",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "193",
+        "name"      : "KUPP KELAS III BARANUSA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "194",
+        "name"      : "KUPP KELAS III SEBA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "195",
+        "name"      : "KUPP KELAS III LEWOLEBA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "196",
+        "name"      : "KUPP KELAS III WINI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "197",
+        "name"      : "KSOP KELAS I PONTIANAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "198",
+        "name"      : "DISNAV TIPE A KELAS III PONTIANAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "199",
+        "name"      : "KSOP KELAS IV SINTETE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "200",
+        "name"      : "KSOP KELAS IV KETAPANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "201",
+        "name"      : "KUPP KELAS III TELUK BATANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "202",
+        "name"      : "KUPP KELAS III KENDAWANGAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "203",
+        "name"      : "KUPP KELAS III PALOH",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "204",
+        "name"      : "KUPP KELAS III PADANG TIKAR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "205",
+        "name"      : "KSOP KELAS III SAMPIT",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "206",
+        "name"      : "KSOP KELAS III RANGGA ILUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "207",
+        "name"      : "KSOP KELAS IV PULANG PISAU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "208",
+        "name"      : "KSOP KELAS IV SUKAMARA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "209",
+        "name"      : "KSOP KELAS IV KUMAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "210",
+        "name"      : "KSOP KELAS IV PANGKALAN BUN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "211",
+        "name"      : "KUPP KELAS III TELUK SEGINTUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "212",
+        "name"      : "KSOP KELAS I BANJARMASIN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "213",
+        "name"      : "KSOP KELAS II KOTABARU – BATULICIN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "214",
+        "name"      : "KUPP KELAS III SATUI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "215",
+        "name"      : "DISNAV TIPE A KELAS II BANJARMASIN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "216",
+        "name"      : "KUPP KELAS III KINTAP",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "217",
+        "name"      : "KSOP KELAS I BALIKPAPAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "218",
+        "name"      : "KSOP KELAS II SAMARINDA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "219",
+        "name"      : "DISNAV TIPE A KELAS I SAMARINDA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "220",
+        "name"      : "KSOP KELAS II BONTANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "221",
+        "name"      : "KUPP KELAS III SANGKULIRANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "222",
+        "name"      : "KUPP KELAS II SANGATTA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "223",
+        "name"      : "KUPP KELAS II TANA PASER",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "224",
+        "name"      : "KUPP KELAS II TANJUNG REDEB",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "225",
+        "name"      : "KUPP KELAS III TANJUNG SANTAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "226",
+        "name"      : "KUPP KELAS III KUALA SAMBOJA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "227",
+        "name"      : "KSOP KELAS III TARAKAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "228",
+        "name"      : "DISNAV TIPE A KELAS III TARAKAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "229",
+        "name"      : "KSOP KELAS IV NUNUKAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "230",
+        "name"      : "KUPP KELAS II TANJUNG SELOR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "231",
+        "name"      : "KUPP KELAS III PULAU BUNYU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "232",
+        "name"      : "KUPP KELAS III SUNGAI NYAMUK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "233",
+        "name"      : "KUPP KELAS II TANJUNG SILOPO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "234",
+        "name"      : "KUPP KELAS I MAMUJU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "235",
+        "name"      : "KUPP KELAS III BELANG-BELANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "236",
+        "name"      : "KUPP KELAS III MAJENE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "237",
+        "name"      : "KSOP UTAMA MAKASSAR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "238",
+        "name"      : "DISNAV TIPE A KELAS I MAKASSAR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "239",
+        "name"      : "KSOP KELAS III PARE-PARE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "240",
+        "name"      : "KSOP KELAS IV GARONGKONG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "241",
+        "name"      : "KUPP KELAS II BAJOE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "242",
+        "name"      : "KUPP KELAS II PALOPO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "243",
+        "name"      : "KUPP KELAS II BULUKUMBA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "244",
+        "name"      : "KUPP KELAS II MACCINI BAJI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "245",
+        "name"      : "KUPP KELAS III SIWA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "246",
+        "name"      : "KUPP KELAS III MALILI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "247",
+        "name"      : "KUPP KELAS III SELAYAR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "248",
+        "name"      : "KUPP KELAS III JAMPEA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "249",
+        "name"      : "KUPP KELAS III SINJAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "250",
+        "name"      : "KUPP KELAS III JENEPONTO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "251",
+        "name"      : "KUPP KELAS III PATTIRO BAJO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "252",
+        "name"      : "KSOP KELAS II BAUBAU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "253",
+        "name"      : "KSOP KELAS II KENDARI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "254",
+        "name"      : "DISNAV TIPE A KELAS II KENDARI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "255",
+        "name"      : "KUPP KELAS I MOLAWE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "256",
+        "name"      : "KUPP KELAS II RAHA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "257",
+        "name"      : "KUPP KELAS II LUWUK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "258",
+        "name"      : "KUPP KELAS III WANCI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "259",
+        "name"      : "KUPP KELAS III POMALAA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "260",
+        "name"      : "KUPP KELAS III KOLAKA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "261",
+        "name"      : "KUPP KELAS III LAPUKO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "262",
+        "name"      : "KSOP KELAS II TELUK PALU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "263",
+        "name"      : "KSOP KELAS IV TOLI-TOLI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "264",
+        "name"      : "KUPP KELAS II BANGGAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "265",
+        "name"      : "KUPP KELAS III PAGIMANA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "266",
+        "name"      : "KUPP KELAS III OGOAMAS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "267",
+        "name"      : "KUPP KELAS III PARIGI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "268",
+        "name"      : "KUPP KELAS III KOLONEDALE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "269",
+        "name"      : "KUPP KELAS III LEOK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "270",
+        "name"      : "KUPP KELAS III AMPANA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "271",
+        "name"      : "KUPP KELAS III POSO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "272",
+        "name"      : "KUPP KELAS III BUNTA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "273",
+        "name"      : "KUPP KELAS III BUNGKU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "274",
+        "name"      : "KSOP KELAS I BITUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "275",
+        "name"      : "DISNAV TIPE A KELAS I BITUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "276",
+        "name"      : "PANGKALAN PLP KELAS II BITUNG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "277",
+        "name"      : "KSOP KELAS III MANADO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "278",
+        "name"      : "KUPP KELAS II AMURANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "279",
+        "name"      : "KUPP KELAS II TAHUNA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "280",
+        "name"      : "KUPP KELAS III LIKUPANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "281",
+        "name"      : "KUPP KELAS III KOTABUNAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "282",
+        "name"      : "KUPP KELAS III MELONGUANE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "283",
+        "name"      : "KUPP KELAS III ULU SIAU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "284",
+        "name"      : "KUPP KELAS III LABUHAN UKI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "285",
+        "name"      : "KSOP KELAS III GORONTALO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "286",
+        "name"      : "KSOP KELAS II ANGGREK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "287",
+        "name"      : "KUPP KELAS III KWANDANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "288",
+        "name"      : "KUPP KELAS III TILAMUTA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "289",
+        "name"      : "KSOP KELAS I AMBON",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "290",
+        "name"      : "KSOP KELAS IV BANDA NAIRA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "291",
+        "name"      : "DISNAV TIPE A KELAS I AMBON",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "292",
+        "name"      : "PANGKALAN PLP KELAS II TUAL",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "293",
+        "name"      : "DISNAV TIPE A KELAS III TUAL",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "294",
+        "name"      : "KUPP KELAS II SAUMLAKI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "295",
+        "name"      : "KUPP KELAS II TUAL",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "296",
+        "name"      : "KUPP KELAS II TULEHU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "297",
+        "name"      : "KUPP KELAS II NAMLEA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "298",
+        "name"      : "KUPP KELAS III NAMROLE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "299",
+        "name"      : "KUPP KELAS III AMAHAI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "300",
+        "name"      : "KUPP KELAS III WONRELI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "301",
+        "name"      : "KUPP KELAS III BULA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "302",
+        "name"      : "KUPP KELAS III DOBO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "303",
+        "name"      : "KUPP KELAS III GESER",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "304",
+        "name"      : "KUPP KELAS III HATU PIRU",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "305",
+        "name"      : "KSOP KELAS II TERNATE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "306",
+        "name"      : "KUPP KELAS I TOBELO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "307",
+        "name"      : "KUPP KELAS II BABANG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "308",
+        "name"      : "KUPP KELAS III SOASIO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "309",
+        "name"      : "KUPP KELAS II WEDA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "310",
+        "name"      : "KUPP KELAS III SANANA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "311",
+        "name"      : "KUPP KELAS III BULI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "312",
+        "name"      : "KUPP KELAS III LAIWUI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "313",
+        "name"      : "KUPP KELAS III DARUBA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "314",
+        "name"      : "KUPP KELAS III JAILOLO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "315",
+        "name"      : "KUPP KELAS III SAKETA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "316",
+        "name"      : "KUPP KELAS III SOFIFI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "317",
+        "name"      : "KSOP KELAS I SORONG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "318",
+        "name"      : "DISNAV TIPE A KELAS I SORONG",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "319",
+        "name"      : "KSOP KELAS IV MANOKWARI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "320",
+        "name"      : "KSOP KELAS IV FAK-FAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "321",
+        "name"      : "KUPP KELAS II BINTUNI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "322",
+        "name"      : "KUPP KELAS II RAJA AMPAT",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "323",
+        "name"      : "KUPP KELAS III TEMINABUAN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "324",
+        "name"      : "KUPP KELAS III WASIOR",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "325",
+        "name"      : "KUPP KELAS III KAIMANA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "326",
+        "name"      : "KUPP KELAS III KOKAS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "327",
+        "name"      : "KUPP KELAS III ORANSBARI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "328",
+        "name"      : "KSOP KELAS II JAYAPURA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "329",
+        "name"      : "DISNAV TIPE A KELAS II JAYAPURA",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "330",
+        "name"      : "DISNAV TIPE A KELAS III MERAUKE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "331",
+        "name"      : "KSOP KELAS III BIAK",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "332",
+        "name"      : "KSOP KELAS IV MERAUKE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "333",
+        "name"      : "KUPP KELAS II POMAKO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "334",
+        "name"      : "KUPP KELAS II SERUI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "335",
+        "name"      : "KUPP KELAS II NABIRE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "336",
+        "name"      : "KUPP KELAS III WAREN",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "337",
+        "name"      : "KUPP KELAS III BADE",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "338",
+        "name"      : "KUPP KELAS III KORIDO",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "339",
+        "name"      : "KUPP KELAS III SARMI",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "340",
+        "name"      : "KUPP KELAS III AGATS",
+        "category"  : "LAUT"
+    },
+    {
+        "id"        : "341",
+        "name"      : "BLU Balai Besar Kalibrasi Fasilitas Penerbangan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "342",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah I",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "343",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah Il ",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "344",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah III",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "345",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah IV",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "346",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah V",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "347",
+        "name"      : "BLU Balai Kesehatan Penerbangan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "348",
+        "name"      : "Balai Teknik Penerbangan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "349",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah VI",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "350",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah VII",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "351",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah VIII",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "352",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah IX",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "353",
+        "name"      : "Kantor Otoritas Bandar Udara Wilayah X",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "354",
+        "name"      : "Kantor BLU UPBU Juwata - Tarakan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "355",
+        "name"      : "Kantor UPBU Budiarto - Curug",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "356",
+        "name"      : "Kantor BLU UPBU Djalaludin - Gorontalo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "357",
+        "name"      : "BLU UPBU Mutiara - Palu",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "358",
+        "name"      : "BLU UPBU Kalimarau - Berau",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "359",
+        "name"      : "UPBU Halu Oleo - Kendari",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "360",
+        "name"      : "UPBU Wamena",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "361",
+        "name"      : "UPBU Mopah",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "362",
+        "name"      : "UPBU Domine Eduard Osok - Sorong",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "363",
+        "name"      : "UPBU Cut Nyak Dhien - Nagan Raya",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "364",
+        "name"      : "UPBU Binaka - Gunung Sitoli",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "365",
+        "name"      : "UPBU Tebelian - Sintang",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "366",
+        "name"      : "UPBU Aji Pangeran Tumenggung Pranoto - Samarinda",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "367",
+        "name"      : "UPBU M. Salahuddin - Bima",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "368",
+        "name"      : "UPBU Frans Seda - Maumere",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "369",
+        "name"      : "UPBU Umbu Mehang Kunda - Waingapu",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "370",
+        "name"      : "UPBU Komodo Labuan Bajo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "371",
+        "name"      : "UPBU H. Aroeboesman - Ende",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "372",
+        "name"      : "UPBU Tambolaka - Waikabubak",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "373",
+        "name"      : "UPBU Rahadi Oesman - Ketapang",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "374",
+        "name"      : "UPBU Pangsuma Putussibau",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "375",
+        "name"      : "UPBU lskandar Pangkalan Bun",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "376",
+        "name"      : "UPBU H. Asan - Sampit",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "377",
+        "name"      : "UPBU Gusti Syamsir Alam",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "378",
+        "name"      : "UPBU  Syukuran Aminudin Amir",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "379",
+        "name"      : "UPBU Kasiguncu Poso",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "380",
+        "name"      : "UPBU Babullah Ternate",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "381",
+        "name"      : "UPBU Dow Aturure",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "382",
+        "name"      : "UPBU Rendani Manokwari",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "383",
+        "name"      : "UPBU Cakrabhuwana Cirebon",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "384",
+        "name"      : "UPBU Tunggul Wulung Cilacap",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "385",
+        "name"      : "UPBU Dewadaru",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "386",
+        "name"      : "UPBU Trunojoyo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "387",
+        "name"      : "UPBU Rembele",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "388",
+        "name"      : "UPBU Cut Ali",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "389",
+        "name"      : "UPBU Lasikin",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "390",
+        "name"      : "UPBU Maimun Saleh",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "391",
+        "name"      : "UPBU Dr. FL. Tobing",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "392",
+        "name"      : "UPBU Lasondre",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "393",
+        "name"      : "UPBU Aek Godang",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "394",
+        "name"      : "UPBU Rokot",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "395",
+        "name"      : "UPBU Japura",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "396",
+        "name"      : "UPBU Pasir Pangaraian",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "397",
+        "name"      : "UPBU Depati Parbo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "398",
+        "name"      : "UPBU Muara Bungo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "399",
+        "name"      : "UPBU Nangapinoh",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "400",
+        "name"      : "UPBU Beringin",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "401",
+        "name"      : "UPBU Tumba Samba",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "402",
+        "name"      : "UPBU Sanggu - Buntok",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "403",
+        "name"      : "UPBU Kuala Pembuang",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "404",
+        "name"      : "UPBU Kuala Kurun",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "405",
+        "name"      : "UPBU Malinau",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "406",
+        "name"      : "UPBU Melak",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "407",
+        "name"      : "UPBU Tanjung Harapan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "408",
+        "name"      : "UPBU Yuvai Semaring",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "409",
+        "name"      : "UPBU Nunukan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "410",
+        "name"      : "UPBU Long Ampung",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "411",
+        "name"      : "UPBU Datah Dawai",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "412",
+        "name"      : "UPBU Naha",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "413",
+        "name"      : "UPBU Melonguane",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "414",
+        "name"      : "UPBU Sultan Bantilan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "415",
+        "name"      : "UPBU Pogogul",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "416",
+        "name"      : "UPBU Toraja",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "417",
+        "name"      : "UPBU Seko",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "418",
+        "name"      : "UPBU Rampi",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "419",
+        "name"      : "UPBU Aroepala",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "420",
+        "name"      : "UPBU Andi Jemma",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "421",
+        "name"      : "UPBU Betoambari",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "422",
+        "name"      : "UPBU Sugimanuru",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "423",
+        "name"      : "UPBU Bua/Lagaligo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "424",
+        "name"      : "UPBU Bone",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "425",
+        "name"      : "UPBU Matahora",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "426",
+        "name"      : "UPBU Sangia Ni Bandera",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "427",
+        "name"      : "UPBU Bandaneira",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "428",
+        "name"      : "UPBU Dobo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "429",
+        "name"      : "UPBU Mathilda Batlayeri",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "430",
+        "name"      : "UPBU Namlea",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "431",
+        "name"      : "UPBU Karel Sadsuitubun",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "432",
+        "name"      : "UPBU Jhon Becker",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "433",
+        "name"      : "UPBU Larat",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "434",
+        "name"      : "UPBU Namrole",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "435",
+        "name"      : "UPBU Amahai",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "436",
+        "name"      : "UPBU Wahai",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "437",
+        "name"      : "UPBU Sultan Muhammad Kaharuddin",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "438",
+        "name"      : "UPBU Frans Sales Lega",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "439",
+        "name"      : "UPBU Mali",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "440",
+        "name"      : "UPBU Gewayantana",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "441",
+        "name"      : "UPBU Soa",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "442",
+        "name"      : "UPBU A.A Bere Tallo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "443",
+        "name"      : "UPBU DC Saudale",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "444",
+        "name"      : "UPBU Tardamu",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "445",
+        "name"      : "UPBU  Wunopito",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "446",
+        "name"      : "UPBU S. Tjondronegoro",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "447",
+        "name"      : "UPBU Tanah Merah",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "448",
+        "name"      : "UPBU Mararena",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "449",
+        "name"      : "UPBU Mindiptanah",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "450",
+        "name"      : "UPBU Oksibil",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "451",
+        "name"      : "UPBU  Enarotali",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "452",
+        "name"      : "UPBU  Waghete",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "453",
+        "name"      : "UPBU Mulia",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "454",
+        "name"      : "UPBU Tiom",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "455",
+        "name"      : "UPBU Mozes Kilangin",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "456",
+        "name"      : "UPBU Kimaam",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "457",
+        "name"      : "UPBU Kamur",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "458",
+        "name"      : "UPBU Bomakia",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "459",
+        "name"      : "UPBU Dabra",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "460",
+        "name"      : "UPBU Bokondini",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "461",
+        "name"      : "UPBU Kepi",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "462",
+        "name"      : "UPBU Okaba",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "463",
+        "name"      : "UPBU Moanamani",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "464",
+        "name"      : "UPBU Kokonao",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "465",
+        "name"      : "UPBU Numfor",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "466",
+        "name"      : "UPBU Karubaga",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "467",
+        "name"      : "UPBU Ewer",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "468",
+        "name"      : "UPBU Illu",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "469",
+        "name"      : "UPBU Bade",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "470",
+        "name"      : "UPBU Senggeh",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "471",
+        "name"      : "UPBU Batom",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "472",
+        "name"      : "UPBU Bilorai",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "473",
+        "name"      : "UPBU Ilaga",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "474",
+        "name"      : "UPBU Muko-Muko",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "475",
+        "name"      : "UPBU Osman Sadik",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "476",
+        "name"      : "UPBU Gamarmalamo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "477",
+        "name"      : "UPBU Buli",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "478",
+        "name"      : "UPBU Kuabang Kao",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "479",
+        "name"      : "UPBU Emalamo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "480",
+        "name"      : "UPBU Pitu",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "481",
+        "name"      : "UPBU Dabo Singkep",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "482",
+        "name"      : "UPBU Ranai",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "483",
+        "name"      : "UPBU Raja Haji Abdullah-Sei Bati",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "484",
+        "name"      : "UPBU Torea Fak-Fak",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "485",
+        "name"      : "UPBU Bintuni",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "486",
+        "name"      : "UPBU Utarom",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "487",
+        "name"      : "UPBU Wasior",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "488",
+        "name"      : "UPBU Teminabuan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "489",
+        "name"      : "UPBU lnanwatan",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "490",
+        "name"      : "UPBU Marinda",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "491",
+        "name"      : "UPBU Merdei",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "492",
+        "name"      : "UPBU Sabo",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "493",
+        "name"      : "UPBU Kambuaya",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "494",
+        "name"      : "UPBU Kebar",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "495",
+        "name"      : "UPBU Ayawasi",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "496",
+        "name"      : "UPBU Tampa Padang",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "497",
+        "name"      : "UPBU Elelim",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "498",
+        "name"      : "UPBU Nop Goliat Dekai",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "499",
+        "name"      : "UPBU Kiwirok",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "500",
+        "name"      : "UPBU Akimuga",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "501",
+        "name"      : "UPBU Silampari",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "502",
+        "name"      : "UPBU Tojo Una-Una",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "503",
+        "name"      : "UPBU Malikussaleh",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "504",
+        "name"      : "UPBU Maratua",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "505",
+        "name"      : "UPBU Harun Thohir Bawean",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "506",
+        "name"      : "UPBU Morowali",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "507",
+        "name"      : "UPBU Letung",
+        "category"  : "UDARA"
+    },
+    {
+        "id"        : "508",
+        "name"      : "Balai Teknik Perkeretaapian Kelas I Jakarta",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "509",
+        "name"      : "Balai Teknik Perkeretaapian Kelas I Bandung",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "510",
+        "name"      : "Balai Teknik Perkeretaapian Kelas I Semarang",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "511",
+        "name"      : "Balai Teknik Perkeretaapian Kelas I Surabaya",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "512",
+        "name"      : "Balai Teknik Perkeretaapian Kelas I Medan",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "513",
+        "name"      : "Balai Teknik Perkeretaapian Kelas II Padang",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "514",
+        "name"      : "Balai Teknik Perkeretaapian Kelas II Palembang",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "515",
+        "name"      : "Balai Pengujian Perkeretaapian",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "516",
+        "name"      : "Balai Perawatan Perkeretaapian",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "517",
+        "name"      : "Balai Pengelola Kereta Api Ringan Sumatera Selatan",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "518",
+        "name"      : "Balai Pengelola Kereta Api Sulawesi Selatan",
+        "category"  : "KERETA"
+    },
+    {
+        "id"        : "519",
+        "name"      : "STIP Jakarta",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "520",
+        "name"      : "BP3IP Jakarta",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "521",
+        "name"      : "PTDI - STTD Bekasi",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "522",
+        "name"      : "PPI Curug",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "523",
+        "name"      : "PIP Semarang",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "524",
+        "name"      : "PIP Makassar",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "525",
+        "name"      : "PKTJ Tegal",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "526",
+        "name"      : "Politeknik Transportasi Darat Bali",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "527",
+        "name"      : "Politeknik Transportasi SDP Palembang",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "528",
+        "name"      : "PPI Madiun",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "529",
+        "name"      : "Poltekpel Surabaya",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "530",
+        "name"      : "Poltekpel Sumatera Barat",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "531",
+        "name"      : "Poltekpel Banten",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "532",
+        "name"      : "Poltekpel Barombong",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "533",
+        "name"      : "Poltekpel Sorong",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "534",
+        "name"      : "Poltekpel Malahayati Aceh",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "535",
+        "name"      : "Poltekpel Sulawesi Utara",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "536",
+        "name"      : "Poltekbang Jayapura",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "537",
+        "name"      : "Poltekbang Surabaya",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "538",
+        "name"      : "Poltekbang Makassar",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "539",
+        "name"      : "Poltekbang Medan",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "540",
+        "name"      : "Poltekbang Palembang",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "541",
+        "name"      : "Akademi Penerbang Indonesia (API) Banyuwangi",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "542",
+        "name"      : "BP2TD Mempawah",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "543",
+        "name"      : "BP2TL Jakarta",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "544",
+        "name"      : "BP3 Curug",
+        "category"  : "BPSDMP(UP)"
+    },
+    {
+        "id"        : "545",
+        "name"      : "BP3K SDMT Ciwidey",
+        "category"  : "BPSDMP(UP)"
+    }
+
+]
