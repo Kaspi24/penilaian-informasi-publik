@@ -100,7 +100,6 @@
             const work_units = {!! json_encode($work_units) !!};
 
             function isValidCharacterKey(key) {
-                // return /^[a-zA-Z0-9 !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? \b\u007F]*$/.test(key);
                 return /^[a-zA-Z0-9 !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(key);
             }
 

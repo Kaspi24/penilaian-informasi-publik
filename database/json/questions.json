@@ -14,7 +14,7 @@
     },
     {
         "id"            : 2,
-        "text"          : "Apakah unit kerja Saudara mengetahui/memiliki/menguasai <b>Peraturan Menteri Perhubungan Nomor 46 tahun 2018</b> tentang Pedoman Pengelolaan Informasi dan Dokumentasi di Lingkungan Kementerian Perhubungan?",
+        "text"          : "Apakah unit kerja Saudara mengetahui/memiliki/menguasai Peraturan Menteri Perhubungan Nomor 46 tahun 2018 tentang Pedoman Pengelolaan Informasi dan Dokumentasi di Lingkungan Kementerian Perhubungan?",
         "nth_indicator" : "I",
         "category"      : "PPID",
         "details"       : null,
@@ -27,7 +27,7 @@
     },
     {
         "id"            : 3,
-        "text"          : "Apakah unit kerja Saudara mengetahui/memiliki/menguasai <b>Keputusan Menteri Perhubungan Nomor 117 tahun 2022</b> tentang SOP Pejabat Pengelola Informasi dan Dokumentasi di Lingkungan Kementerian Perhubungan?",
+        "text"          : "Apakah unit kerja Saudara mengetahui/memiliki/menguasai Keputusan Menteri Perhubungan Nomor 117 tahun 2022 tentang SOP Pejabat Pengelola Informasi dan Dokumentasi di Lingkungan Kementerian Perhubungan?",
         "nth_indicator" : "I",
         "category"      : "PPID",
         "details"       : null,
