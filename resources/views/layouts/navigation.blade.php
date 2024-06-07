@@ -79,6 +79,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if ( Auth::user()->role !== "RESPONDENT")
+                <x-responsive-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">
+                    {{ __('Pertanyaan') }}
+                </x-responsive-nav-link>
+            @endif
+            <x-responsive-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">
+                {{ __('Kuesioner') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

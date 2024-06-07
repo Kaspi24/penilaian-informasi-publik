@@ -20,7 +20,7 @@
 
         <div class="">
             <x-input-label for="unit_name" :value="__('Nama Unit Kerja')" />
-            <x-text-input id="unit_name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->work_unit->name)" readonly disabled/>
+            <x-text-input id="unit_name" name="name" type="text" class="mt-1 block w-full bg-primary-10" :value="old('name', $user->work_unit->name)" readonly disabled/>
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
