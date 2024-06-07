@@ -8,6 +8,6 @@ class WorkUnitController extends Controller
 {
     public function index()
     {
-        return view('pages.user.index');
+        return view('pages.work-unit.index');
     }
 }
