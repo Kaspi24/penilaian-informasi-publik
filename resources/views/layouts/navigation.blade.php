@@ -16,14 +16,22 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('questionnaire.index')" :active="request()->routeIs('questionnaire.index')">
+                        {{ __('Kuesioner') }}
+                    </x-nav-link>
                     @if ( Auth::user()->role !== "RESPONDENT")
                         <x-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">
                             {{ __('Pertanyaan') }}
                         </x-nav-link>
                     @endif
-                    <x-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">
-                        {{ __('Kuesioner') }}
-                    </x-nav-link>
+                    @if ( Auth::user()->role === "ADMIN")
+                        <x-nav-link :href="route('work-unit.index')" :active="request()->routeIs('work-unit.index')">
+                            {{ __('Unit Kerja') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                            {{ __('Pengguna') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -19,6 +19,6 @@ class QuestionController extends Controller
             $indicators["INDIKATOR ".$indicator] = $all_questions->groupBy('category');
         }
         
-        return view('pages.admin.question.index', compact('indicators'));
+        return view('pages.question.index', compact('indicators'));
     }
 }

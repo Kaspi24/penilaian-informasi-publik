@@ -12,7 +12,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        if ($user->role !== UserRole::ADMIN) {
+        if ($user->role !== "ADMIN") {
             return response()->view('notfound');
         }
         return $next($request);
