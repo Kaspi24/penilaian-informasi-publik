@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" href="{{ asset('image/class-32.png') }}" type="image/png" sizes="32x32 16x16">
+    <title>{{ config('app.name', 'Penilaian Informasi Publik') }}</title>
+    <link rel="icon" href="{{ asset('logo/KEMENHUB.png') }}" type="image/png" sizes="32x32 16x16">
 
     <!-- Poppins Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

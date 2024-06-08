@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class UserTable extends DataTableComponent
 {
@@ -13,6 +15,37 @@ class UserTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setSortingEnabled();
+        $this->setFiltersEnabled();
+    }
+
+    public function builder(): Builder
+    {
+        return User::query()
+            ->with([
+                'work_unit',
+            ]);
+    }
+
+    public function filters(): array
+    {
+        return [
+            SelectFilter::make('Tipe Unit Kerja')
+                ->options(
+                    array_merge(
+                        [""             => "Semua"],
+                        ["PELAKSANA"    => "Pelaksana"],
+                        ["DARAT"        => "Darat"],
+                        ["LAUT"         => "Laut"],
+                        ["UDARA"        => "Udara"],
+                        ["KERETA"       => "Kereta"],
+                        ["BPSDMP(UP)"   => "BPSDMP(UP)"],
+                    )
+                )
+                ->filter(function(Builder $builder, string $value) {
+                    $builder->where('work_unit.category', $value);
+                }),
+        ];
     }
 
     public function columns(): array
@@ -20,25 +53,19 @@ class UserTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Name", "name")
+            Column::make("Nama", "name")
                 ->sortable(),
             Column::make("Username", "username")
                 ->sortable(),
             Column::make("Email", "email")
                 ->sortable(),
-            Column::make("Phone", "phone")
+            Column::make("Telepom", "phone")
                 ->sortable(),
-            Column::make("Whatsapp", "whatsapp")
+            Column::make("WhatsApp", "whatsapp")
                 ->sortable(),
-            Column::make("Work unit id", "work_unit_id")
+            Column::make("Unit Kerja", "work_unit.name")
                 ->sortable(),
             Column::make("Role", "role")
-                ->sortable(),
-            Column::make("Profile picture", "profile_picture")
-                ->sortable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
                 ->sortable(),
         ];
     }

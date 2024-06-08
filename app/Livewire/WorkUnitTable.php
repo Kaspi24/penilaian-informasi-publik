@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\WorkUnit;
+use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 
 class WorkUnitTable extends DataTableComponent
 {
@@ -15,25 +16,30 @@ class WorkUnitTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
+    public function builder(): Builder
+    {
+        return WorkUnit::query()
+            ->whereNot('category','PUSAT');
+    }
+
     public function columns(): array
     {
         return [
+        
             Column::make("Id", "id")
-                ->sortable(),
-            Column::make("Name", "name")
-                ->sortable(),
-            Column::make("Category", "category")
+                ->sortable()
+                ->hideIf(true),
+            Column::make("Nama", "name")
+                ->sortable()
+                ->searchable(),
+            Column::make("Kategori", "category")
                 ->sortable(),
             Column::make("Head name", "head_name")
                 ->sortable(),
-            Column::make("Phone", "phone")
+            Column::make("Telepon", "phone")
                 ->sortable(),
             Column::make("Email", "email")
                 ->sortable(),
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
         ];
     }
 }
