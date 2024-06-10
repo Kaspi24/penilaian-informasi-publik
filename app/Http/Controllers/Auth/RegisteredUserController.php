@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Models\Question;
+use App\Models\RespondentAnswer;
+use App\Models\RespondentAnswerChildren;
 
 class RegisteredUserController extends Controller
 {
@@ -40,6 +43,27 @@ class RegisteredUserController extends Controller
             'role'          => UserRole::RESPONDENT,
             'password'      => Hash::make($validated["password"])
         ]);
+
+        // dd($user);
+
+        if ($user->role == UserRole::RESPONDENT)
+        {
+            $questions = Question::with('children')->get();
+    
+            foreach ($questions as $question) {
+                RespondentAnswer::create([
+                    'respondent_id' => $user->id,
+                    'question_id'   => $question->id
+                ]);
+                foreach ($question->children as $question_child) {
+                    RespondentAnswerChildren::create([
+                        'respondent_id'         => $user->id,
+                        'question_children_id'  => $question_child->id,
+                        'question_id'           => $question->id
+                    ]);
+                }
+            }
+        }
 
         event(new Registered($user));
 

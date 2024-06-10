@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\QuestionChildren;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Question extends Model
 {
@@ -24,5 +25,11 @@ class Question extends Model
     public function children(): HasMany
     {
         return $this->hasMany(QuestionChildren::class, 'question_id', 'id');
+    }
+
+    public function respondents(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'respondent_answer', 'question_id', 'respondent_id', 'id', 'id')
+            ->withPivot('answer', 'attachment', 'score');
     }
 }

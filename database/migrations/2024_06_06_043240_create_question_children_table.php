@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('question_childrens', function (Blueprint $table) {
+        Schema::create('question_children', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
             $table->text('text');
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('question_childrens');
+        Schema::dropIfExists('question_children');
     }
 };

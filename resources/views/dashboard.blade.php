@@ -16,7 +16,7 @@
                     <p>
                         Selamat datang 
                         <span class="font-extrabold text-primary-50">
-                            {{ Auth::user()->name ? Auth::user()->name : Auth::user()->user_name }}
+                            {{ Auth::user()->name ? Auth::user()->name : Auth::user()->username }}
                         </span>
                     </p>
                 </div>
