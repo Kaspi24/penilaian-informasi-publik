@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\WorkUnit;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,9 +52,21 @@ class User extends Authenticatable
             ->withPivot('answer', 'attachment', 'score');
     }
 
-    public function answer_childrens(): BelongsToMany
+    public function answer_children(): BelongsToMany
     {
         return $this->belongsToMany(QuestionChildren::class, 'respondent_answer_children', 'respondent_id', 'question_children_id', 'id', 'id')
             ->withPivot('answer', 'attachment', 'question_id');
+    }
+
+    public function score(): HasOne
+    {
+        return $this->hasOne(RespondentScore::class, 'respondent_id', 'id')
+            ->withPivot('is_done', 'total_score');
+    }
+
+    public function submissions(): HasMany
+    {
+        return $this->hasMany(RespondentScore::class, 'jury_id', 'id')
+            ->withPivot('respondent_id', 'is_done', 'total_score');
     }
 }

@@ -30,7 +30,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('success', 'Data Pribadi Responden berhasil diperbarui!');
     }
 
     public function updateWorkUnit(WorkUnitUpdateRequest $request): RedirectResponse
@@ -46,7 +46,7 @@ class ProfileController extends Controller
 
         $work_unit->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit')->with('success', 'Data Unit Kerja berhasil diperbarui!');
     }
 
     public function destroy(Request $request): RedirectResponse

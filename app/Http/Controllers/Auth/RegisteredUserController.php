@@ -18,6 +18,7 @@ use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Models\Question;
 use App\Models\RespondentAnswer;
 use App\Models\RespondentAnswerChildren;
+use App\Models\RespondentScore;
 
 class RegisteredUserController extends Controller
 {
@@ -44,8 +45,6 @@ class RegisteredUserController extends Controller
             'password'      => Hash::make($validated["password"])
         ]);
 
-        // dd($user);
-
         if ($user->role == UserRole::RESPONDENT)
         {
             $questions = Question::with('children')->get();
@@ -63,6 +62,9 @@ class RegisteredUserController extends Controller
                     ]);
                 }
             }
+            RespondentScore::create([
+                'respondent_id'         => $user->id
+            ]);
         }
 
         event(new Registered($user));

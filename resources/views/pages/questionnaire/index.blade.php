@@ -8,9 +8,19 @@
     @include('components.alert')
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm rounded-sm">
-                Kuesioner
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-6">
+            <div class="bg-white shadow-sm rounded-sm">
+                <div class="p-4 text-primary-70">
+                    <p class="text-xl font-bold">Kuesioner Penilaian Informasi Publik</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-6">
+            <div class="bg-white shadow-sm rounded-sm">
+                <div class="p-4 text-primary-70">
+                    <p class="text-xl font-bold">Kuesioner Penilaian Informasi Publik</p>
+                </div>
             </div>
         </div>
     </div>
