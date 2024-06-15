@@ -23,8 +23,11 @@ Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(Questi
 });
 
 // Questionnaire
-Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(QuestionnaireController::class)->as('questionnaire.')->prefix('kuesioner')->group(function() {
-    Route::get('/', 'index')->name('index');
+Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(QuestionnaireController::class)->as('questionnaire.')->group(function() {
+    Route::get('kuesioner',             'index')->name('index');
+    Route::get('isi-kuesioner',         'start')->name('start');
+    Route::put('update-answer',         'updateAnswer')->name('updateAnswer');
+    Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
 });
 
 // Work Units

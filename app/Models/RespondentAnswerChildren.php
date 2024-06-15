@@ -13,6 +13,8 @@ class RespondentAnswerChildren extends Model
         'respondent_id',
         'question_children_id',
         'question_id',
+        'answer',
+        'attachment'
     ];
 
     public function respondent(): BelongsTo
