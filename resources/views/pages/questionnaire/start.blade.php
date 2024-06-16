@@ -104,17 +104,25 @@
                             $answered_count = 0;
                             foreach ($categories as $category => $questions) {
                                 $all_count      += $questions->count();
-                                $answered_count += $questions->whereNotNull('answer')->count();
+                                foreach ($questions as $question) {
+                                if (
+                                    ($question->children->count() > 0 && $question->children->whereNull('answer')->count() == 0) 
+                                    || 
+                                    ($question->children->count() == 0 && ($question->answer == '1' || $question->answer == '0')) 
+                                    ) {
+                                        $answered_count++;
+                                    }
+                                }
                             }
                             $indicator_percentage = round(($answered_count/$all_count)*100, 0);
                             if ($indicator_percentage==100) {
-                                $indicator_percentage_classlist = "bg-emerald-600 text-white";
+                                $indicator_percentage_classlist = "indicator-progess-100";
                             } elseif ($indicator_percentage>=66) {
-                                $indicator_percentage_classlist = "bg-yellow-300 text-yellow-50";
+                                $indicator_percentage_classlist = "indicator-progess-66";
                             } elseif ($indicator_percentage>=33) {
-                                $indicator_percentage_classlist = "bg-amber-300 text-amber-50";
+                                $indicator_percentage_classlist = "indicator-progess-33";
                             } else {
-                                $indicator_percentage_classlist = "bg-gray-400 text-gray-50";
+                                $indicator_percentage_classlist = "indicator-progess-default";
                             }
                         @endphp
                         <!-- NOMOR INDIKATOR -->
@@ -134,26 +142,35 @@
                             @php $j=0; @endphp
                             @foreach ($categories as $category => $questions)
                                 @php
-                                    $answered_questions_count = $questions->whereNotNull('answer')->count();
+                                    $answered_questions_count   = 0;
+                                    foreach ($questions as $question) {
+                                        if (
+                                            ($question->children->count() > 0 && $question->children->whereNull('answer')->count() == 0) 
+                                            || 
+                                            ($question->children->count() == 0 && ($question->answer == '1' || $question->answer == '0')) 
+                                        ) {
+                                            $answered_questions_count++;
+                                        }
+                                    }
                                     $percentage = round(($answered_questions_count/$questions->count())*100, 0);
                                     if ($percentage==100) {
-                                        $category_percentage_classlist = [ "border-emerald-600 bg-emerald-50", "bg-emerald-600" ];
+                                        $category_percentage_classlist = [ "category-progress-container-100", "category-progress-100" ];
                                     } elseif ($percentage>=66) {
-                                        $category_percentage_classlist = [ "border-yellow-300 bg-yellow-50 bg-opacity-40", "bg-yellow-300" ];
+                                        $category_percentage_classlist = [ "category-progress-container-66", "category-progress-66" ];
                                     } elseif ($percentage>=33) {
-                                        $category_percentage_classlist = [ "border-amber-600 bg-amber-50 bg-opacity-40", "bg-amber-600" ];
+                                        $category_percentage_classlist = [ "category-progress-container-33", "category-progress-33" ];
                                     } else {
-                                        $category_percentage_classlist = [ "border-gray-400 bg-gray-200", "bg-gray-400" ];
+                                        $category_percentage_classlist = [ "category-progress-container-default", "category-progress-default" ];
                                     }
                                 @endphp
                                 <!-- KATEGORI -->
-                                <button id="category-button_{{$i}}_{{$j}}" type="button" class="{{ $i==0 && $j==0 ? 'bg-white' : '' }} border border-white category-button block rounded-md hover:bg-gray-100 w-full p-1 lg:p-2 {{ $loop->index === 0 ? 'mt-1.5' : 'mt-2' }} border">
+                                <button id="category-button_{{$i}}_{{$j}}" type="button" class="{{ $i==0 && $j==0 ? 'active-category-button' : '' }} cbtn border border-white block rounded-md hover:bg-gray-100 w-full p-1 lg:p-2 {{ $loop->index === 0 ? 'mt-1.5' : 'mt-2' }} border category-button">
                                     <!-- JUDUL KATEGORI -->
                                     <p class="text-left font-bold text-xs text-primary mb-1"> {{ $upper_alphabet[$loop->index] .". ". $category }} </p>
                                     <!-- PROGRES KATEGORI -->
                                     <div class="flex justify-between w-full h-5">
-                                        <div class="w-[87%] border {{ $category_percentage_classlist[0] }} rounded-lg h-full box-border overflow-hidden">
-                                            <div class="h-full border {{ $category_percentage_classlist[1] }} rounded-lg box-border overflow-hidden" style="width: {{ $percentage }}%;"></div>
+                                        <div id="progres_category_container_{{$i}}_{{$j}}" class="w-[87%] border {{ $category_percentage_classlist[0] }} rounded-lg h-full box-border overflow-hidden">
+                                            <div id="progres_category_{{$i}}_{{$j}}" class="h-full border {{ $category_percentage_classlist[1] }} rounded-lg box-border overflow-hidden" style="width: {{ $percentage }}%;"></div>
                                         </div>
                                         <p class="block w-[12%] text-sm text-right text-primary-60 font-mono">{{ $answered_questions_count }}/{{ $questions->count() }}</p>
                                     </div>
@@ -219,11 +236,12 @@
                                                             </label>
                                                         </div>
                                                         <!-- INPUT TEXT -->
-                                                        <div id="attachment_{{$i}}_{{$j}}_{{$k}}_container" class="attachment-field w-full mt-2 {{ $question->answer === 0 ? 'hidden' : '' }}">
+                                                        <div id="attachment_{{$i}}_{{$j}}_{{$k}}_container" class="attachment-field w-full mt-2 {{ $question->answer === 1 ? '' : 'hidden' }}">
                                                             <label for="attachment_{{$i}}_{{$j}}_{{$k}}" class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</label>
                                                             <input data-questionDBID="{{ $question->id }}" data-oldAnswer="{{ $question->attachment }}" type="text" 
                                                                 id="attachment_{{$i}}_{{$j}}_{{$k}}" name="attachment[{{ $i }}][{{ $j }}][{{ $k }}]" value="{{ $question->attachment }}"
-                                                                class="attachment-link bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com">
+                                                                class="attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com">
+                                                            <p id="error_msg_{{$i}}_{{$j}}_{{$k}}" class="error-msg hidden mt-1 text-xs text-danger">Tautan Bukti Pendukung Jawaban Wajib Diisi!</p>
                                                             <p class="mt-1 text-xs text-gray-500">Pastikan tautan yang anda masukkan valid dan dapat diakses. Kegagalan saat mengakses tautan bermasalah dapat berdampak pada penilaian buruk.</p>
                                                         </div>
                                                     @else
@@ -257,11 +275,12 @@
                                                                         </label>
                                                                     </div>
                                                                     <!-- CHILD INPUT TEXT -->
-                                                                    <div id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}_container" class="attachment-field w-full mt-2 {{ $question_child->answer === 0 ? 'hidden' : '' }}">
+                                                                    <div id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}_container" class="attachment-field w-full mt-2 {{ $question_child->answer === 1 ? '' : 'hidden' }}">
                                                                         <label for="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</label>
                                                                         <input data-questionDBID="{{ $question_child->id }}" data-oldAnswer="{{ $question_child->attachment }}" type="text" 
                                                                             id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" value="{{ $question_child->attachment }}"
-                                                                            class="child-attachment-link bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com">
+                                                                            class="child-attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com">
+                                                                        <p id="error_msg_{{$i}}_{{$j}}_{{$k}}_{{$l}}" class="error-msg hidden mt-1 text-xs text-danger">Tautan Bukti Pendukung Jawaban Wajib Diisi!</p>
                                                                         <p class="mt-1 text-xs text-gray-500">Pastikan tautan yang anda masukkan valid dan dapat diakses. Kegagalan saat mengakses tautan bermasalah dapat berdampak pada penilaian buruk.</p>
                                                                         {{-- '{{ $question_child->attachment }}' --}}
                                                                     </div>
@@ -283,8 +302,8 @@
                     </div>
                 </div>
                 <!-- QUESTION CONTAINER FOOTER -->
-                <div class="bg-white w-full h-20 box-border flex justify-between items-center px-5">
-                    <button type="button" id="" class="flex gap-2 items-center justify-center uppercase question-btn w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs pl-2 pr-4 py-2">
+                <div class="border bg-white w-full h-20 box-border flex justify-between items-center px-3 lg:px-5">
+                    <button type="button" id="" class="hidden prev-btn prev-next-btn gap-2 items-center justify-center uppercase w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs pl-2 pr-4 py-2">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                 <path fill-rule="evenodd" d="M11.03 3.97a.75.75 0 0 1 0 1.06l-6.22 6.22H21a.75.75 0 0 1 0 1.5H4.81l6.22 6.22a.75.75 0 1 1-1.06 1.06l-7.5-7.5a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
@@ -292,11 +311,20 @@
                         </span>
                         <span>Sebelumnya</span>
                     </button>
-                    <button type="button" id="" class="flex gap-2 items-center justify-center uppercase question-btn w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs pl-4 pr-2 py-2">
+                    <div></div>
+                    <button type="button" id="next--category-button_0_1" class="next-btn prev-next-btn flex gap-2 items-center justify-center uppercase w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs pl-4 pr-2 py-2">
                         <span>Berikutnya</span>
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                 <path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pl-5 pr-2.5 py-2.5">
+                        <span>KIRIM JAWABAN</span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
                             </svg>
                         </span>
                     </button>
@@ -307,7 +335,7 @@
 
 
     <!-- SUBMIT EXAM ANSWERS POP UP -->
-    {{-- <div class="fixed z-[2220] inset-0" x-cloak x-show="showEndExamPopUp">
+    <div class="fixed z-[2220] inset-0" x-cloak x-show="showEndExamPopUp">
         <div class="absolute z-[2222] inset-0 bg-black bg-opacity-30 flex justify-center items-center py-4">
             <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 py-10 xl:py-12 flex flex-col justify-center items-center">
                 <div class="w-fit text-warning mb-6 xl:mb-8">
@@ -324,7 +352,7 @@
                     <button type="button" x-on:click="showEndExamPopUp = false" class="block w-36 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm px-5 py-2.5 text-center">
                         Kembali
                     </button>
-                    <form action="{{ route('exam.save', [$classroom->slug, $exam->slug]) }}" method="POST">
+                    <form action="" method="POST">
                         @csrf @method('POST')
                         <div class="" id="additionalFormFields"></div>
                         <button type="submit" class="block w-36 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center">
@@ -334,7 +362,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <!-- QUIT EXAM POP UP -->
     <div class="fixed z-[2220] inset-0" x-cloak x-show="showExitPopUp">
@@ -373,6 +401,8 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script>
+        let indicator_category_indices = [];
+
         const ajaxCall = (url, question_id, new_answer, attachment = null) => {
             $.ajax({
                 type    : "POST",
@@ -390,9 +420,75 @@
                     $("#saving").removeClass("hidden");
                 },
                 success: function (response){
-                    console.log(response);
-                    // reponseAction(response);
-                    // colorButton(currentIndex);
+                    let i = 0;
+                    $.each(response, function (indicator, categories) {
+                        let indicator_all_count      = 0;
+                        let indicator_answered_count = 0;
+                        let j = 0;
+                        $.each(categories, function (category, questions) {
+                            let category_answered_count   = 0;
+                            indicator_all_count      += questions.length;
+                            $.each(questions, function (index, question) { 
+                                if ( question.children.length > 0 ) {
+                                    let answered_child = 0;
+                                    $.each(question.children, function (id, child) { 
+                                        (child.answer == '1' || child.answer == '0') && answered_child ++;
+                                    });
+                                    (answered_child == question.children.length) && category_answered_count++;
+                                    (answered_child == question.children.length) && indicator_answered_count++;
+                                } else {
+                                    (question.answer == '1' || question.answer == '0') && category_answered_count++;
+                                    (question.answer == '1' || question.answer == '0') && indicator_answered_count++;
+                                }
+                            });
+                            let category_percentage = Math.round((category_answered_count/questions.length)*100);
+
+                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-100");
+                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-66");
+                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-33");
+                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-default");
+
+                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-100");
+                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-66");
+                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-33");
+                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-default");
+
+                            if ( category_percentage == 100 ) {
+                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-100");
+                                $(`#progres_category_${i}_${j}`).addClass("category-progress-100");
+                            } else if ( category_percentage >= 66 ) {
+                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-66");
+                                $(`#progres_category_${i}_${j}`).addClass("category-progress-66");
+                            } else if ( category_percentage >= 33 ) {
+                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-33");
+                                $(`#progres_category_${i}_${j}`).addClass("category-progress-33");
+                            } else {
+                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-default");
+                                $(`#progres_category_${i}_${j}`).addClass("category-progress-default");
+                            }
+                            // $(`#progres_category_${i}_${j}`).removeAttr("style");
+                            $(`#progres_category_${i}_${j}`).attr("style", `width: ${category_percentage}%`);
+                            j++;
+                        });
+
+                        let indicator_percentage = Math.round((indicator_answered_count/indicator_all_count)*100);
+                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-100");
+                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-66");
+                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-33");
+                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-default");
+
+                        if ( indicator_percentage == 100 ) {
+                            $(`#progress_indikator_${i}`).addClass("indicator-progess-100");
+                        } else if ( indicator_percentage >= 66 ) {
+                            $(`#progress_indikator_${i}`).addClass("indicator-progess-66");
+                        } else if ( indicator_percentage >= 33 ) {
+                            $(`#progress_indikator_${i}`).addClass("indicator-progess-33");
+                        } else {
+                            $(`#progress_indikator_${i}`).addClass("indicator-progess-default");
+                        }
+                        $(`#progress_indikator_${i}`).text(`${indicator_percentage}%`);
+                        i++;
+                    });
                 },
                 complete: function(){
                     $("#saving").addClass("hidden");
@@ -401,7 +497,109 @@
             });
         }
 
+        function processQuestion(currentIndex, targetIndex){
+            $(".error-msg").addClass("hidden");
+            $(".text-input").removeClass("border-danger");
+            $(".text-input").addClass("border-gray-300");
+            
+            let targetRawID         = targetIndex;
+            let targetIndicatorID   = targetRawID.split('_')[1];
+            let targetCategoryID    = targetRawID.split('_')[2];
+            
+            let currentRawID        = currentIndex;
+            let currentIndicatorID  = currentRawID.split('_')[1];
+            let currentCategoryID   = currentRawID.split('_')[2];
+
+            let groupedCurrentRadios         = {};
+            var groupsCheckedOnTrueButEmpty  = [];
+            
+            // GET ALL RADIOS BUTTON GROUP OF CURRENTLY ACTIVE CATEGORY
+            $('#questions-container_'+currentIndicatorID+'_'+currentCategoryID)
+                .find('[type="radio"]')
+                .each(function() {
+                    let rawID       = $(this).attr('id');
+                    let parts       = rawID.split("_");
+                    let newParts    = parts.slice(1, -1);
+                    let processedID = newParts.join("_");
+                    if (!groupedCurrentRadios[processedID]) {
+                        groupedCurrentRadios[processedID] = [];
+                    }
+                    groupedCurrentRadios[processedID].push(this);
+                }
+            );
+
+            // GET ALL RADIOS BUTTON GROUP THAT CHECKED ON TRUE BUT THE ATTACHMENT LINK TEXT INPUT IS EMPTY
+            $.each(groupedCurrentRadios, function(processedID, radios) {
+                let isCheckedOnTrue = radios.some(function(radio) {
+                    return $(radio).val() === '1' && $(radio).is(':checked');
+                });
+                let isTextInputEmpty = $("#attachment_"+processedID).val().trim() === '';
+                if (isCheckedOnTrue && isTextInputEmpty) {
+                    groupsCheckedOnTrueButEmpty.push(processedID);
+                }
+            });
+
+            if (groupsCheckedOnTrueButEmpty.length > 0) {
+                $.each(groupsCheckedOnTrueButEmpty, function(index, groupName) {
+                    let textInput = $("#attachment_"+groupName)
+                    if (textInput.val().trim() === '') {
+                        textInput.removeClass("border-gray-300");
+                        textInput.addClass("border-danger");
+                        $("#error_msg_"+groupName).removeClass("hidden");
+                    }
+                });
+            } else {
+                let target_index;
+                for (let i = 0; i < indicator_category_indices.length; i++) {
+                    if(indicator_category_indices[i] === targetRawID) {
+                        target_index = i;
+                        break;
+                    }
+                }
+                if(target_index == 0) {
+                    $("#submit_btn").removeClass("flex");
+                    $("#submit_btn").addClass("hidden");
+
+                    $(".prev-btn").removeClass("flex");
+                    $(".prev-btn").addClass("hidden");
+                    
+                    $(".next-btn").attr("id",`next--${indicator_category_indices[target_index+1]}`);
+                } else if (target_index == indicator_category_indices.length-1) {
+                    $(".next-btn").removeClass("flex");
+                    $(".next-btn").addClass("hidden");
+                    $("#submit_btn").removeClass("hidden");
+                    $("#submit_btn").addClass("flex");
+                    $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
+                } else {
+                    $("#submit_btn").removeClass("flex");
+                    $("#submit_btn").addClass("hidden");
+                    
+                    $(".prev-btn").removeClass("hidden");
+                    $(".prev-btn").addClass("flex");
+                    
+                    $(".next-btn").removeClass("hidden");
+                    $(".next-btn").addClass("flex");
+
+                    $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
+                    $(".next-btn").attr("id",`next--${indicator_category_indices[target_index+1]}`);
+                }
+
+                $(".category-button").removeClass("active-category-button");
+                $(`#${targetIndex}`).addClass("active-category-button");
+                $(".questions-container").addClass("hidden");
+                $("#questions-container_"+targetIndicatorID+"_"+targetCategoryID).removeClass("hidden");
+            }
+        }
+
         $(document).ready(function () {
+            let indicators = @json($indicators);
+            let i = 0;
+            $.each(indicators, function (indicatorKey, categories) { 
+                let j = 0;
+                $.each(categories, function (categoryKey, value) { 
+                    indicator_category_indices.push(`category-button_${i}_${j}`); j++;
+                }); i++;
+            });
 
             $(".radio-button").change(function (e) { 
                 e.preventDefault();
@@ -414,8 +612,6 @@
                 let questionChildID = rawID.split('_').length == 6 ? rawID.split('_')[4] : null;
 
                 let questionDBID    = $(this).attr("data-questionDBID");
-
-                // console.log(questionDBID);
                 
                 if (questionChildID != null && value == 1) {
                     // SHOW INPUT TEXT
@@ -426,11 +622,13 @@
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").removeClass("bg-gray-300 text-gray-500");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").addClass("bg-emerald-500 text-emerald-50");
                 } else if (questionChildID != null && value == 0) {
-                    // console.log("OKE");
                     // HIDE INPUT TEXT
                     $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_container").addClass("hidden");
                     // CLEAR INPUT TEXT VALUE
                     $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID).val("");
+                    // REMOVE ERROR MESSAGE
+                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID).removeClass("border-danger");
+                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID).addClass("border-gray-300");
                     // COLOR BUTTON
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").removeClass("bg-gray-300 text-gray-500");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").addClass("bg-red-500 text-red-50");
@@ -451,6 +649,9 @@
                     $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_container").addClass("hidden");
                     // CLEAR INPUT TEXT VALUE
                     $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID).val("");
+                    // REMOVE ERROR MESSAGE
+                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID).removeClass("border-danger");
+                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID).addClass("border-gray-300");
                     // COLOR BUTTON
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").removeClass("bg-gray-300 text-gray-500");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").addClass("bg-red-500 text-red-50");
@@ -514,22 +715,28 @@
                 }
             });
 
+            // QUESTION NAVIGATION BY CATEGORIES BUTTON
             $(".category-button").click(function (e) { 
                 e.preventDefault();
+                let targetRawID         = $(this).attr('id');
+                let currentRawID        = $(".category-button.active-category-button").attr('id');
+                
+                // CALL THE MAIN PROCESS
+                processQuestion(currentRawID, targetRawID);
+            });
 
-                let rawID           = $(this).attr('id');
-                let indicatorID     = rawID.split('_')[1];
-                let categoryID      = rawID.split('_')[2];
+            // QUESTION NAVIGATION BY NEXT & PREV BUTTON
+            $("#questionContainer").on("click", ".prev-next-btn", function(e){
+                e.preventDefault();
 
-                $(".category-button").removeClass("bg-white shadow");
-                $(this).addClass("bg-white shadow");
-
-                // $(selector).find(selector2);
-
-                console.log($("#questions-container_"+indicatorID+"_"+categoryID).find('.attachment-field.w-full.mt-2>[type="text"]'));
-
-                // $(".questions-container").addClass("hidden");
-                // $("#questions-container_"+indicatorID+"_"+categoryID).removeClass("hidden");
+                // Getting question index in the Array
+                let targetRawID     = $(this).attr('id').split("--")[1];
+                let parts           = targetRawID.split("_");
+                let newParts        = parts.slice(0, -1);
+                let currentRawID    = newParts.join("_") + "_" + (parseInt(parts[parts.length-1])-1).toString();
+                
+                // CALL THE MAIN PROCESS
+                processQuestion(currentRawID, targetRawID);
             });
         });
     </script>

@@ -63,4 +63,31 @@
         left    : 0px !important;
         width   : 288px !important;
     }
+
+    .active-category-button {
+        @apply bg-white shadow;
+    }
+
+    .indicator-progess-100 {
+        @apply bg-emerald-600 text-white;
+    }
+    .indicator-progess-66 {
+        @apply bg-yellow-300 text-yellow-50;
+    }
+    .indicator-progess-33 {
+        @apply bg-amber-300 text-amber-50;
+    }
+    .indicator-progess-default {
+        @apply bg-gray-400 text-gray-50;
+    }
+
+
+    .category-progress-container-100 { @apply border-emerald-600 bg-emerald-50 }
+    .category-progress-100 { @apply bg-emerald-600 }
+    .category-progress-container-66 { @apply border-yellow-300 bg-yellow-50 bg-opacity-40 }
+    .category-progress-66 { @apply bg-yellow-300 }
+    .category-progress-container-33 { @apply border-amber-600 bg-amber-50 bg-opacity-40 }
+    .category-progress-33 { @apply bg-amber-600 }
+    .category-progress-container-default { @apply border-gray-400 bg-gray-200 }
+    .category-progress-default { @apply bg-gray-400 }
 } 
