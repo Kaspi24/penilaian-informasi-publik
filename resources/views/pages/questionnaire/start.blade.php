@@ -399,7 +399,7 @@
                 </div>
                 <div class="w-full text-center mb-4 xl:mb-6">
                     <p class="text-base xl:text-lg text-gray-900 font-semibold tracking-wide">
-                        Anda yakin ingin meninggalkan ujian?
+                        Anda yakin ingin meninggalkan halaman pengisian kuesioner?
                     </p>
                 </div>
                 <div class="w-full text-center mb-8 xl:mb-10">
@@ -409,12 +409,12 @@
                 </div>
                 <div class="w-full flex justify-center items-center gap-2 md:gap-4">
                     <button type="button" x-on:click="showExitPopUp = false" 
-                        class="block w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
-                        Lanjutkan Ujian
+                        class="block w-40 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-xs xl:text-sm py-2.5 text-cente">
+                        Lanjutkan Mengisi
                     </button>
                     <a href="{{ route('questionnaire.index') }}"
-                        class="block w-40 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-xs xl:text-sm py-2.5 text-center">
-                        Tinggalkan Ujian
+                        class=" block w-40 text-white bg-danger hover:bg-danger-70 border border-danger focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
+                        Tinggalkan Halaman
                     </a>
                 </div>
             </div>
