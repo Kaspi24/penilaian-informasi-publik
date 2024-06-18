@@ -5,12 +5,6 @@
         </h2>
     </x-slot>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-primary leading-tight">
-            {{ __('Kuesioner') }}
-        </h2>
-    </x-slot>
-
     @include('components.alert')
 
     <div class="py-6">

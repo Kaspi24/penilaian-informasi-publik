@@ -27,6 +27,11 @@ class Question extends Model
         return $this->hasMany(QuestionChildren::class, 'question_id', 'id');
     }
 
+    // public function children_answer(): HasMany
+    // {
+    //     return $this->hasMany(QuestionChildren::class, 'question_id', 'id');
+    // }
+
     public function respondents(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'respondent_answer', 'question_id', 'respondent_id', 'id', 'id')

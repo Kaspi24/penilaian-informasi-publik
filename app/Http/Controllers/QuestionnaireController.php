@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-use App\Models\QuestionChildren;
 use Illuminate\Http\Request;
-use App\Models\RespondentAnswer;
-use App\Models\RespondentAnswerChildren;
 use App\Models\RespondentScore;
+use App\Models\QuestionChildren;
+use App\Models\RespondentAnswer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RespondentAnswerChildren;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -21,16 +22,23 @@ class QuestionnaireController extends Controller
         $all_indicators = Question::select(DB::raw('DISTINCT(nth_indicator) AS indicator'))->pluck('indicator')->toArray();
         foreach ($all_indicators as $indicator) {
             $all_questions = Question::query()
-                ->leftJoin('respondent_answer', function ($join) {
-                    $join->on('questions.id', '=', 'respondent_answer.question_id')
-                        ->where('respondent_answer.respondent_id', '=', Auth::user()->id);
-                })
+                ->select(
+                    'questions.id                   AS id',
+                    'questions.*',
+                    'respondent_answer.answer       AS answer',
+                    'respondent_answer.attachment   AS attachment',
+                    'respondent_answer.score        AS score'
+                )
                 ->with(['children' => function ($q) {
                     $q->leftJoin('respondent_answer_children', function ($join) {
                         $join->on('question_children.id', '=', 'respondent_answer_children.question_children_id')
                             ->where('respondent_answer_children.respondent_id', '=', Auth::user()->id);
                     });
                 }])
+                ->leftJoin('respondent_answer', function ($join) {
+                    $join->on('questions.id', '=', 'respondent_answer.question_id')
+                        ->where('respondent_answer.respondent_id', '=', Auth::user()->id);
+                })
                 ->where('questions.nth_indicator',$indicator)
                 ->get();
             $indicators["INDIKATOR ".$indicator] = $all_questions->groupBy('category');
@@ -149,8 +157,30 @@ class QuestionnaireController extends Controller
 
     public function submitResponse(Request $request)
     {
+        $questions = Question::with('children')->get();
+        foreach ($questions as $question) {
+            if($question->children->count() === 0) {
+                $respondent_answer = RespondentAnswer::query()
+                    ->where('respondent_id', Auth::user()->id)
+                    ->where('question_id', $question->id)
+                    ->first();
+                if(!$respondent_answer->answer) {
+                    $respondent_answer->update(['answer' => 0]);
+                }
+            } else {
+                foreach ($question->children as $question_child) {
+                    $respondent_answer_child = RespondentAnswerChildren::query()
+                        ->where('respondent_id', Auth::user()->id)
+                        ->where('question_children_id', $question_child->id)
+                        ->first();
+                    if(!$respondent_answer_child->answer) {
+                        $respondent_answer_child->update(['answer' => 0]);
+                    }
+                }
+            }
+        }
         $submission     = RespondentScore::firstWhere('respondent_id',Auth::user()->id);
         $submission->update(['is_done_filling' => true]);
-        return redirect()->route('questionnaire.index');
+        return Redirect::route('questionnaire.index')->with('success', 'Tanggapan anda telah dikirim!');
     }
 }

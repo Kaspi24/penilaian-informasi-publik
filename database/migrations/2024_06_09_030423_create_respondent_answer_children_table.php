@@ -12,6 +12,7 @@ return new class extends Migration
     {
         Schema::create('respondent_answer_children', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('respondent_answer_id')->references('id')->on('respondent_answer')->constrained()->cascadeOnDelete();
             $table->foreignId('respondent_id')->references('id')->on('users')->constrained()->cascadeOnDelete();
             $table->foreignId('question_children_id')->references('id')->on('question_children')->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();

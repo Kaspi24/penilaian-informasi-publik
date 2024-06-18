@@ -11,7 +11,7 @@
         @endif
     @else
         <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-gray-200 text-gray-500">
-            BELUM MENGUMPULKAN
+            BELUM DIKIRIMKAN
         </p>
     @endif
 </div>

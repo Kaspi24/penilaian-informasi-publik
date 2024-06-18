@@ -45,8 +45,8 @@
     </nav>
 
     <!-- QUESTIONS NAVIGATION FOR MOBILE -->
-    <div class="flex xl:hidden fixed z-[1010] top-[3.5rem] h-[3rem] shadow shadow-gray-400 w-full bg-primary-10 text-primary py-2 px-4 justify-between items-center">
-        {{-- <div class="relative flex gap-2 items-center w-full " x-data="{ showMobilePreview : false }"> --}}
+    {{-- <div class="flex xl:hidden fixed z-[1010] top-[3.5rem] h-[3rem] shadow shadow-gray-400 w-full bg-primary-10 text-primary py-2 px-4 justify-between items-center">
+        <!--  <div class="relative flex gap-2 items-center w-full " x-data="{ showMobilePreview : false }"> -->
         <div class="relative hidden gap-2 items-center w-full " x-data="{ showMobilePreview : false }">
             <span class="text-primary-30">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
@@ -76,7 +76,7 @@
             </span>
             <div class="absolute top-[2.25rem] left-6 w-[90vw] h-40 rounded-b-md shadow shadow-primary-20 border-t-2 border-primary p-2 bg-gray-100"></div>
         </div>
-    </div>
+    </div> --}}
 
     <main class="relative w-full" 
         x-data="{
@@ -275,11 +275,11 @@
                                                                     <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
                                                                         id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1" 
                                                                         class="hidden radio-button" 
-                                                                        value="1" data-questionDBID="{{ $question_child->id }}" @checked($question_child->answer === 1)>
+                                                                        value="1" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 1)>
                                                                     <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
                                                                         id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0" 
                                                                         class="hidden radio-button" 
-                                                                        value="0" data-questionDBID="{{ $question_child->id }}" @checked($question_child->answer === 0)>
+                                                                        value="0" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 0)>
                                                                     <!-- CHILD ANSWER LABEL -->
                                                                     <div class="flex w-2/3 md:w-1/2 xl:w-1/4 gap-2 mt-2">
                                                                         <label id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1" for="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1" 
@@ -294,7 +294,7 @@
                                                                     <!-- CHILD INPUT TEXT -->
                                                                     <div id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}_container" class="attachment-field w-full mt-2 {{ $question_child->answer === 1 ? '' : 'hidden' }}">
                                                                         <label for="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</label>
-                                                                        <input data-questionDBID="{{ $question_child->id }}" data-oldAnswer="{{ $question_child->attachment }}" type="text" 
+                                                                        <input data-questionDBID="{{ $question_child->question_children_id }}" data-oldAnswer="{{ $question_child->attachment }}" type="text" 
                                                                             id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" value="{{ $question_child->attachment }}"
                                                                             class="child-attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com">
                                                                         <p id="error_msg_{{$i}}_{{$j}}_{{$k}}_{{$l}}" class="error-msg hidden mt-1 text-xs text-danger">Tautan Bukti Pendukung Jawaban Wajib Diisi!</p>
@@ -428,6 +428,9 @@
         let indicator_category_indices = [];
 
         const ajaxCall = (url, question_id, new_answer, attachment = null) => {
+            // console.log(url);
+            // console.log(question_id);
+            // console.log(new_answer);
             $.ajax({
                 type    : "POST",
                 url     : url,
@@ -444,6 +447,7 @@
                     $(".saving").removeClass("hidden");
                 },
                 success: function (response){
+                    console.log(response);
                     let i = 0;
                     $.each(response, function (indicator, categories) {
                         let indicator_all_count      = 0;
@@ -660,7 +664,6 @@
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").addClass("bg-red-500 text-red-50");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").removeClass("bg-emerald-500 text-emerald-50");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").addClass("bg-gray-300 text-gray-500");
-                    
                     ajaxCall("{{ route('questionnaire.updateAnswerChild') }}", questionDBID, value);
                 } else if (questionChildID == null && value == 1) {
                     // SHOW INPUT TEXT
@@ -683,7 +686,6 @@
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").addClass("bg-red-500 text-red-50");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_1").removeClass("bg-emerald-500 text-emerald-50");
                     $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_1").addClass("bg-gray-300 text-gray-500");
-
                     ajaxCall("{{ route('questionnaire.updateAnswer') }}", questionDBID, value);
                 }
             });

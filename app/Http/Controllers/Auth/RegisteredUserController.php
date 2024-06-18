@@ -50,12 +50,14 @@ class RegisteredUserController extends Controller
             $questions = Question::with('children')->get();
     
             foreach ($questions as $question) {
-                RespondentAnswer::create([
+                $respondent_answer = RespondentAnswer::create([
                     'respondent_id' => $user->id,
                     'question_id'   => $question->id
                 ]);
+                
                 foreach ($question->children as $question_child) {
                     RespondentAnswerChildren::create([
+                        'respondent_answer_id'  => $respondent_answer->id,
                         'respondent_id'         => $user->id,
                         'question_children_id'  => $question_child->id,
                         'question_id'           => $question->id
