@@ -9,7 +9,15 @@ class RespondentScore extends Model
 {
     protected $table = 'respondent_score';
     
-    protected $guarded = ['total_score'];
+    protected $fillable = [
+        'respondent_id',
+        'jury_id',
+        'is_done_filling',
+        'is_done_scoring',
+        'total_score',
+        'updated_by',
+        'updated_by_name',
+    ];
 
     public function respondent(): BelongsTo
     {

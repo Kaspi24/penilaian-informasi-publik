@@ -24,7 +24,7 @@ class UserTable extends DataTableComponent
         return User::query()
             ->with([
                 'work_unit',
-            ]);
+            ])->where('role', 'RESPONDENT');
     }
 
     public function filters(): array
@@ -51,8 +51,6 @@ class UserTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable(),
             Column::make("Nama", "name")
                 ->sortable(),
             Column::make("Username", "username")
@@ -65,7 +63,12 @@ class UserTable extends DataTableComponent
                 ->sortable(),
             Column::make("Unit Kerja", "work_unit.name")
                 ->sortable(),
+
             Column::make("Role", "role")
+                ->hideIf(true)
+                ->sortable(),
+            Column::make("Id", "id")
+                ->hideIf(true)
                 ->sortable(),
         ];
     }

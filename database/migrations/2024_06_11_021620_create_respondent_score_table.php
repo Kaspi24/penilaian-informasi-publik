@@ -26,6 +26,8 @@ return new class extends Migration
             // Total Score
             $table->float('total_score')->default(0);
             $table->timestamps();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('updated_by_name')->nullable();
         });
     }
     

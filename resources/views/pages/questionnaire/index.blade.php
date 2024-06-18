@@ -150,7 +150,7 @@
                             <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/2 bg-primary text-white ">
                                 <span>
                                     <p class="flex justify-start items-center gap-2 text-sm lg:text-base text-warning lg:tracking-wide font-semibold mb-3">
-                                        Skor Pelayanan Informasi Publik Unit Kerja Anda adalah :
+                                        Skor Pelayanan Informasi Publik Unit Kerja Anda adalah
                                     </p>
                                     <span class="flex justify-start items-center gap-3">
                                         <p class="text-4xl lg:text-5xl w-24 text-center font-extrabold bg-primary-80 text-white p-3 rounded-md">
