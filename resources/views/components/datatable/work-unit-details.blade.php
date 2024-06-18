@@ -14,17 +14,29 @@
             <div class="flex justify-start items-center mb-1.5">
                 <p class="w-32 font-bold">Kepala Unit Kerja</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->head_name }}</p>
+                @if ($row->head_name)
+                    <p class="">{{ $row->head_name }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
             <div class="flex justify-start items-center mb-1.5">
                 <p class="w-32 font-bold">Telepon Unit Kerja</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->phone }}</p>
+                @if ($row->phone)
+                    <p class="">{{ $row->phone }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
             <div class="flex justify-start items-center">
                 <p class="w-32 font-bold">Email Unit Kerja</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->email }}</p>
+                @if ($row->email)
+                    <p class="">{{ $row->email }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
         </div>
         <p class="font-extrabold tracking-wide uppercase mb-2">Detail Responden</p>
@@ -32,27 +44,47 @@
             <div class="flex justify-start items-center mb-1.5">
                 <p class="w-32 font-bold">Nama</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->user[0]->name }}</p>
+                @if ($row->user[0]->name)
+                    <p class="">{{ $row->user[0]->name }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
             <div class="flex justify-start items-center mb-1.5">
                 <p class="w-32 font-bold">Username</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->user[0]->username }}</p>
+                @if ($row->user[0]->username)
+                    <p class="">{{ $row->user[0]->username }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
             <div class="flex justify-start items-center mb-1.5">
                 <p class="w-32 font-bold">Email</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->user[0]->email }}</p>
+                @if ($row->user[0]->email)
+                    <p class="">{{ $row->user[0]->email }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
             <div class="flex justify-start items-center mb-1.5">
                 <p class="w-32 font-bold">Telepon</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->user[0]->phone }}</p>
+                @if ($row->user[0]->phone)
+                    <p class="">{{ $row->user[0]->phone }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
             <div class="flex justify-start items-center">
                 <p class="w-32 font-bold">WhatsApp</p>
                 <p class="pr-2">:</p>
-                <p class="">{{ $row->user[0]->whatsapp }}</p>
+                @if ($row->user[0]->whatsapp)
+                    <p class="">{{ $row->user[0]->whatsapp }}</p>
+                @else
+                    <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-warning-10 text-warning border border-warning">BELUM DILENGKAPI</p>
+                @endif
             </div>
         </div>
     @endif
