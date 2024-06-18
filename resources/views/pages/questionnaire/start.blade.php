@@ -758,10 +758,15 @@
                 e.preventDefault();
 
                 // Getting question index in the Array
+                let currentRawID;
                 let targetRawID     = $(this).attr('id').split("--")[1];
                 let parts           = targetRawID.split("_");
                 let newParts        = parts.slice(0, -1);
-                let currentRawID    = newParts.join("_") + "_" + (parseInt(parts[parts.length-1])-1).toString();
+                if ($(this).attr('id').split("--")[0] === 'prev') {
+                    currentRawID    = newParts.join("_") + "_" + (parseInt(parts[parts.length-1])+1).toString();
+                } else {
+                    currentRawID    = newParts.join("_") + "_" + (parseInt(parts[parts.length-1])-1).toString();
+                }
                 
                 // CALL THE MAIN PROCESS
                 processQuestion(currentRawID, targetRawID);
