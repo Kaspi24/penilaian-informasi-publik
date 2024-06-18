@@ -24,6 +24,7 @@ class UserTable extends DataTableComponent
         return User::query()
             ->with([
                 'work_unit',
+                'score'
             ])->where('role', 'RESPONDENT');
     }
 
@@ -51,25 +52,32 @@ class UserTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            // DISPLAYED COLUMNS
+            Column::make("Status Kuesioner")
+                ->label(
+                    fn($row) => view('components.datatable.respondent-questionnaire-status', compact('row'))
+                ),
             Column::make("Nama", "name")
                 ->sortable(),
             Column::make("Username", "username")
                 ->sortable(),
             Column::make("Email", "email")
                 ->sortable(),
-            Column::make("Telepom", "phone")
+            Column::make("Telepon", "phone")
                 ->sortable(),
             Column::make("WhatsApp", "whatsapp")
                 ->sortable(),
             Column::make("Unit Kerja", "work_unit.name")
                 ->sortable(),
-
-            Column::make("Role", "role")
-                ->hideIf(true)
-                ->sortable(),
-            Column::make("Id", "id")
-                ->hideIf(true)
-                ->sortable(),
+            // COLLAPSED COLUMNS
+            // Column::make("Detail Pengerjaan Kuesioner")
+            //     ->label(
+            //         fn($row) => view('components.datatable.respondent-questionnaire-details', compact('row'))
+            //     )
+            //     ->collapseAlways(),
+            // HIDDEN COLUMNS
+            Column::make("Role", "role")->hideIf(true),
+            Column::make("Id", "id")->hideIf(true),
         ];
     }
 }

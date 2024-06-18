@@ -20,6 +20,7 @@ class WorkUnitTable extends DataTableComponent
     public function builder(): Builder
     {
         return WorkUnit::query()
+            ->with('user')
             ->whereNot('category','PUSAT');
     }
 
@@ -41,6 +42,15 @@ class WorkUnitTable extends DataTableComponent
                 ->filter(function(Builder $builder, string $value) {
                     $builder->where('category', $value);
                 }),
+            SelectFilter::make('Status Responden')
+                ->options([
+                    ''      => 'Semua',
+                    '=='    => 'Belum Mendaftar',
+                    '>'     => 'Sudah Mendaftar'
+                ])
+                ->filter(function(Builder $builder, string $operator) {
+                    $builder->has('user', $operator, 0);
+                }),
         ];
     }
 
@@ -52,37 +62,26 @@ class WorkUnitTable extends DataTableComponent
     {
         return [
             // DISPLAYED COLUMNS
+            Column::make("Status Responden")
+                ->label(
+                    fn($row) => view('components.datatable.work-unit-respondent-status', compact('row'))
+                ),
             Column::make("Nama", "name")
                 ->sortable()
                 ->searchable(),
             Column::make("Kategori", "category")
                 ->sortable(),
             // COLLAPSED COLUMNS
-            // Column::make("Ditampilkan", "id")
-            //     ->label(
-            //         fn($row) => view('components.datatable.toggle-review-visibility')->withRow($row)
-            //     ),
-            Column::make("Detail Unit Kerja")
+            Column::make("Detail Unit Kerja dan Responden")
                 ->label(
                     fn($row) => view('components.datatable.work-unit-details', compact('row'))
                 )
-                // ->view('components.datatable.work-unit-details', compact('row'))
                 ->collapseAlways(),
-            // Column::make("Telepon", "phone")
-            //     ->view('components.datatable.work-unit-details')
-            //     ->collapseAlways(),
-            // Column::make("Email", "email")
-            //     ->view('components.datatable.work-unit-details')
-            //     ->collapseAlways(),
             // HIDDEN COLUMNS
-            Column::make("Id", "id")
-                ->hideIf(true),
-            Column::make("Telepon", "phone")
-                ->hideIf(true),
-            Column::make("Email", "email")
-                ->hideIf(true),
-            Column::make("Nama Kepala", "head_name")
-                ->hideIf(true),
+            Column::make("ID", "id")->hideIf(true),
+            Column::make("Telepon", "phone")->hideIf(true),
+            Column::make("Email", "email")->hideIf(true),
+            Column::make("Kepala Unit Kerja", "head_name")->hideIf(true),
         ];
     }
 }

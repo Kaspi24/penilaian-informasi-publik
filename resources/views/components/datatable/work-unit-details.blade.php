@@ -1,5 +1,5 @@
 <div class="w-full text-sm text-primary">
-    @if ($row->head_name == null || $row->phone == null || $row->email == null)
+    @if ($row->user->count() === 0)
         <p class="flex items-center gap-2 text-xs bg-warning-10 text-warning p-1 px-2 w-fit rounded-md border border-warning font-bold">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
@@ -9,20 +9,51 @@
             <span>BELUM ADA RESPONDEN YANG MENDAFTAR DARI UNIT KERJA INI</span>
         </p>
     @else 
-        <div class="flex justify-start items-center mb-1.5">
-            <p class="w-32 font-bold">Kepala Unit Kerja</p>
-            <p class="pr-2">:</p>
-            <p class="">{{ $row->head_name }}</p>
+        <p class="font-extrabold tracking-wide uppercase mb-2">Detail Unit Kerja</p>
+        <div class="p-2 border rounded bg-primary-10/25 mb-2 border-primary-20">
+            <div class="flex justify-start items-center mb-1.5">
+                <p class="w-32 font-bold">Kepala Unit Kerja</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->head_name }}</p>
+            </div>
+            <div class="flex justify-start items-center mb-1.5">
+                <p class="w-32 font-bold">Telepon Unit Kerja</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->phone }}</p>
+            </div>
+            <div class="flex justify-start items-center">
+                <p class="w-32 font-bold">Email Unit Kerja</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->email }}</p>
+            </div>
         </div>
-        <div class="flex justify-start items-center mb-1.5">
-            <p class="w-32 font-bold">Telepon Unit Kerja</p>
-            <p class="pr-2">:</p>
-            <p class="">{{ $row->phone }}</p>
-        </div>
-        <div class="flex justify-start items-center">
-            <p class="w-32 font-bold">Email Unit Kerja</p>
-            <p class="pr-2">:</p>
-            <p class="">{{ $row->email }}</p>
+        <p class="font-extrabold tracking-wide uppercase mb-2">Detail Responden</p>
+        <div class="p-2 border rounded bg-primary-10/25 mb-2 border-primary-20">
+            <div class="flex justify-start items-center mb-1.5">
+                <p class="w-32 font-bold">Nama</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->user[0]->name }}</p>
+            </div>
+            <div class="flex justify-start items-center mb-1.5">
+                <p class="w-32 font-bold">Username</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->user[0]->username }}</p>
+            </div>
+            <div class="flex justify-start items-center mb-1.5">
+                <p class="w-32 font-bold">Email</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->user[0]->email }}</p>
+            </div>
+            <div class="flex justify-start items-center mb-1.5">
+                <p class="w-32 font-bold">Telepon</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->user[0]->phone }}</p>
+            </div>
+            <div class="flex justify-start items-center">
+                <p class="w-32 font-bold">WhatsApp</p>
+                <p class="pr-2">:</p>
+                <p class="">{{ $row->user[0]->whatsapp }}</p>
+            </div>
         </div>
     @endif
 </div>

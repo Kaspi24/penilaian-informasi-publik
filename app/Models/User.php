@@ -60,13 +60,11 @@ class User extends Authenticatable
 
     public function score(): HasOne
     {
-        return $this->hasOne(RespondentScore::class, 'respondent_id', 'id')
-            ->withPivot('is_done', 'total_score');
+        return $this->hasOne(RespondentScore::class, 'respondent_id', 'id');
     }
 
     public function submissions(): HasMany
     {
-        return $this->hasMany(RespondentScore::class, 'jury_id', 'id')
-            ->withPivot('respondent_id', 'is_done', 'total_score');
+        return $this->hasMany(RespondentScore::class, 'jury_id', 'id');
     }
 }
