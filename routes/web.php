@@ -8,6 +8,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\WorkUnitController;
 use App\Http\Middleware\ProfileCompletedMiddleware;
+use App\Http\Middleware\RespondentMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,9 +26,12 @@ Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(Questi
 // Questionnaire
 Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(QuestionnaireController::class)->as('questionnaire.')->group(function() {
     Route::get('kuesioner',             'index')->name('index');
-    Route::get('isi-kuesioner',         'start')->name('start');
-    Route::put('update-answer',         'updateAnswer')->name('updateAnswer');
-    Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
+    Route::middleware(RespondentMiddleware::class)->group(function() {
+        Route::get('isi-kuesioner',         'start')->name('start');
+        Route::put('update-answer',         'updateAnswer')->name('updateAnswer');
+        Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
+        Route::put('submit-response',       'submitResponse')->name('submitResponse');
+    });
 });
 
 // Work Units
@@ -48,3 +52,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::fallback(function () {
+    abort(404);
+});

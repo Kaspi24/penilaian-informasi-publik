@@ -12,8 +12,8 @@ class RespondentMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        if ($user->role !== UserRole::RESPONDENT) {
-            return response()->view('notfound');
+        if ($user->role !== "RESPONDENT") {
+            return response()->view('404');
         }
         return $next($request);
     }

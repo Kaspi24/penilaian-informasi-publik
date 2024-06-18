@@ -16,7 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" {{ $attributes }}>
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -30,10 +30,11 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="px-3 lg:px-0">
                 {{ $slot }}
             </main>
         </div>
+        @isset($modals) {{ $modals }} @endisset
         @livewireScripts
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/flowbite.min.js') }}"></script>

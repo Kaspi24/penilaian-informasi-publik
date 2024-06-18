@@ -1,12 +1,13 @@
 <x-guest-layout>
     <div class="w-full md:w-1/2 lg:1/3 xl:w-1/4 p-4 md:p-3 xl:p-2">
-        <p class="text-center text-3xl text-primary font-bold  px-2">Selamat Datang</p>
-        <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-3/4 h-auto mx-auto my-3 lg:my-6">
+        <p class="text-center text-3xl text-primary font-bold px-2">Selamat Datang</p>
+        <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-3/4 h-auto mx-auto my-2 lg:my-4">
+        <p class="text-center text-lg text-primary font-bold px-2 mb-2 lg:mb-4">KEMENTERIAN PERHUBUNGAN REPUBLIK INDONESIA</p>
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- USERNAME -->
-            <div class="mb-4 px-2">
+            <div class="mb-2 lg:mb-4 px-2">
                 <label for="username" class="block mb-2 text-base font-medium text-primary-70">Username</label>
                 <input type="text" id="username" name="username"
                     class="border-2 border-primary-20 text-primary-50 text-sm rounded-md focus:ring-primary-70 focus:border-primary-70 block w-full p-2.5 custom-placeholder" 
@@ -17,7 +18,7 @@
             </div>
 
             <!-- PASSWORD -->
-            <div class="mb-6 px-2">
+            <div class="mb-2 lg:mb-4 px-2">
                 <label for="password" class="block mb-2 text-base font-medium text-primary-70">Password</label>
                 <input type="password" id="password" name="password" required
                     class="border-2 border-primary-20 text-primary-50 text-sm rounded-md focus:ring-primary-70 focus:border-primary-70 block w-full p-2.5"  autocomplete="off">

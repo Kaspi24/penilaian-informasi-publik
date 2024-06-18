@@ -21,7 +21,8 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
             // Status 'is done'
-            $table->boolean('is_done')->default(false);
+            $table->boolean('is_done_filling')->default(false);
+            $table->boolean('is_done_scoring')->default(false);
             // Total Score
             $table->float('total_score')->default(0);
             $table->timestamps();

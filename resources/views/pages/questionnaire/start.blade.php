@@ -23,11 +23,11 @@
     x-data="{
         showEndExamPopUp : false,
         showExitPopUp : false,
+        showSidebar : false,
     }">
 
     <!-- PAGE HEADER (EXAM TITLE) -->
     <nav class="fixed z-[999] top-0 w-full bg-primary text-white h-[3.5rem] flex justify-between xl:grid xl:grid-cols-3 items-center px-4">
-        <p id="user_ID" class="hidden">{{ Auth::user()->id }}</p>
         <div class="relative">
             <button type="button" x-on:click="showExitPopUp = true" class="block xl:flex xl:items-center xl:gap-2 text-white hover:text-gray-200">
                 <span class="block m-0">
@@ -38,30 +38,48 @@
                 <span class="hidden text-xs xl:text-sm xl:block xl:m-0">Kembali</span>
             </button>
         </div>
-        <p class="block m-0 text-xs xl:text-sm xl:text-center">KUESIONER PENILAIAN INFORMASI PUBLIK</p>
+        <div class="flex justify-center items-center gap-2">
+            <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
+            <p class="block m-0 text-xs xl:text-sm xl:text-center">KUESIONER PENILAIAN <br class="lg:hidden"> INFORMASI PUBLIK</p>
+        </div>
     </nav>
 
-    {{-- <!-- QUESTIONS INDICATOR AND EXAM TIMER FOR MOBILE -->
-    <div class="flex xl:hidden fixed z-[999] top-[3.45rem] w-full bg-primary-10 text-primary py-2 px-4 justify-between items-center">
-        <div class="relative" x-data="{ showMobilePreview : false }">
-            <button class="w-fit flex items-center gap-2" x-on:click="showMobilePreview =! showMobilePreview">
-                <span class="block m-0 text-sm">Semua soal</span>
-                <span class="block m-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </span>
+    <!-- QUESTIONS NAVIGATION FOR MOBILE -->
+    <div class="flex xl:hidden fixed z-[1010] top-[3.5rem] h-[3rem] shadow shadow-gray-400 w-full bg-primary-10 text-primary py-2 px-4 justify-between items-center">
+        {{-- <div class="relative flex gap-2 items-center w-full " x-data="{ showMobilePreview : false }"> --}}
+        <div class="relative hidden gap-2 items-center w-full " x-data="{ showMobilePreview : false }">
+            <span class="text-primary-30">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                </svg>
+            </span>
+            <button class="text-sm lg:text-base font-bold underline underline-offset-4 tracking-wide" x-on:click="">
+                INDIKATOR I
             </button>
-            <div class="fixed z-[1000] top-[6.5rem] w-fit h-fit max-h-[calc(50vh)] overflow-y-auto custom-scrollbar rounded-md p-3 border-2 border-primary bg-white drop-shadow"
-                x-cloak x-show="showMobilePreview" x-on:click.outside="showMobilePreview = false">
-                <div class="w-fit grid grid-cols-5 items-start gap-3 h-fit">
-
-                </div>
-            </div>
+            <span class="text-primary-30">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </span>
+            <button class="text-sm mr-2 lg:text-base font-bold underline underline-offset-4 tracking-wide" x-on:click="">
+                PPID
+            </button>
+            <span class="saving hidden text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 animate-spin">
+                    <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
+                </svg>
+            </span>
+            <span class="saved text-emerald-600">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.7427 10.2859C17.7427 10.578 17.7184 10.8643 17.6716 11.1431H18.5999C20.7301 11.1431 22.457 12.87 22.457 15.0002C22.457 17.1305 20.7301 18.8574 18.5999 18.8574L12.5999 18.8574H5.74275C3.37581 18.8574 1.45703 16.9386 1.45703 14.5716C1.45703 12.2047 3.37581 10.2859 5.74275 10.2859H7.45703C7.45703 7.4456 9.75957 5.14307 12.5999 5.14307C15.4402 5.14307 17.7427 7.4456 17.7427 10.2859ZM16.08 11.8088L12.298 15.5908L12.298 15.5908L11.0374 16.8515L7.88569 13.6998L9.14636 12.4392L11.0373 14.3301L14.8193 10.5481L16.08 11.8088Z"/>
+                </svg>
+            </span>
+            <div class="absolute top-[2.25rem] left-6 w-[90vw] h-40 rounded-b-md shadow shadow-primary-20 border-t-2 border-primary p-2 bg-gray-100"></div>
         </div>
-    </div> --}}
+    </div>
 
-    <main class="relative w-full" x-data="{
+    <main class="relative w-full" 
+        x-data="{
             @php $x=0; @endphp
             @foreach ($indicators as $indicator => $categories)
                 @php $y=0; @endphp
@@ -72,16 +90,16 @@
                 @php $x++; @endphp
             @endforeach
         }">
-        <!-- QUESTIONS NAVIGATOR -->
-        <div class="block fixed z-[1000] top-[3.5rem] h-[calc(100vh-3.5rem)] w-1/4 box-border border-r-4 border-primary bg-primary-10 bg-opacity-60 p-4">
+        <!-- QUESTIONS NAVIGATION -->
+        <div class="hidden xl:block fixed z-[999] top-[3.5rem] h-[calc(100vh-3.5rem)] w-1/4 box-border border-r-4 border-primary bg-primary-10 bg-opacity-60 p-4">
             <div class="flex gap-1 w-full items-center m-0 mb-4 font-semibold text-primary">
                 <p>Pertanyaan Kuesioner</p>
-                <span id="saving" class="hidden text-gray-600">
+                <span id="saving" class="saving hidden text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 animate-spin">
                         <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
                     </svg>
                 </span>
-                <span id="saved" class="text-emerald-600">
+                <span id="saved" class="saved text-emerald-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.7427 10.2859C17.7427 10.578 17.7184 10.8643 17.6716 11.1431H18.5999C20.7301 11.1431 22.457 12.87 22.457 15.0002C22.457 17.1305 20.7301 18.8574 18.5999 18.8574L12.5999 18.8574H5.74275C3.37581 18.8574 1.45703 16.9386 1.45703 14.5716C1.45703 12.2047 3.37581 10.2859 5.74275 10.2859H7.45703C7.45703 7.4456 9.75957 5.14307 12.5999 5.14307C15.4402 5.14307 17.7427 7.4456 17.7427 10.2859ZM16.08 11.8088L12.298 15.5908L12.298 15.5908L11.0374 16.8515L7.88569 13.6998L9.14636 12.4392L11.0373 14.3301L14.8193 10.5481L16.08 11.8088Z"/>
                     </svg>
@@ -185,7 +203,6 @@
         </div>
 
         <!-- QUESTION CONTAINER -->
-        {{-- <div class="absolute top-[6.5rem] xl:top-[3.5rem] min-h-[calc(100vh-6.5rem)] xl:min-h-[calc(100vh-3.5rem)] w-full xl:w-[calc(100vw-6.5rem-12.5rem-31px)] xl:left-[calc(19rem+14px)] p-4"> --}}
         <div class="fixed z-[1000] top-[6.5rem] xl:top-[3.5rem] h-[calc(100vh-6.5rem)] box-border xl:h-[calc(100vh-3.5rem)] w-full xl:w-3/4 xl:right-0">
             <div id="questionContainer" class="text-gray-900 text-sm lg:text-base h-full">
                 <!-- QUESTION CONTAINER BODY -->
@@ -320,13 +337,13 @@
                             </svg>
                         </span>
                     </button>
-                    <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pl-5 pr-2.5 py-2.5">
-                        <span>KIRIM JAWABAN</span>
+                    <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                 <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
                             </svg>
                         </span>
+                        <span>KIRIM JAWABAN</span>
                     </button>
                 </div>
             </div>
@@ -336,27 +353,34 @@
 
     <!-- SUBMIT EXAM ANSWERS POP UP -->
     <div class="fixed z-[2220] inset-0" x-cloak x-show="showEndExamPopUp">
-        <div class="absolute z-[2222] inset-0 bg-black bg-opacity-30 flex justify-center items-center py-4">
-            <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 py-10 xl:py-12 flex flex-col justify-center items-center">
-                <div class="w-fit text-warning mb-6 xl:mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div class="w-full text-center mb-8 xl:mb-10">
-                    <p class="text-base xl:text-lg text-gray-900 font-semibold tracking-wide">
-                        Anda yakin ingin mengakhiri ujian?
+        <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
+            <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
+                <div class="w-full text-center mb-3">
+                    <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
+                        Kirim tanggapan kuesioner anda?
+                    </p>
+                    <p class="text-sm lg:text-base text-justify text-primary-50">
+                        Setelah mengirim tanggapan, anda tidak dapat mengubahnya lagi, karena tanggapan anda akan melalui proses penilaian. <br>
+                        <span class="mt-1 font-semibold text-primary-70 text-left">
+                            Catatan : Pertanyaan yang tidak/belum diisi akan mendapatkan nilai 0.
+                        </span>
                     </p>
                 </div>
+                <div class="w-full flex gap-2 justify-center items-center bg-warning-10 border border-warning text-warning p-1 rounded-md mb-6 xl:mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="text-sm">Aksi tidak dapat dibatalkan!</p>
+                </div>
                 <div class="w-full flex justify-center items-center gap-4">
-                    <button type="button" x-on:click="showEndExamPopUp = false" class="block w-36 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm px-5 py-2.5 text-center">
-                        Kembali
+                    <button type="button" x-on:click="showEndExamPopUp = false" class="block w-[32%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
+                        KEMBALI
                     </button>
-                    <form action="" method="POST">
-                        @csrf @method('POST')
-                        <div class="" id="additionalFormFields"></div>
-                        <button type="submit" class="block w-36 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center">
-                            Akhiri Ujian
+                    <form action="{{ route('questionnaire.submitResponse') }}" class="block w-[32%]"  method="POST">
+                        @csrf @method('PUT')
+                        <div class="w-full" id="additionalFormFields"></div>
+                        <button type="submit" class="block w-full text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
+                            KIRIM
                         </button>
                     </form>
                 </div>
@@ -388,7 +412,7 @@
                         class="block w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
                         Lanjutkan Ujian
                     </button>
-                    <a href=""
+                    <a href="{{ route('questionnaire.index') }}"
                         class="block w-40 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-xs xl:text-sm py-2.5 text-center">
                         Tinggalkan Ujian
                     </a>
@@ -416,8 +440,8 @@
                 },
                 dataType: 'JSON',
                 beforeSend : function(){
-                    $("#saved").addClass("hidden");
-                    $("#saving").removeClass("hidden");
+                    $(".saved").addClass("hidden");
+                    $(".saving").removeClass("hidden");
                 },
                 success: function (response){
                     let i = 0;
@@ -491,8 +515,8 @@
                     });
                 },
                 complete: function(){
-                    $("#saving").addClass("hidden");
-                    $("#saved").removeClass("hidden");
+                    $(".saving").addClass("hidden");
+                    $(".saved").removeClass("hidden");
                 },
             });
         }
@@ -592,6 +616,8 @@
         }
 
         $(document).ready(function () {
+            // $("#main-loading-indicator").removeClassß("flex");
+            // $("#main-loading-indicator").addClass("hidden");
             let indicators = @json($indicators);
             let i = 0;
             $.each(indicators, function (indicatorKey, categories) { 
