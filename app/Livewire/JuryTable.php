@@ -37,12 +37,12 @@ class JuryTable extends DataTableComponent
             Column::make("Email", "email")
                 ->sortable(),
             Column::make("Jumlah Unit Kerja Selesai/Ditugaskan",'id')
-                // ->label(function($value, $row, Column $column) {
-                //     $count = RespondentScore::where('jury_id',$row->id)->count();
-                //     return $count;
-                // }),
                 ->label(
                     fn($row) => view('components.datatable.jury-evaluation-progress', compact('row'))
+                ),
+            Column::make("Aksi",'id')
+                ->label(
+                    fn($row) => view('components.datatable.jury-datatable-actions', compact('row'))
                 ),
             Column::make("Id", "id")->hideIf(true),
             Column::make("Phone", "phone")->hideIf(true),

@@ -10,7 +10,7 @@
 @else
     <div class="flex justify-between items-center w-[21.7rem]">
         @php
-            $percentage = round((($finished_count+9)/$assigned_count)*100, 0);
+            $percentage = round((($finished_count)/$assigned_count)*100, 0);
             if ($percentage==100) {
                 $category_percentage_classlist = [ "category-progress-container-100", "category-progress-100" ];
             } elseif ($percentage>=66) {
