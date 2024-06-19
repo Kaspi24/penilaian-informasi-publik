@@ -38,5 +38,8 @@
         @livewireScripts
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/flowbite.min.js') }}"></script>
+        <!-- SweetAlert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @isset($scripts) {{ $scripts }} @endisset
     </body>
 </html>

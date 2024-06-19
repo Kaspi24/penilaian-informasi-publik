@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\RespondentScore;
@@ -80,7 +81,8 @@ class QuestionnaireController extends Controller
         }
         /* ADMIN */  
         else if ($user->role === "ADMIN") {
-            return view('pages.questionnaire.admin-index');
+            $juries         = User::where('role','JURY')->get();
+            return view('pages.questionnaire.admin-index', compact('juries'));
         } else {
             abort(404);
         }
