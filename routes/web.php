@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JuryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
@@ -42,6 +43,12 @@ Route::middleware(['auth',AdminMiddleware::class])->controller(WorkUnitControlle
 // Users
 Route::middleware(['auth',AdminMiddleware::class])->controller(UserController::class)->as('user.')->prefix('pengguna')->group(function() {
     Route::get('/', 'index')->name('index');
+});
+
+// Juries
+Route::middleware(['auth',AdminMiddleware::class])->controller(JuryController::class)->as('jury.')->prefix('juri')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
 });
 
 Route::middleware('auth')->group(function () {

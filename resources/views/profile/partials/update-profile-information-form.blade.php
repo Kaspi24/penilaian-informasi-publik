@@ -17,7 +17,7 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-
+        
         <div class="">
             <x-input-label for="name" :value="__('Nama')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="off" />
@@ -53,18 +53,19 @@
                 </div>
             @endif --}}
         </div>
+        @if (Auth::user()->role === 'RESPONDENT')
+            <div>
+                <x-input-label for="phone" :value="__('Nomor Telepon')" />
+                <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autocomplete="off" />
+                <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+            </div>
 
-        <div>
-            <x-input-label for="phone" :value="__('Nomor Telepon')" />
-            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autocomplete="off" />
-            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
-        </div>
-
-        <div>
-            <x-input-label for="whatsapp" :value="__('Nomor WhatsApp')" />
-            <x-text-input id="whatsapp" name="whatsapp" type="text" class="mt-1 block w-full" :value="old('whatsapp', $user->whatsapp)" required autocomplete="off" />
-            <x-input-error class="mt-2" :messages="$errors->get('whatsapp')" />
-        </div>
+            <div>
+                <x-input-label for="whatsapp" :value="__('Nomor WhatsApp')" />
+                <x-text-input id="whatsapp" name="whatsapp" type="text" class="mt-1 block w-full" :value="old('whatsapp', $user->whatsapp)" required autocomplete="off" />
+                <x-input-error class="mt-2" :messages="$errors->get('whatsapp')" />
+            </div>
+        @endif
 
         <div class="flex items-center gap-4">
             <x-primary-button>Simpan Perubahan</x-primary-button>

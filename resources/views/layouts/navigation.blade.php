@@ -34,6 +34,9 @@
                         <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                             {{ __('Pengguna') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('jury.index')" :active="request()->routeIs('jury.index')">
+                            {{ __('Juri') }}
+                        </x-nav-link>
                     @endif
                 </div>
 
@@ -104,6 +107,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                     {{ __('Pengguna') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('jury.index')" :active="request()->routeIs('jury.index')">
+                    {{ __('Juri') }}
                 </x-responsive-nav-link>
             @endif
         </div>
