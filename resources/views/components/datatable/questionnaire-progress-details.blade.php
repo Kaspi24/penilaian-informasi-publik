@@ -14,7 +14,6 @@
             $all_answered && $answered_count++;
         }
     }
-    dump($row);
 @endphp
 <div class="w-full">
     @if (

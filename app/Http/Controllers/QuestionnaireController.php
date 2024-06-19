@@ -77,7 +77,8 @@ class QuestionnaireController extends Controller
         }
         /* JURY */ 
         else if ($user->role === "JURY") {
-            return view('pages.questionnaire.jury-index');
+            $juries         = User::where('role','JURY')->get();
+            return view('pages.questionnaire.jury-index',compact('juries'));
         }
         /* ADMIN */  
         else if ($user->role === "ADMIN") {

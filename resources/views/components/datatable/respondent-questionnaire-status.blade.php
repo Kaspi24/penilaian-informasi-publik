@@ -5,7 +5,7 @@
                 SUDAH DINILAI
             </p>
         @else
-            <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-blue-200 text-blue-800">
+            <p class="w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-red-200 text-red-800">
                 MENUNGGU DINILAI
             </p>
         @endif
