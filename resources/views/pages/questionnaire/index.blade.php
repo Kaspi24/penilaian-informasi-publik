@@ -27,7 +27,7 @@
                                         <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                     </svg>
                                 </span>
-                                <p class="text-2xl md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Silakan mulai <br>mengisi kuesioner</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Silakan mulai <br>mengisi kuesioner</p>
                             </div>
                             <a href="{{ route('questionnaire.start') }}" class="flex justify-end items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/3 bg-primary hover:bg-primary-70 text-white hover:text-warning hover:shadow-inner group transition duration-300 ease-in-out">
                                 <p class="text-lg lg:text-2xl lg:tracking-wide font-bold">MULAI MENGISI KUESIONER</p>
@@ -43,7 +43,7 @@
                     <div class="w-full bg-white p-3">
                         <div class="w-full p-3 rounded-lg bg-primary-10/40 text-primary-50 block lg:flex">
                             <div class="w-full lg:w-2/3 p-6 flex flex-col gap-3 items-start">
-                                <p class="text-2xl md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Progres pengisian <br> kuesioner anda</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Progres pengisian <br> kuesioner anda</p>
                                 @php
                                     $percentage = round(($answered_count/$questions->count())*100, 0);
                                     if ($percentage==100) {
@@ -87,7 +87,7 @@
                                             <span>KIRIM JAWABAN</span>
                                         </button>
                                         <a href="{{ route('questionnaire.start') }}" class="flex gap-2 justify-end p-2.5 items-center w-[49%] rounded-md bg-primary hover:bg-primary-70 text-white hover:text-warning hover:shadow-inner group transition duration-300 ease-in-out">
-                                            <p class="text-xs lg:tracking-wide font-bold">PERIKSA JAWABAN</p>
+                                            <p class="text-xs lg:tracking-wide font-bold">PERIKSA <span class="hidden md:inline">JAWABAN</span></p>
                                             <span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 lg:size-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
@@ -111,7 +111,7 @@
                                         <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                     </svg>
                                 </span>
-                                <p class="text-xl md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Anda telah mengirim <br>tanggapan kuesioner.</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Anda telah mengirim <br>tanggapan kuesioner.</p>
                             </div>
                             <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/3 bg-primary text-white ">
                                 <span>
@@ -139,7 +139,7 @@
                                         <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
                                     </svg>
                                 </span>
-                                <p class="text-xl md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Tanggapan kuesioner <br>anda telah dinilai.</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Tanggapan kuesioner <br>anda telah dinilai.</p>
                             </div>
                             <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/2 bg-primary text-white ">
                                 <span>
@@ -148,7 +148,7 @@
                                     </p>
                                     <span class="flex justify-start items-center gap-3">
                                         <p class="text-4xl lg:text-5xl w-24 text-center font-extrabold bg-primary-80 text-white p-3 rounded-md">
-                                            {{ $submission->total_score }}
+                                            {{ round($submission->total_score,1) }}
                                         </p>
                                         <span>
                                             <p class="text-sm lg:text-base font-thin mb-1">
@@ -159,15 +159,15 @@
                                                     INFORMATIF
                                                 </p>
                                             @elseif ($submission->total_score >= 80)
-                                                <p class="lg:text-lg font-bold bg-lime-200 text-lime-600 p-1 px-2 rounded">
+                                                <p class="text-sm lg:text-lg font-bold bg-lime-200 text-lime-600 p-1 px-2 rounded">
                                                     MENUJU INFORMATIF
                                                 </p>
                                             @elseif ($submission->total_score >= 60)
-                                                <p class="lg:text-lg font-bold bg-yellow-100 text-yellow-400 p-1 px-2 rounded">
+                                                <p class="text-sm lg:text-lg font-bold bg-yellow-100 text-yellow-400 p-1 px-2 rounded">
                                                     CUKUP INFORMATIF
                                                 </p>
                                             @elseif ($submission->total_score >= 40)
-                                                <p class="lg:text-lg font-bold bg-orange-200 text-orange-500 p-1 px-2 rounded">
+                                                <p class="text-sm lg:text-lg font-bold bg-orange-200 text-orange-500 p-1 px-2 rounded">
                                                     KURANG INFORMATIF
                                                 </p>
                                             @else

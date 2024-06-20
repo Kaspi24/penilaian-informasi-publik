@@ -17,7 +17,9 @@ class RespondentAnswer extends Model
         'question_id',
         'answer',
         'attachment',
-        'score'
+        'score',
+        'updated_by',
+        'updated_by_name',
     ];
 
     public function respondent(): BelongsTo

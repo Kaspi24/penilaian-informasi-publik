@@ -49,7 +49,7 @@ class User extends Authenticatable
     public function answers(): BelongsToMany
     {
         return $this->belongsToMany(Question::class, 'respondent_answer', 'respondent_id', 'question_id', 'id', 'id')
-            ->withPivot('answer', 'attachment', 'score');
+            ->withPivot('answer', 'attachment', 'score', 'updated_by', 'updated_by_name');
     }
 
     public function answer_children(): BelongsToMany

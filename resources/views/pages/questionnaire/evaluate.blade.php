@@ -19,7 +19,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body 
+<body
     x-data="{
         showEndExamPopUp : false,
         showExitPopUp : false,
@@ -78,7 +78,7 @@
         </div>
     </div> --}}
 
-    <main class="relative w-full" 
+    <main class="relative w-full"  
         x-data="{
             @php $x=0; @endphp
             @foreach ($indicators as $indicator => $categories)
@@ -94,9 +94,9 @@
         <div class="hidden xl:block fixed z-[999] top-[3.5rem] h-[calc(100vh-3.5rem)] w-1/4 box-border border-r-4 border-primary bg-primary-10 bg-opacity-60 p-4">
 
             <div class="w-full m-0 mb-4 text-primary">
-                <p class="font-semibold  mb-2">Detail Responden</p>
-                <div class="p-2 border border-primary rounded-md bg-primary-10 text-primary-70">
-                    <table>
+                <p class="font-semibold mb-2">Detail Responden</p>
+                <div class="p-2 border border-primary-20 rounded-md bg-primary-10 text-primary-70 shadow-inner">
+                    <table class="text-sm">
                         <tbody>
                             <tr class="">
                                 <th class="py-1 w-[24%] align-top text-left">Nama</th>
@@ -113,8 +113,8 @@
                 </div>
             </div>
 
-            <div class="flex gap-1 w-full items-center m-0 mb-4 font-semibold text-primary">
-                <p>Pertanyaan Kuesioner</p>
+            <div class="flex gap-1 w-full items-center m-0 mb-2 font-semibold text-primary">
+                <p class="text-base">Tanggapan Kuesioner</p>
                 <span id="saving" class="saving hidden text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 animate-spin">
                         <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
@@ -126,7 +126,7 @@
                     </svg>
                 </span>
             </div>
-            <div class="relative w-full h-fit max-h-[calc(100vh-3.5rem-3rem-1.5rem)] overflow-y-auto custom-scrollbar">
+            <div class="relative w-full h-fit max-h-[calc(100vh-17.5rem)] p-2 rounded-md bg-primary-10 overflow-y-auto custom-scrollbar border border-primary-20 shadow-inner">
                 <div class="w-full h-fit" x-data="{
                         @for ($i = 0; $i < $indicators->count(); $i++)
                             showIndicator_{{ $i }}: {{ $i==0 ? 'true' : 'false' }},
@@ -144,13 +144,7 @@
                             foreach ($categories as $category => $questions) {
                                 $all_count      += $questions->count();
                                 foreach ($questions as $question) {
-                                if (
-                                    ($question->children->count() > 0 && $question->children->whereNull('answer')->count() == 0) 
-                                    || 
-                                    ($question->children->count() == 0 && ($question->answer == '1' || $question->answer == '0')) 
-                                    ) {
-                                        $answered_count++;
-                                    }
+                                    $question->updated_by && $answered_count++;
                                 }
                             }
                             $indicator_percentage = round(($answered_count/$all_count)*100, 0);
@@ -183,13 +177,7 @@
                                 @php
                                     $answered_questions_count   = 0;
                                     foreach ($questions as $question) {
-                                        if (
-                                            ($question->children->count() > 0 && $question->children->whereNull('answer')->count() == 0) 
-                                            || 
-                                            ($question->children->count() == 0 && ($question->answer == '1' || $question->answer == '0')) 
-                                        ) {
-                                            $answered_questions_count++;
-                                        }
+                                        $question->updated_by && $answered_questions_count++;
                                     }
                                     $percentage = round(($answered_questions_count/$questions->count())*100, 0);
                                     if ($percentage==100) {
@@ -224,25 +212,25 @@
         </div>
 
         <!-- QUESTION CONTAINER -->
-        <div class="fixed z-[1000] top-[6.5rem] xl:top-[3.5rem] h-[calc(100vh-6.5rem)] box-border xl:h-[calc(100vh-3.5rem)] w-full xl:w-3/4 xl:right-0">
+        <div class="fixed z-[1000] top-[6.5rem] xl:top-[3.5rem] h-[calc(100vh-6.5rem)] box-border xl:h-[calc(100vh-3.5rem)] w-full xl:w-3/4 xl:right-0 pb-10 lg:pb-0">
             <div id="questionContainer" class="text-gray-900 text-sm lg:text-base h-full">
                 <!-- QUESTION CONTAINER BODY -->
                 <div class="w-full h-[calc(100%-5rem)] box-border bg-gray-50 xl:p-4">
                     <div class="w-full h-full p-4 bg-white rounded-md shadow">
-                        <div class="w-full h-full bg-primary-10 border-y rounded-md overflow-y-auto p-4">
+                        <div class="w-full h-full bg-primary-10 border-y rounded-md overflow-y-auto p-4 shadow-inner">
                             @php $i=0; @endphp
                             @foreach ($indicators as $indicator => $categories)
                                 @php $j=0; @endphp
                                 @foreach ($categories as $category => $questions)
                                     @php $k=0; @endphp
                                     <div id="questions-container_{{$i}}_{{$j}}" class="questions-container {{ ($i==0 && $j==0) ? '' : 'hidden' }}  w-full">
-                                        <p class="text-2xl text-primary-70 font-extrabold tracking-wider mb-4">{{ $category }}</p>
+                                        <p class="text-xl lg:text-2xl text-primary-70 font-extrabold tracking-wider mb-4">{{ $category }}</p>
                                         @foreach ($questions as $question)
                                             <div class="w-full flex gap-2 border py-3 pl-1 pr-2 rounded-md bg-white {{ $loop->index === 0 ? '' : 'mt-6' }}">
-                                                <p class="text-primary-70 w-8 box-border text-right font-mono">{{ $k+1 }}.</p>
-                                                <div class="w-[calc(100%-2.5rem)] box-border">
+                                                <p class="text-primary-70 w-8 box-border text-sm lg:text-base text-right font-mono">{{ $k+1 }}.</p>
+                                                <div class="w-[calc(100%-2.5rem)] box-border pb-3 pr-3">
                                                     <!-- QUESTION TEXT -->
-                                                    <p class="text-primary-80 tracking-tight text-base font-medium p-0">
+                                                    <p class="text-primary-80 tracking-tight text-sm lg:text-base font-medium p-0">
                                                         {{ $question->text }}
                                                         <!-- QUESTION TEXT DETAIL -->
                                                         @if ($question->details)
@@ -250,78 +238,93 @@
                                                             <span class="text-xs text-primary-50 font-medium">{{ $question->details }}</span>
                                                         @endif
                                                     </p>
-                                                    @if ($question->children->count() === 0)
-                                                        <!-- ANSWER INPUT RADIO -->
-                                                        <input type="radio" name="answer[{{ $i }}][{{ $j }}][{{ $k }}]" 
-                                                            id="answer_{{$i}}_{{$j}}_{{$k}}_1"
-                                                            class="hidden radio-button" value="1"
-                                                            data-questionDBID="{{ $question->id }}"
-                                                            @checked($question->answer === 1)>
-                                                        <input type="radio" name="answer[{{ $i }}][{{ $j }}][{{ $k }}]" 
-                                                            id="answer_{{$i}}_{{$j}}_{{$k}}_0"
-                                                            class="hidden radio-button" value="0"
-                                                            data-questionDBID="{{ $question->id }}"
-                                                            @checked($question->answer === 0)>
-                                                        <!-- ANSWER LABEL -->
-                                                        <div class="flex w-2/3 md:w-1/2 xl:w-1/4 gap-2 mt-2">
-                                                            <p id="label_{{$i}}_{{$j}}_{{$k}}_1"
-                                                                class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question->answer === 1 ? 'bg-emerald-500 text-emerald-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
-                                                                YA
-                                                            </p>
-                                                            <p id="label_{{$i}}_{{$j}}_{{$k}}_0"
-                                                                class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question->answer === 0 ? 'bg-red-500 text-red-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
-                                                                TIDAK
-                                                            </p>
-                                                        </div>
-                                                        <!-- INPUT TEXT -->
-                                                        <div id="attachment_{{$i}}_{{$j}}_{{$k}}_container" class="attachment-field w-full mt-2 {{ $question->answer === 1 ? '' : 'hidden' }}">
-                                                            <p class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</p>
-                                                            <input data-questionDBID="{{ $question->id }}" data-oldAnswer="{{ $question->attachment }}" type="text" 
-                                                                id="attachment_{{$i}}_{{$j}}_{{$k}}" name="attachment[{{ $i }}][{{ $j }}][{{ $k }}]" value="{{ $question->attachment }}"
-                                                                class="attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com" readonly disabled>
-                                                        </div>
-                                                    @else
-                                                        @php $l=0; @endphp
-                                                        @foreach ($question->children as $question_child)
-                                                            <div class="w-full bg-gray-100 p-3 rounded-md flex gap-2 mt-3">
-                                                                <p class="text-primary-70 w-10 box-border text-right font-mono">{{ $k+1 }}.{{ $l+1 }}.</p>
-                                                                <div class="w-[calc(100%-3rem)] box-border">
-                                                                    <!-- QUESTION CHILD TEXT -->
-                                                                    <p class="text-primary-70 tracking-tight text-base font-normal p-0">
-                                                                        {{ $question_child->text }}
-                                                                    </p>
-                                                                    <!-- CHILD ANSWER INPUT RADIO -->
-                                                                    <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
-                                                                        id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1" 
-                                                                        class="hidden radio-button" 
-                                                                        value="1" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 1)>
-                                                                    <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
-                                                                        id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0" 
-                                                                        class="hidden radio-button" 
-                                                                        value="0" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 0)>
-                                                                    <!-- CHILD ANSWER LABEL -->
-                                                                    <div class="flex w-2/3 md:w-1/2 xl:w-1/4 gap-2 mt-2">
-                                                                        <p id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1"
-                                                                            class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question_child->answer === 1 ? 'bg-emerald-500 text-emerald-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
+                                                    <div class="w-full lg:flex">
+                                                        @if ($question->children->count() === 0)
+                                                            @if ($question->answer === 1)
+                                                                <div class="shadow shadow-primary-20 w-full md:w-fit rounded-md">
+                                                                    <div class="flex items-center w-fit gap-2 mt-2 border rounded-t-md p-1">
+                                                                        <p class="px-2 text-xs lg:text-sm font-bold uppercase text-primary-40">Tanggapan responden </p>
+                                                                        <p class="w-20 lg:w-24 p-2 text-center text-xs shadow-inner shadow-emerald-700 font-black tracking-bold bg-emerald-500 text-emerald-50 rounded-md">
                                                                             YA
                                                                         </p>
-                                                                        <p id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0"
-                                                                            class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question_child->answer === 0 ? 'bg-red-500 text-red-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
+                                                                    </div>
+                                                                    <div class="py-2 px-3 bg-primary-10 rounded-b-md">
+                                                                        <a href="{{ $question->attachment }}" target="_blank" class="flex gap-2 justify-center items-center text-primary-50 hover:text-primary">
+                                                                            <p class="uppercase text-xs lg:text-sm font-bold pt-0.5">Bukti Pendukung Jawaban</p>
+                                                                            <span>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 md:w-[1.125rem] md:h-[1.125rem]">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                                                                </svg>
+                                                                            </span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="shadow shadow-primary-20 w-full md:w-fit rounded-md">
+                                                                    <div class="flex items-center w-fit gap-2 mt-2 rounded-md shadow shadow-primary-20 p-1">
+                                                                        <p class="px-2 text-sm font-bold uppercase text-primary-40">Tanggapan responden </p>
+                                                                        <p class="w-24 p-2 text-center text-xs shadow-inner shadow-red-700 font-black tracking-bold bg-red-500 text-red-50 rounded-md">
                                                                             TIDAK
                                                                         </p>
                                                                     </div>
-                                                                    <!-- CHILD INPUT TEXT -->
-                                                                    <div id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}_container" class="attachment-field w-full mt-2 {{ $question_child->answer === 1 ? '' : 'hidden' }}">
-                                                                        <p class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</p>
-                                                                        <input data-questionDBID="{{ $question_child->question_children_id }}" data-oldAnswer="{{ $question_child->attachment }}" type="text" 
-                                                                            id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" value="{{ $question_child->attachment }}"
-                                                                            class="child-attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com" readonly disabled>
+                                                                </div>
+                                                            @endif
+                                                            <!-- INPUT TEXT -->
+                                                            {{-- <div id="attachment_{{$i}}_{{$j}}_{{$k}}_container" class="attachment-field w-full mt-2 {{ $question->answer === 1 ? '' : 'hidden' }}">
+                                                                <p class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</p>
+                                                                <input data-questionDBID="{{ $question->id }}" data-oldAnswer="{{ $question->attachment }}" type="text" 
+                                                                    id="attachment_{{$i}}_{{$j}}_{{$k}}" name="attachment[{{ $i }}][{{ $j }}][{{ $k }}]" value="{{ $question->attachment }}"
+                                                                    class="attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com" readonly disabled>
+                                                            </div> --}}
+                                                        @else
+                                                            @php $l=0; @endphp
+                                                            @foreach ($question->children as $question_child)
+                                                                <div class="w-full bg-gray-100 p-3 rounded-md flex gap-2 mt-3">
+                                                                    <p class="text-primary-70 w-10 box-border text-right font-mono">{{ $k+1 }}.{{ $l+1 }}.</p>
+                                                                    <div class="w-[calc(100%-3rem)] box-border">
+                                                                        <!-- QUESTION CHILD TEXT -->
+                                                                        <p class="text-primary-70 tracking-tight text-base font-normal p-0">
+                                                                            {{ $question_child->text }}
+                                                                        </p>
+                                                                        <!-- CHILD ANSWER INPUT RADIO -->
+                                                                        <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
+                                                                            id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1" 
+                                                                            class="hidden radio-button" 
+                                                                            value="1" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 1)>
+                                                                        <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
+                                                                            id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0" 
+                                                                            class="hidden radio-button" 
+                                                                            value="0" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 0)>
+                                                                        <!-- CHILD ANSWER LABEL -->
+                                                                        <div class="flex w-2/3 md:w-1/2 xl:w-1/4 gap-2 mt-2">
+                                                                            <p id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1"
+                                                                                class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question_child->answer === 1 ? 'bg-emerald-500 text-emerald-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
+                                                                                YA
+                                                                            </p>
+                                                                            <p id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0"
+                                                                                class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question_child->answer === 0 ? 'bg-red-500 text-red-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
+                                                                                TIDAK
+                                                                            </p>
+                                                                        </div>
+                                                                        <!-- CHILD INPUT TEXT -->
+                                                                        <div id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}_container" class="attachment-field w-full mt-2 {{ $question_child->answer === 1 ? '' : 'hidden' }}">
+                                                                            <p class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</p>
+                                                                            <input data-questionDBID="{{ $question_child->question_children_id }}" data-oldAnswer="{{ $question_child->attachment }}" type="text" 
+                                                                                id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" value="{{ $question_child->attachment }}"
+                                                                                class="child-attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com" readonly disabled>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            @php $l++; @endphp
-                                                        @endforeach
-                                                    @endif
+                                                                @php $l++; @endphp
+                                                            @endforeach
+                                                        @endif
+                                                        <div class="grid grid-cols-4">
+                                                            <input type="radio" name="" id="">
+                                                            <input type="radio" name="" id="">
+                                                            <input type="radio" name="" id="">
+                                                            <input type="radio" name="" id="">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @php $k++; @endphp
@@ -335,7 +338,7 @@
                     </div>
                 </div>
                 <!-- QUESTION CONTAINER FOOTER -->
-                <div class="border bg-white w-full h-20 box-border flex justify-between items-center px-3 lg:px-5">
+                <div class="border-t bg-white w-full h-14 lg:h-20 box-border flex justify-between items-center px-3 lg:px-5">
                     <button type="button" id="" class="hidden prev-btn prev-next-btn gap-2 items-center justify-center uppercase w-40 text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-xs pl-2 pr-4 py-2">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
@@ -353,14 +356,14 @@
                             </svg>
                         </span>
                     </button>
-                    {{-- <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
+                    <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                 <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
                             </svg>
                         </span>
-                        <span>KIRIM JAWABAN</span>
-                    </button> --}}
+                        <span>SIMPAN NILAI</span>
+                    </button>
                 </div>
             </div>
         </div>

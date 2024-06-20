@@ -26,9 +26,11 @@ class QuestionnaireController extends Controller
                 ->select(
                     'questions.id                   AS id',
                     'questions.*',
-                    'respondent_answer.answer       AS answer',
-                    'respondent_answer.attachment   AS attachment',
-                    'respondent_answer.score        AS score'
+                    'respondent_answer.answer           AS answer',
+                    'respondent_answer.attachment       AS attachment',
+                    'respondent_answer.score            AS score',
+                    'respondent_answer.updated_by       AS updated_by',
+                    'respondent_answer.updated_by_name  AS updated_by_name'
                 )
                 ->with(['children' => function ($q) use ($respondent_id) {
                     $q->leftJoin('respondent_answer_children', function ($join) use ($respondent_id){
@@ -188,8 +190,9 @@ class QuestionnaireController extends Controller
 
     public function evaluate($respondent_id)
     {
-        $respondent = User::with('work_unit')->firstWhere('id',$respondent_id);
+        $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
         $indicators = $this->load_respondent_question_answers($respondent_id);
+        // dd($indicators["INDIKATOR I"]["PPID"]);
         return view('pages.questionnaire.evaluate', compact('respondent', 'indicators'));
     }
 }

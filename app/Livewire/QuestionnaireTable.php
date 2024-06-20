@@ -113,7 +113,7 @@ class QuestionnaireTable extends DataTableComponent
                     }
                 })
                 ->html(),
-            Column::make("Status Kuesioner")
+            Column::make("Aksi", "id")
                 ->label(
                     fn($row) => view('components.datatable.respondent-questionnaire-status', compact('row'))
                 ),
