@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class QuestionnaireController extends Controller
 {
-    public function load_respondent_question_answers()
+    public function load_respondent_question_answers($respondent_id)
     {
         $indicators = new Collection();
         $all_indicators = Question::select(DB::raw('DISTINCT(nth_indicator) AS indicator'))->pluck('indicator')->toArray();
@@ -30,15 +30,15 @@ class QuestionnaireController extends Controller
                     'respondent_answer.attachment   AS attachment',
                     'respondent_answer.score        AS score'
                 )
-                ->with(['children' => function ($q) {
-                    $q->leftJoin('respondent_answer_children', function ($join) {
+                ->with(['children' => function ($q) use ($respondent_id) {
+                    $q->leftJoin('respondent_answer_children', function ($join) use ($respondent_id){
                         $join->on('question_children.id', '=', 'respondent_answer_children.question_children_id')
-                            ->where('respondent_answer_children.respondent_id', '=', Auth::user()->id);
+                            ->where('respondent_answer_children.respondent_id', '=', $respondent_id);
                     });
                 }])
-                ->leftJoin('respondent_answer', function ($join) {
+                ->leftJoin('respondent_answer', function ($join) use ($respondent_id) {
                     $join->on('questions.id', '=', 'respondent_answer.question_id')
-                        ->where('respondent_answer.respondent_id', '=', Auth::user()->id);
+                        ->where('respondent_answer.respondent_id', '=', $respondent_id);
                 })
                 ->where('questions.nth_indicator',$indicator)
                 ->get();
@@ -91,8 +91,7 @@ class QuestionnaireController extends Controller
 
     public function start()
     {
-        $indicators = $this->load_respondent_question_answers();
-        // dd($indicators["INDIKATOR II"]["DIUMUMKAN BERKALA"]);
+        $indicators = $this->load_respondent_question_answers(Auth::user()->id);
         return view('pages.questionnaire.start',
             compact(
                 'indicators'
@@ -123,7 +122,7 @@ class QuestionnaireController extends Controller
             } catch (\Error $error) {
                 return Response::json($error);
             }
-            $reloaded_questions = $this->load_respondent_question_answers();
+            $reloaded_questions = $this->load_respondent_question_answers(Auth::user()->id);
             return Response::json($reloaded_questions);
         }
     }
@@ -153,7 +152,7 @@ class QuestionnaireController extends Controller
             } catch (\Error $error) {
                 return Response::json($error);
             }
-            $reloaded_questions = $this->load_respondent_question_answers();
+            $reloaded_questions = $this->load_respondent_question_answers(Auth::user()->id);
             return Response::json($reloaded_questions);
         }
     }
@@ -185,5 +184,12 @@ class QuestionnaireController extends Controller
         $submission     = RespondentScore::firstWhere('respondent_id',Auth::user()->id);
         $submission->update(['is_done_filling' => true]);
         return Redirect::route('questionnaire.index')->with('success', 'Tanggapan anda telah dikirim!');
+    }
+
+    public function evaluate($respondent_id)
+    {
+        $respondent = User::with('work_unit')->firstWhere('id',$respondent_id);
+        $indicators = $this->load_respondent_question_answers($respondent_id);
+        return view('pages.questionnaire.evaluate', compact('respondent', 'indicators'));
     }
 }

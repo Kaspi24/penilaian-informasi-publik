@@ -15,11 +15,11 @@
             <div class="bg-white shadow-sm rounded-sm mb-6">
                 <div class="p-4 text-primary flex justify-between items-center">
                     <p class="text-lg lg:text-xl font-bold">Juri dan Progres Penilaian Kuesioner</p>
-                    <button type="button" x-on:click="showaddJuryModal = true" class="w-fit aspect-square lg:aspect-auto p-1 lg:p-2 lg:pr-4 rounded bg-emerald-600 text-white lg:flex lg:gap-2 lg:items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                            <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+                    <button type="button" x-on:click="showaddJuryModal = true" class="w-fit aspect-square md:aspect-auto p-1 md:p-2 md:pr-4 rounded bg-emerald-600 text-white md:flex md:gap-2 md:items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        <p class="hidden lg:inline-block tex-xs font-semibold uppercase">Tambah Juri</p>
+                        <p class="hidden md:inline-block text-xs font-black uppercase">Tambah Juri</p>
                     </button>
                 </div>
             </div>

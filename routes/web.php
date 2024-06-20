@@ -33,6 +33,7 @@ Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(Questi
         Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
         Route::put('submit-response',       'submitResponse')->name('submitResponse');
     });
+    Route::get('nilai-kuesioner/{respondent_id}', 'evaluate')->name('evaluate');
 });
 
 // Work Units

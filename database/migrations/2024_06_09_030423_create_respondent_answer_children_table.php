@@ -19,6 +19,8 @@ return new class extends Migration
             $table->boolean('answer')->nullable();
             $table->text('attachment')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->string('updated_by_name')->nullable();
         });
     }
 

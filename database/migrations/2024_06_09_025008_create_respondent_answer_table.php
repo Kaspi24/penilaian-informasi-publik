@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('attachment')->nullable();
             $table->float('score')->default(0);
             $table->timestamps();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->string('updated_by_name')->nullable();
         });
     }
     

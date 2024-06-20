@@ -1,7 +1,7 @@
 <div class="flex w-40 items-center justify-between">
     @if (!$row->score->is_done_scoring)
         @if ($row->score->is_done_filling)
-            <a href="" type="button" class="w-full py-1.5 pl-2 pr-3 rounded-md text-xs font-extrabold tracking-tight bg-emerald-600 hover:bg-emerald-700 text-white flex gap-1.5 items-center justify-center">
+            <a href="{{ route('questionnaire.evaluate',$row->id) }}" type="button" class="w-full py-1.5 pl-2 pr-3 rounded-md text-xs font-extrabold tracking-tight bg-emerald-600 hover:bg-emerald-700 text-white flex gap-1.5 items-center justify-center">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                         <path d="M11.625 16.5a1.875 1.875 0 1 0 0-3.75 1.875 1.875 0 0 0 0 3.75Z" />

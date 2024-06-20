@@ -39,17 +39,15 @@ class QuestionnaireTable extends DataTableComponent
     {
         return [
             SelectFilter::make('Tipe Unit Kerja')
-                ->options(
-                    array_merge(
-                        [""             => "Semua"],
-                        ["PELAKSANA"    => "Pelaksana"],
-                        ["DARAT"        => "Darat"],
-                        ["LAUT"         => "Laut"],
-                        ["UDARA"        => "Udara"],
-                        ["KERETA"       => "Kereta"],
-                        ["BPSDMP(UP)"   => "BPSDMP(UP)"],
-                    )
-                )
+                ->options([
+                    ""             => "Semua",
+                    "PELAKSANA"    => "Pelaksana",
+                    "DARAT"        => "Darat",
+                    "LAUT"         => "Laut",
+                    "UDARA"        => "Udara",
+                    "KERETA"       => "Kereta",
+                    "BPSDMP(UP)"   => "BPSDMP(UP)"
+                ])
                 ->filter(function(Builder $builder, string $value) {
                     $builder->where('work_unit.category', $value);
                 }),
