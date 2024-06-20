@@ -114,9 +114,7 @@ class QuestionnaireTable extends DataTableComponent
                 })
                 ->html(),
             Column::make("Aksi", "id")
-                ->label(
-                    fn($row) => view('components.datatable.respondent-questionnaire-status', compact('row'))
-                ),
+                ->label(fn($row) => view('components.datatable.respondent-datatable-actions', compact('row'))),
             // COLLAPSED COLUMNS
             Column::make("Detail Pengerjaan Kuesioner")
                 ->label(
