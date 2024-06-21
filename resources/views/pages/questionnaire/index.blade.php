@@ -155,23 +155,23 @@
                                                 Dengan Predikat :
                                             </p>
                                             @if ($submission->total_score >= 90)
-                                                <p class="lg:text-lg font-bold bg-green-400 text-green-800 p-1 px-2 rounded">
+                                                <p class="lg:text-lg font-bold text-green-200 bg-green-600 p-1 px-2 rounded">
                                                     INFORMATIF
                                                 </p>
                                             @elseif ($submission->total_score >= 80)
-                                                <p class="text-sm lg:text-lg font-bold bg-lime-200 text-lime-600 p-1 px-2 rounded">
+                                                <p class="text-sm lg:text-lg font-bold text-lime-200 bg-lime-600 p-1 px-2 rounded">
                                                     MENUJU INFORMATIF
                                                 </p>
                                             @elseif ($submission->total_score >= 60)
-                                                <p class="text-sm lg:text-lg font-bold bg-yellow-100 text-yellow-400 p-1 px-2 rounded">
+                                                <p class="text-sm lg:text-lg font-bold text-yellow-50 bg-yellow-300 p-1 px-2 rounded">
                                                     CUKUP INFORMATIF
                                                 </p>
                                             @elseif ($submission->total_score >= 40)
-                                                <p class="text-sm lg:text-lg font-bold bg-orange-200 text-orange-500 p-1 px-2 rounded">
+                                                <p class="text-sm lg:text-lg font-bold text-orange-100 bg-orange-500 p-1 px-2 rounded">
                                                     KURANG INFORMATIF
                                                 </p>
                                             @else
-                                                <p class="lg:text-lg font-bold bg-red-300 text-red-800 p-1 px-2 rounded">
+                                                <p class="lg:text-lg font-bold text-red-200 bg-red-600 p-1 px-2 rounded">
                                                     TIDAK INFORMATIF
                                                 </p>
                                             @endif

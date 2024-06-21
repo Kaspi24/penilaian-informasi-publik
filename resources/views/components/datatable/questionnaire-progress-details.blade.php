@@ -84,23 +84,23 @@
                                     Dengan Predikat :
                                 </p>
                                 @if ($row->score->total_score >= 90)
-                                    <p class="text-xs lg:text-sm font-bold bg-green-400 text-green-800 p-0.5 px-1.5 rounded">
+                                    <p class="text-xs lg:text-sm font-bold text-green-200 bg-green-600 p-0.5 px-1.5 rounded">
                                         INFORMATIF
                                     </p>
                                 @elseif ($row->score->total_score >= 80)
-                                    <p class="text-xs lg:text-sm font-bold bg-lime-200 text-lime-600 p-0.5 px-1.5 rounded">
+                                    <p class="text-xs lg:text-sm font-bold text-lime-200 bg-lime-600 p-0.5 px-1.5 rounded">
                                         MENUJU INFORMATIF
                                     </p>
                                 @elseif ($row->score->total_score >= 60)
-                                    <p class="text-xs lg:text-sm font-bold bg-yellow-100 text-yellow-400 p-0.5 px-1.5 rounded">
+                                    <p class="text-xs lg:text-sm font-bold text-yellow-50 bg-yellow-300 p-0.5 px-1.5 rounded">
                                         CUKUP INFORMATIF
                                     </p>
                                 @elseif ($row->score->total_score >= 40)
-                                    <p class="text-xs lg:text-sm font-bold bg-orange-200 text-orange-500 p-0.5 px-1.5 rounded">
+                                    <p class="text-xs lg:text-sm font-bold text-orange-100 bg-orange-500 p-0.5 px-1.5 rounded">
                                         KURANG INFORMATIF
                                     </p>
                                 @else
-                                    <p class="text-xs lg:text-sm font-bold bg-red-300 text-red-800 p-0.5 px-1.5 rounded">
+                                    <p class="text-xs lg:text-sm font-bold text-red-200 bg-red-600 p-0.5 px-1.5 rounded">
                                         TIDAK INFORMATIF
                                     </p>
                                 @endif
