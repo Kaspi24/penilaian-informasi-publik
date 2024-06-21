@@ -216,10 +216,14 @@ class QuestionnaireController extends Controller
         $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
         $indicators = $this->load_respondent_question_answers($respondent_id);
         $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
-        if($submission->is_done_filling){
+        if($submission->is_done_filling && (Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id))){
             return view('pages.questionnaire.evaluate', compact('respondent', 'indicators', 'submission'));
         } else {
-            return Redirect::route('questionnaire.index')->with('failed', 'Tanggapan repsonden yang coba anda nilai belum selesai/dikirimkan!');
+            if (Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id)) {
+                return Redirect::route('questionnaire.index')->with('failed', 'Tanggapan repsonden yang coba anda nilai belum selesai/dikirimkan!');
+            } else {
+                abort(404);
+            }
         }
     }
     
@@ -288,7 +292,7 @@ class QuestionnaireController extends Controller
         $respondent = User::find($respondent_id);
         $submission = RespondentScore::firstWhere('respondent_id',$respondent->id);
         $indicators = $this->load_respondent_question_answers($respondent->id);
-        
+
         if(
             (Auth::user()->role === 'RESPONDENT' && Auth::user()->id === $respondent->id) 
             ||
