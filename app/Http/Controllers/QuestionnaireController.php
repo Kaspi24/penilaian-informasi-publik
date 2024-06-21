@@ -161,7 +161,8 @@ class QuestionnaireController extends Controller
 
     public function submitResponse(Request $request)
     {
-        $questions = Question::with('children')->get();
+        $admin      = User::firstWhere('role','ADMIN');
+        $questions  = Question::with('children')->get();
         foreach ($questions as $question) {
             if($question->children->count() === 0) {
                 $respondent_answer = RespondentAnswer::query()
@@ -169,9 +170,19 @@ class QuestionnaireController extends Controller
                     ->where('question_id', $question->id)
                     ->first();
                 if(!$respondent_answer->answer) {
-                    $respondent_answer->update(['answer' => 0]);
+                    $respondent_answer->update([
+                        'answer'            => 0,
+                        'updated_by'        => $admin->id,
+                        'updated_by_name'   => $admin->name
+                    ]);
+                } else if ($respondent_answer->answer === 0) {
+                    $respondent_answer->update([
+                        'updated_by'        => $admin->id,
+                        'updated_by_name'   => $admin->name
+                    ]);
                 }
             } else {
+                $all_empty = true;
                 foreach ($question->children as $question_child) {
                     $respondent_answer_child = RespondentAnswerChildren::query()
                         ->where('respondent_id', Auth::user()->id)
@@ -179,7 +190,19 @@ class QuestionnaireController extends Controller
                         ->first();
                     if(!$respondent_answer_child->answer) {
                         $respondent_answer_child->update(['answer' => 0]);
+                    } else {
+                        $all_empty = false;
                     }
+                }
+                if($all_empty) {
+                    $respondent_answer = RespondentAnswer::query()
+                        ->where('respondent_id', Auth::user()->id)
+                        ->where('question_id', $question->id)
+                        ->first();
+                    $respondent_answer->update([
+                        'updated_by'        => $admin->id,
+                        'updated_by_name'   => $admin->name
+                    ]);
                 }
             }
         }
@@ -193,6 +216,79 @@ class QuestionnaireController extends Controller
         $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
         $indicators = $this->load_respondent_question_answers($respondent_id);
         // dd($indicators["INDIKATOR I"]["PPID"]);
-        return view('pages.questionnaire.evaluate', compact('respondent', 'indicators'));
+
+        $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
+        if($submission->is_done_filling){
+            return view('pages.questionnaire.evaluate', compact('respondent', 'indicators', 'submission'));
+        } else {
+            return Redirect::route('questionnaire.index')->with('failed', 'Tanggapan repsonden yang coba anda nilai belum selesai/dikirimkan!');
+        }
+    }
+    
+    public function updateScore(Request $request, $respondent_id)
+    {
+        $respondent_answer  = RespondentAnswer::query()
+            ->where('question_id', $request->question_id)
+            ->where('respondent_id', $respondent_id)
+            ->first();
+
+        if($respondent_answer) {
+            try {
+                $respondent_answer->update([
+                    'score'             => $request->score,
+                    'updated_by'        => Auth::user()->id,
+                    'updated_by_name'   => Auth::user()->name,
+                ]);
+            } catch (\Exception $exception) {
+                return Response::json($exception);
+            } catch (\Error $error) {
+                return Response::json($error);
+            }
+            $reloaded_questions = $this->load_respondent_question_answers($respondent_id);
+            return Response::json($reloaded_questions);
+        }
+    }
+
+    public function submitScore(Request $request, $respondent_id)
+    {
+        $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
+        
+        $indicators = $this->load_respondent_question_answers($respondent_id);
+        
+        $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
+        
+        $total_score = 0;
+
+
+
+        foreach ($indicators as $indicator => $categories) {
+            foreach ($categories as $category => $questions) {
+                foreach ($questions as $question) {
+                    if ($question->updated_by) {
+                        $total_score += $question->score;
+                    } else {
+                        $respondent_answer = RespondentAnswer::query()
+                            ->where('question_id',$question->id)
+                            ->where('respondent_id',$respondent->id)
+                            ->first();
+                        $respondent_answer->update([
+                            'score'             => $question->good_enough,
+                            'updated_by'        => Auth::user()->id,
+                            'updated_by_name'   => Auth::user()->name,
+                        ]);
+                        $total_score += $question->good_enough;
+                    }
+                }
+            }
+        }
+
+        $submission->update([
+            'total_score'       => $total_score,
+            'updated_by'        => Auth::user()->id,
+            'updated_by_name'   => Auth::user()->name,
+            'is_done_scoring'   => true
+        ]);
+
+        return Redirect::route('questionnaire.index')->with('success', 'Penilaian telah disimpan!');
     }
 }

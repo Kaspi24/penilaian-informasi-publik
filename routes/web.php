@@ -34,6 +34,8 @@ Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(Questi
         Route::put('submit-response',       'submitResponse')->name('submitResponse');
     });
     Route::get('nilai-kuesioner/{respondent_id}', 'evaluate')->name('evaluate');
+    Route::put('update-score/{respondent_id}',      'updateScore')->name('updateScore');
+    Route::put('submit-score/{respondent_id}',      'submitScore')->name('submitScore');
 });
 
 // Work Units

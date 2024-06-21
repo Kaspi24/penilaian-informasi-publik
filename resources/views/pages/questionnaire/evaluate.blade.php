@@ -21,6 +21,7 @@
 </head>
 <body
     x-data="{
+        showAdminEndExamPopUp : false,
         showEndExamPopUp : false,
         showExitPopUp : false,
         showSidebar : false,
@@ -45,51 +46,69 @@
     </nav>
 
     <!-- QUESTIONS NAVIGATION FOR MOBILE -->
-    {{-- <div class="flex xl:hidden fixed z-[1010] top-[3.5rem] h-[3rem] shadow shadow-gray-400 w-full bg-primary-10 text-primary py-2 px-4 justify-between items-center">
-        <!--  <div class="relative flex gap-2 items-center w-full " x-data="{ showMobilePreview : false }"> -->
-        <div class="relative hidden gap-2 items-center w-full " x-data="{ showMobilePreview : false }">
-            <span class="text-primary-30">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                </svg>
-            </span>
-            <button class="text-sm lg:text-base font-bold underline underline-offset-4 tracking-wide" x-on:click="">
-                INDIKATOR I
-            </button>
-            <span class="text-primary-30">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-            </span>
-            <button class="text-sm mr-2 lg:text-base font-bold underline underline-offset-4 tracking-wide" x-on:click="">
-                PPID
-            </button>
-            <span class="saving hidden text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 animate-spin">
-                    <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
-                </svg>
-            </span>
-            <span class="saved text-emerald-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.7427 10.2859C17.7427 10.578 17.7184 10.8643 17.6716 11.1431H18.5999C20.7301 11.1431 22.457 12.87 22.457 15.0002C22.457 17.1305 20.7301 18.8574 18.5999 18.8574L12.5999 18.8574H5.74275C3.37581 18.8574 1.45703 16.9386 1.45703 14.5716C1.45703 12.2047 3.37581 10.2859 5.74275 10.2859H7.45703C7.45703 7.4456 9.75957 5.14307 12.5999 5.14307C15.4402 5.14307 17.7427 7.4456 17.7427 10.2859ZM16.08 11.8088L12.298 15.5908L12.298 15.5908L11.0374 16.8515L7.88569 13.6998L9.14636 12.4392L11.0373 14.3301L14.8193 10.5481L16.08 11.8088Z"/>
-                </svg>
-            </span>
-            <div class="absolute top-[2.25rem] left-6 w-[90vw] h-40 rounded-b-md shadow shadow-primary-20 border-t-2 border-primary p-2 bg-gray-100"></div>
-        </div>
-    </div> --}}
+    <div class="flex xl:hidden fixed z-[1010] top-[3.5rem] h-[3rem] shadow shadow-gray-400 w-full bg-primary-10 text-primary py-2 px-4 justify-between items-center"
+        x-data="{showRespondentDetails: false}">
+        @php
+            $scored_count = 0;
+            $total_score = 0;
+            foreach ($indicators as $indicator => $categories) {
+                foreach ($categories as $category => $questions) {
+                    foreach ($questions as $question) {
+                        $question->updated_by && $scored_count++;
+                        $total_score += $question->score;
+                    }
+                }
+            }
+            $questionnaire_percentage = round(($scored_count/35)*100, 0);
 
-    <main class="relative w-full"  
-        x-data="{
-            @php $x=0; @endphp
-            @foreach ($indicators as $indicator => $categories)
-                @php $y=0; @endphp
-                @foreach ($categories as $category)
-                    showQuestions_{{ $x }}_{{ $y }}: {{ ($x==0 && $y==0) ? 'true' : 'false' }},
-                    @php $y++; @endphp
-                @endforeach
-                @php $x++; @endphp
-            @endforeach
-        }">
+            if ($questionnaire_percentage==100) {
+                $questionnaire_percentage_classlist = [ "category-progress-container-100", "category-progress-100" ];
+            } elseif ($questionnaire_percentage>=66) {
+                $questionnaire_percentage_classlist = [ "category-progress-container-66", "category-progress-66" ];
+            } elseif ($questionnaire_percentage>=33) {
+                $questionnaire_percentage_classlist = [ "category-progress-container-33", "category-progress-33" ];
+            } else {
+                $questionnaire_percentage_classlist = [ "category-progress-container-default", "category-progress-default" ];
+            }
+        @endphp
+        <div class="w-full h-full flex py-1 items-center justify-between relative">
+            <span class="w-7 cursor-pointer" x-on:click="showRespondentDetails =! showRespondentDetails">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                </svg>
+            </span>
+            <div id="progress_questionnaire_container" class="w-[calc(73%-1.75rem)] md:w-[calc(87%-1.75rem)] border {{ $questionnaire_percentage_classlist[0] }} rounded-lg h-full box-border overflow-hidden">
+                <div id="progress_questionnaire" class="h-full border {{ $questionnaire_percentage_classlist[1] }} rounded-lg box-border overflow-hidden" style="width: {{ $questionnaire_percentage }}%;"></div>
+            </div>
+            <p class="w-[26%] md:w-[12%] text-sm font-bold text-right"><span id="questionnaire_scored_count">{{ $scored_count }}</span>/<span id="questionnaire_all_count">35</span> DINILAI</p>
+            <div x-cloak x-show="showRespondentDetails" class="absolute w-full bg-primary-10 border-x border-primary-10/70 shadow shadow-gray-400 text-primary top-full mt-2 rounded-b-md p-2">
+                <p class="font-semibold mb-2">Detail Responden</p>
+                <div class="p-2 border border-primary-20 rounded-md bg-white text-primary-70 shadow-inner">
+                    <table class="text-xs">
+                        <tbody>
+                            <tr class="">
+                                <th class="py-1 w-[24%] align-top text-left">Nama</th>
+                                <td class="py-1 inline-block mx-1">:</td>
+                                <td class="py-1 text-left">{{ $respondent->name }}</td>
+                            </tr>
+                            <tr class="">
+                                <th class="py-1 w-[24%] align-top text-left">Unit Kerja</th>
+                                <td class="py-1 inline-block mx-1">:</td>
+                                <td class="py-1 text-left">{{ $respondent->work_unit->name }}</td>
+                            </tr>
+                            <tr class="">
+                                <th class="py-1 w-[24%] align-top text-left">Total Nilai</th>
+                                <td class="py-1 inline-block mx-1">:</td>
+                                <td class="questionnaire_total_score py-1 text-left">{{ $total_score }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="relative w-full">
         <!-- QUESTIONS NAVIGATION -->
         <div class="hidden xl:block fixed z-[999] top-[3.5rem] h-[calc(100vh-3.5rem)] w-1/4 box-border border-r-4 border-primary bg-primary-10 bg-opacity-60 p-4">
 
@@ -107,6 +126,11 @@
                                 <th class="py-1 w-[24%] align-top text-left">Unit Kerja</th>
                                 <td class="py-1 inline-block mx-1">:</td>
                                 <td class="py-1 text-left">{{ $respondent->work_unit->name }}</td>
+                            </tr>
+                            <tr class="">
+                                <th class="py-1 w-[24%] align-top text-left">Total Nilai</th>
+                                <td class="py-1 inline-block mx-1">:</td>
+                                <td class="questionnaire_total_score py-1 text-left">{{ $total_score }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -139,15 +163,17 @@
                     @endphp
                     @foreach ($indicators as $indicator => $categories)
                         @php
-                            $all_count      = 0;
-                            $answered_count = 0;
+                            $all_count          = 0;
+                            $scored_count       = 0;
+                            $indicator_score    = 0;
                             foreach ($categories as $category => $questions) {
                                 $all_count      += $questions->count();
                                 foreach ($questions as $question) {
-                                    $question->updated_by && $answered_count++;
+                                    $question->updated_by && $scored_count++;
+                                    $indicator_score += $question->score;
                                 }
                             }
-                            $indicator_percentage = round(($answered_count/$all_count)*100, 0);
+                            $indicator_percentage = round(($scored_count/$all_count)*100, 0);
                             if ($indicator_percentage==100) {
                                 $indicator_percentage_classlist = "indicator-progess-100";
                             } elseif ($indicator_percentage>=66) {
@@ -164,6 +190,7 @@
                             <div class="flex gap-2 items-center">
                                 <span id="progress_indikator_{{ $loop->index }}" class="w-12 {{ $indicator_percentage_classlist }} text-xs text-center rounded-md h-fit">{{ $indicator_percentage }}%</span>
                                 <span>{{ $indicator }}</span>
+                                <span id="indicator_total_score_{{ $loop->index }}" class="font-sans font-medium text-warning">({{ $indicator_score }})</span>
                             </div>
                             <span :class="showIndicator_{{ $loop->index }} && 'rotate-90'">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -175,11 +202,11 @@
                             @php $j=0; @endphp
                             @foreach ($categories as $category => $questions)
                                 @php
-                                    $answered_questions_count   = 0;
+                                    $scored_questions_count   = 0;
                                     foreach ($questions as $question) {
-                                        $question->updated_by && $answered_questions_count++;
+                                        $question->updated_by && $scored_questions_count++;
                                     }
-                                    $percentage = round(($answered_questions_count/$questions->count())*100, 0);
+                                    $percentage = round(($scored_questions_count/$questions->count())*100, 0);
                                     if ($percentage==100) {
                                         $category_percentage_classlist = [ "category-progress-container-100", "category-progress-100" ];
                                     } elseif ($percentage>=66) {
@@ -193,13 +220,15 @@
                                 <!-- KATEGORI -->
                                 <button id="category-button_{{$i}}_{{$j}}" type="button" class="{{ $i==0 && $j==0 ? 'active-category-button' : '' }} cbtn border border-white block rounded-md hover:bg-gray-100 w-full p-1 lg:p-2 {{ $loop->index === 0 ? 'mt-1.5' : 'mt-2' }} border category-button">
                                     <!-- JUDUL KATEGORI -->
-                                    <p class="text-left font-bold text-xs text-primary mb-1"> {{ $upper_alphabet[$loop->index] .". ". $category }} </p>
+                                    <p class="text-left font-bold text-xs text-primary mb-1"> {{ $upper_alphabet[$loop->index] .". ". $category }} (<span class="category-total-score_{{$i}}_{{$j}} font-medium">{{ $questions->sum('score') }}</span>) </p>
                                     <!-- PROGRES KATEGORI -->
                                     <div class="flex justify-between w-full h-5">
                                         <div id="progres_category_container_{{$i}}_{{$j}}" class="w-[87%] border {{ $category_percentage_classlist[0] }} rounded-lg h-full box-border overflow-hidden">
                                             <div id="progres_category_{{$i}}_{{$j}}" class="h-full border {{ $category_percentage_classlist[1] }} rounded-lg box-border overflow-hidden" style="width: {{ $percentage }}%;"></div>
                                         </div>
-                                        <p class="block w-[12%] text-sm text-right text-primary-60 font-mono">{{ $answered_questions_count }}/{{ $questions->count() }}</p>
+                                        <p class="block w-[12%] text-sm text-right text-primary-60 font-mono">
+                                            <span id="category_scored_count_{{$i}}_{{$j}}">{{ $scored_questions_count }}</span>/{{ $questions->count() }}
+                                        </p>
                                     </div>
                                 </button>
                                 @php $j++; @endphp
@@ -217,20 +246,25 @@
                 <!-- QUESTION CONTAINER BODY -->
                 <div class="w-full h-[calc(100%-5rem)] box-border bg-gray-50 xl:p-4">
                     <div class="w-full h-full p-4 bg-white rounded-md shadow">
-                        <div class="w-full h-full bg-primary-10 border-y rounded-md overflow-y-auto p-4 shadow-inner">
-                            @php $i=0; @endphp
-                            @foreach ($indicators as $indicator => $categories)
-                                @php $j=0; @endphp
-                                @foreach ($categories as $category => $questions)
-                                    @php $k=0; @endphp
+                        <div class="w-full h-full bg-primary-10 border-y rounded-md overflow-y-auto p-4 shadow-inner"> @php $i=0; @endphp
+                            @foreach ($indicators as $indicator => $categories) @php $j=0; @endphp
+                                @foreach ($categories as $category => $questions) @php $k=0; @endphp
+                                    <!-- RESPONSE CONTAINER -->
                                     <div id="questions-container_{{$i}}_{{$j}}" class="questions-container {{ ($i==0 && $j==0) ? '' : 'hidden' }}  w-full">
-                                        <p class="text-xl lg:text-2xl text-primary-70 font-extrabold tracking-wider mb-4">{{ $category }}</p>
+                                        <!-- CATEGORY TITLE -->
+                                        <p class="text-xl lg:text-2xl text-primary-70 font-extrabold tracking-wider mb-4">
+                                            {{ $category }} <span class="tracking-normal font-medium text-lg lg:text-xl">(NILAI KATEGORI : <span class="category-total-score_{{$i}}_{{$j}} font-extrabold">{{ $questions->sum('score') }}</span>)</span>
+                                        </p>
                                         @foreach ($questions as $question)
+                                            {{-- @php
+                                                dump($question);
+                                            @endphp --}}
+                                            <!-- MAIN CONTENT -->
                                             <div class="w-full flex gap-2 border py-3 pl-1 pr-2 rounded-md bg-white {{ $loop->index === 0 ? '' : 'mt-6' }}">
                                                 <p class="text-primary-70 w-8 box-border text-sm lg:text-base text-right font-mono">{{ $k+1 }}.</p>
                                                 <div class="w-[calc(100%-2.5rem)] box-border pb-3 pr-3">
                                                     <!-- QUESTION TEXT -->
-                                                    <p class="text-primary-80 tracking-tight text-sm lg:text-base font-medium p-0">
+                                                    <p class="text-primary-80 tracking-tight text-sm lg:text-base font-medium p-0 mb-2">
                                                         {{ $question->text }}
                                                         <!-- QUESTION TEXT DETAIL -->
                                                         @if ($question->details)
@@ -238,19 +272,43 @@
                                                             <span class="text-xs text-primary-50 font-medium">{{ $question->details }}</span>
                                                         @endif
                                                     </p>
-                                                    <div class="w-full lg:flex">
-                                                        @if ($question->children->count() === 0)
+
+                                                    <!-- RADIOS FOR SCORES IF QUESTION HAS NO CHILDREN -->
+                                                    @if ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0))
+                                                        <div>
+                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
+                                                                id="score_{{$i}}_{{$j}}_{{$k}}--less-good"
+                                                                value="{{ $question->less_good }}"
+                                                                @checked($question->score ==$question->less_good)>
+                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
+                                                                id="score_{{$i}}_{{$j}}_{{$k}}--good-enough"
+                                                                value="{{ $question->good_enough }}"
+                                                                @checked($question->score ==$question->good_enough)>
+                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
+                                                                id="score_{{$i}}_{{$j}}_{{$k}}--good"
+                                                                value="{{ $question->good }}"
+                                                                @checked($question->score ==$question->good)>
+                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
+                                                                id="score_{{$i}}_{{$j}}_{{$k}}--very-good"
+                                                                value="{{ $question->very_good }}"
+                                                                @checked($question->score ==$question->very_good)>
+                                                        </div>
+                                                    @endif
+                                                    
+                                                    <!-- RESPONSE -->
+                                                    @if ($question->children->count() === 0)
+                                                        <div class="w-full md:flex md:gap-3 h-fit">
                                                             @if ($question->answer === 1)
-                                                                <div class="shadow shadow-primary-20 w-full md:w-fit rounded-md">
-                                                                    <div class="flex items-center w-fit gap-2 mt-2 border rounded-t-md p-1">
-                                                                        <p class="px-2 text-xs lg:text-sm font-bold uppercase text-primary-40">Tanggapan responden </p>
-                                                                        <p class="w-20 lg:w-24 p-2 text-center text-xs shadow-inner shadow-emerald-700 font-black tracking-bold bg-emerald-500 text-emerald-50 rounded-md">
+                                                                <div class="shadow shadow-primary-20 w-full md:w-[41.5%] xl:w-[31.25%] rounded-md mb-4 md:mb-0">
+                                                                    <div class="flex items-center justify-center w-full gap-2 border rounded-t-md p-1">
+                                                                        <p class="px-2 text-xs md:text-sm font-bold uppercase text-primary-40">Tanggapan responden </p>
+                                                                        <p class="w-20 md:w-24 p-2 text-center text-xs shadow-inner shadow-emerald-700 font-black tracking-bold bg-emerald-500 text-emerald-50 rounded-md">
                                                                             YA
                                                                         </p>
                                                                     </div>
                                                                     <div class="py-2 px-3 bg-primary-10 rounded-b-md">
                                                                         <a href="{{ $question->attachment }}" target="_blank" class="flex gap-2 justify-center items-center text-primary-50 hover:text-primary">
-                                                                            <p class="uppercase text-xs lg:text-sm font-bold pt-0.5">Bukti Pendukung Jawaban</p>
+                                                                            <p class="uppercase text-xs md:text-sm font-bold pt-0.5">Bukti Pendukung Jawaban</p>
                                                                             <span>
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 md:w-[1.125rem] md:h-[1.125rem]">
                                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
@@ -259,80 +317,172 @@
                                                                         </a>
                                                                     </div>
                                                                 </div>
+                                                                <!-- LABELS -->
+                                                                <div class="flex justify-between w-full md:w-[57%] xl:w-[67.5%] rounded-md ">
+                                                                    <div class="w-[calc(100%-3.5rem)] md:w-[calc(100%-4.75rem)] p-1 md:p-2 rounded-md bg-primary-10 shadow shadow-primary-20">
+                                                                        <p class="text-xs md:text-sm mb-1 text-center text-primary font-bold">KESESUIAN BUKTI PENDUKUNG</p>
+                                                                        <div class="w-full grid grid-cols-4 gap-1 md:gap-1.5 xl:gap-2 p-1 md:p-1.5 xl:p-[0.4rem] rounded-md bg-gray-50 border border-primary-20">
+                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--less-good"
+                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--less-good"
+                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                                {{ $question->score == $question->less_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                                <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">KURANG</p>
+                                                                            </label>
+                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good-enough"
+                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--good-enough"
+                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                                {{ $question->score == $question->good_enough ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                                <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">CUKUP</p>
+                                                                            </label>
+                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good"
+                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--good"
+                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                                {{ $question->score == $question->good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                                <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">HAMPIR</p>
+                                                                            </label>
+                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--very-good"
+                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--very-good"
+                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                                {{ $question->score == $question->very_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                                <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">SESUAI</p>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border border-primary rounded-md overflow-hidden w-12 md:w-16 bg-primary-10/25">
+                                                                        <p class="text-xs font-bold tracking-tight p-1 bg-primary text-warning text-center">NILAI</p>
+                                                                        <p id="value_score_{{$i}}_{{$j}}_{{$k}}" class="text-lg md:text-2xl text-center font-sans font-black p-1 py-2.5 md:py-[0.68rem] bg-primary-10/25 text-primary">{{ round($question->score,1) }}</p>
+                                                                    </div>
+                                                                </div>
                                                             @else
-                                                                <div class="shadow shadow-primary-20 w-full md:w-fit rounded-md">
-                                                                    <div class="flex items-center w-fit gap-2 mt-2 rounded-md shadow shadow-primary-20 p-1">
-                                                                        <p class="px-2 text-sm font-bold uppercase text-primary-40">Tanggapan responden </p>
-                                                                        <p class="w-24 p-2 text-center text-xs shadow-inner shadow-red-700 font-black tracking-bold bg-red-500 text-red-50 rounded-md">
+                                                                <div class="shadow shadow-primary-20 w-full md:w-fit h-fit rounded-md">
+                                                                    <div class="flex items-center justify-center w-full gap-1 lg:gap-2 rounded-md p-1">
+                                                                        <p class="px-2 text-xs md:text-sm font-bold uppercase text-primary-40">Tanggapan responden </p>
+                                                                        <p class="w-20 md:w-24 p-2 text-center text-xs shadow-inner shadow-red-700 font-black tracking-bold bg-red-500 text-red-50 rounded-md">
                                                                             TIDAK
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                            @endif
-                                                            <!-- INPUT TEXT -->
-                                                            {{-- <div id="attachment_{{$i}}_{{$j}}_{{$k}}_container" class="attachment-field w-full mt-2 {{ $question->answer === 1 ? '' : 'hidden' }}">
-                                                                <p class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</p>
-                                                                <input data-questionDBID="{{ $question->id }}" data-oldAnswer="{{ $question->attachment }}" type="text" 
-                                                                    id="attachment_{{$i}}_{{$j}}_{{$k}}" name="attachment[{{ $i }}][{{ $j }}][{{ $k }}]" value="{{ $question->attachment }}"
-                                                                    class="attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com" readonly disabled>
-                                                            </div> --}}
-                                                        @else
-                                                            @php $l=0; @endphp
-                                                            @foreach ($question->children as $question_child)
-                                                                <div class="w-full bg-gray-100 p-3 rounded-md flex gap-2 mt-3">
-                                                                    <p class="text-primary-70 w-10 box-border text-right font-mono">{{ $k+1 }}.{{ $l+1 }}.</p>
-                                                                    <div class="w-[calc(100%-3rem)] box-border">
-                                                                        <!-- QUESTION CHILD TEXT -->
-                                                                        <p class="text-primary-70 tracking-tight text-base font-normal p-0">
-                                                                            {{ $question_child->text }}
+                                                                <div class="mt-3 md:mt-0 w-full md:w-[57%] xl:w-[67.5%] flex justify-center border border-primary rounded-md overflow-hidden bg-primary-10/25">
+                                                                    <div class="bg-primary flex items-center w-1/2">
+                                                                        <p class="text-xs font-bold tracking-tight p-1 text-warning mx-auto">NILAI</p>
+                                                                    </div>
+                                                                    <div class="flex items-center w-1/2">
+                                                                        <p id="value_score_{{$i}}_{{$j}}_{{$k}}" class="text-lg md:text-2xl mx-auto font-sans font-black text-primary">
+                                                                            {{ round($question->score,1) }}
                                                                         </p>
-                                                                        <!-- CHILD ANSWER INPUT RADIO -->
-                                                                        <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
-                                                                            id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1" 
-                                                                            class="hidden radio-button" 
-                                                                            value="1" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 1)>
-                                                                        <input type="radio" name="answer[{{$i}}][{{$j}}][{{$k}}][{{$l}}]" 
-                                                                            id="answer_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0" 
-                                                                            class="hidden radio-button" 
-                                                                            value="0" data-questionDBID="{{ $question_child->question_children_id }}" @checked($question_child->answer === 0)>
-                                                                        <!-- CHILD ANSWER LABEL -->
-                                                                        <div class="flex w-2/3 md:w-1/2 xl:w-1/4 gap-2 mt-2">
-                                                                            <p id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_1"
-                                                                                class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question_child->answer === 1 ? 'bg-emerald-500 text-emerald-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
-                                                                                YA
-                                                                            </p>
-                                                                            <p id="label_{{$i}}_{{$j}}_{{$k}}_{{$l}}_0"
-                                                                                class="w-1/2 p-2 text-center text-xs font-black tracking-widest {{ $question_child->answer === 0 ? 'bg-red-500 text-red-50' : 'bg-gray-300 text-gray-500' }} rounded-md">
-                                                                                TIDAK
-                                                                            </p>
-                                                                        </div>
-                                                                        <!-- CHILD INPUT TEXT -->
-                                                                        <div id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}_container" class="attachment-field w-full mt-2 {{ $question_child->answer === 1 ? '' : 'hidden' }}">
-                                                                            <p class="block mb-2 text-base font-medium text-primary">Tautan Bukti Pendukung Jawaban</p>
-                                                                            <input data-questionDBID="{{ $question_child->question_children_id }}" data-oldAnswer="{{ $question_child->attachment }}" type="text" 
-                                                                                id="attachment_{{$i}}_{{$j}}_{{$k}}_{{$l}}" value="{{ $question_child->attachment }}"
-                                                                                class="child-attachment-link text-input bg-gray-50 border border-gray-300 text-primary-50 text-sm rounded-md focus:ring-primary-50 focus:border-primary-50 block w-full p-2" placeholder="https://www.example.com" readonly disabled>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                @php $l++; @endphp
-                                                            @endforeach
-                                                        @endif
-                                                        <div class="grid grid-cols-4">
-                                                            <input type="radio" name="" id="">
-                                                            <input type="radio" name="" id="">
-                                                            <input type="radio" name="" id="">
-                                                            <input type="radio" name="" id="">
+                                                            @endif
                                                         </div>
+                                                    @else 
+                                                        @php $l=0; @endphp
+                                                        <div class="w-full">
+                                                            @foreach ($question->children as $question_child)
+                                                                <div class="w-full bg-gray-100/80 p-2 md:p-3 rounded-md mt-2 md:mt-3 border border-primary-10/25 shadow">
+                                                                    <div class="w-full box-border">
+                                                                        <!-- QUESTION CHILD TEXT -->
+                                                                        <p class="text-primary-70 tracking-tight text-sm font-normal p-0 w-full mb-2">
+                                                                            <span class="text-primary-80 font-semibold">{{ $k+1 }}.{{ $l+1 }}.</span> {{ $question_child->text }}
+                                                                        </p>
+                                                                        @if ($question_child->answer === 1)
+                                                                            <div class="shadow shadow-primary-20 w-full md:w-fit rounded-md">
+                                                                                <div class="flex items-center justify-center w-full gap-1 lg:gap-2 border rounded-t-md p-1">
+                                                                                    <p class="px-1 lg:px-2 text-xs lg:text-sm font-semibold tracking-tight uppercase text-primary-40">Tanggapan responden </p>
+                                                                                    <p class="w-[4.5rem] lg:w-24 p-1 lg:p-2 text-center text-xs shadow-inner shadow-emerald-700 font-medium bg-emerald-500 text-emerald-50 rounded-md">
+                                                                                        YA
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="py-2 px-3 bg-primary-10 rounded-b-md">
+                                                                                    <a href="{{ $question_child->attachment }}" target="_blank" class="flex gap-2 justify-center items-center text-primary-50 hover:text-primary">
+                                                                                        <p class="uppercase text-xs lg:text-sm font-bold pt-0.5">Bukti Pendukung Jawaban</p>
+                                                                                        <span>
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 md:w-[1.125rem] md:h-[1.125rem]">
+                                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                                                                            </svg>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        @else
+                                                                            <div class="shadow shadow-primary-20 w-full md:w-fit rounded-md">
+                                                                                <div class="flex items-center justify-center w-full gap-1 lg:gap-2 rounded-md p-1">
+                                                                                    <p class="px-1 lg:px-2 text-xs lg:text-sm font-semibold tracking-tight uppercase text-primary-40">Tanggapan responden </p>
+                                                                                    <p class="w-[4.5rem] lg:w-24 p-1 lg:p-2 text-center text-xs shadow-inner shadow-red-700 font-black tracking-bold bg-red-500 text-red-50 rounded-md">
+                                                                                        TIDAK
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                </div> @php $l++; @endphp
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- LABELS FOR QUESTION WITH CHILDREN -->
+                                                        @if ($question->children->where('answer',1)->count() > 0)
+                                                            <div class="flex justify-between w-full rounded-md mt-4">
+                                                                <div class="w-[calc(100%-3.5rem)] md:w-[calc(100%-4.75rem)] p-1 md:p-2 rounded-md bg-primary-10 shadow shadow-primary-20">
+                                                                    <p class="text-xs md:text-sm mb-1 text-center text-primary font-bold">KESESUIAN BUKTI PENDUKUNG</p>
+                                                                    <div class="w-full grid grid-cols-4 gap-1 md:gap-1.5 xl:gap-2 p-1 md:p-1.5 xl:p-[0.4rem] rounded-md bg-gray-50 border border-primary-20">
+                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--less-good"
+                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--less-good" 
+                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                            {{ $question->score == $question->less_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">KURANG</p>
+                                                                        </label>
+                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good-enough"
+                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--good-enough" 
+                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                            {{ $question->score == $question->good_enough ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">CUKUP</p>
+                                                                        </label>
+                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good"
+                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--good" 
+                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                            {{ $question->score == $question->good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">HAMPIR</p>
+                                                                        </label>
+                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--very-good"
+                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--very-good" 
+                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
+                                                                            {{ $question->score == $question->very_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">SESUAI</p>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="border border-primary rounded-md overflow-hidden w-12 md:w-16 bg-primary-10/25">
+                                                                    <p class="text-xs font-bold tracking-tight p-1 bg-primary text-warning text-center">NILAI</p>
+                                                                    <p id="value_score_{{$i}}_{{$j}}_{{$k}}" class="text-lg md:text-2xl text-center font-sans font-black p-1 py-2.5 md:py-[0.68rem] bg-primary-10/25 text-primary">
+                                                                        {{ round($question->score,1) }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        @else 
+                                                            <div class="mt-3 flex justify-center border border-primary rounded-md overflow-hidden bg-primary-10/25">
+                                                                <div class="bg-primary flex items-center w-1/2">
+                                                                    <p class="text-xs font-bold tracking-tight p-1 text-warning mx-auto">NILAI</p>
+                                                                </div>
+                                                                <div class="flex items-center w-1/2">
+                                                                    <p id="value_score_{{$i}}_{{$j}}_{{$k}}" class="text-lg md:text-2xl mx-auto font-sans font-black text-primary">
+                                                                        {{ round($question->score,1) }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                    <div id="updated_by_score_{{$i}}_{{$j}}_{{$k}}" 
+                                                        class="{{ $question->updated_by && ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0)) ? '' : 'hidden' }} w-full mt-4 p-1.5 bg-primary-10/25 rounded border border-primary-20/25">
+                                                        <p class="text-xs md:text-sm font-medium text-gray-500">
+                                                            Nilai terakhir diperbarui oleh
+                                                            <span id="updated_by_name_score_{{$i}}_{{$j}}_{{$k}}" class="text-primary font-semibold">
+                                                                {{ $question->updated_by === Auth::user()->id ? 'Anda' : $question->updated_by_name }}
+                                                            </span>
+                                                        </p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            @php $k++; @endphp
+                                            </div> @php $k++; @endphp
                                         @endforeach
-                                    </div>
-                                    @php $j++; @endphp
-                                @endforeach
-                                @php $i++; @endphp
+                                    </div> @php $j++; @endphp
+                                @endforeach @php $i++; @endphp
                             @endforeach
                         </div>
                     </div>
@@ -371,17 +521,51 @@
 
 
     <!-- SUBMIT EXAM ANSWERS POP UP -->
+    <div class="fixed z-[2220] inset-0" x-cloak x-show="showAdminEndExamPopUp">
+        <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
+            <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
+                <div class="w-full text-center mb-3">
+                    <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
+                        Konfirmasi Aksi Sebagai ADMIN
+                    </p>
+                    <p class="text-sm lg:text-base text-justify text-primary-50">
+                        Saat ini terdapat juri yang ditugaskan untuk menilai tanggapan kuesioner ini. Aapakah Anda tetap ingin melanjutkan aksi sebagai <span class="font-bold">ADMIN</span>?
+                    </p>
+                </div>
+                <div class="w-full flex gap-2 justify-center items-center bg-warning-10 border border-warning text-warning p-1 rounded-md mb-6 xl:mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="text-sm">Aksi tidak dapat dibatalkan!</p>
+                </div>
+                <div class="w-full flex justify-center items-center gap-4">
+                    <button type="button" x-on:click="showAdminEndExamPopUp = false" class="block w-[32%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
+                        KEMBALI
+                    </button>
+                    <form action="{{ route('questionnaire.submitScore', $respondent->id) }}" class="block w-[32%]"  method="POST">
+                        @csrf @method('PUT')
+                        <div class="w-full" id="additionalFormFields"></div>
+                        <button type="submit" class="block w-full text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
+                            SIMPAN
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMIT EXAM ANSWERS POP UP -->
     <div class="fixed z-[2220] inset-0" x-cloak x-show="showEndExamPopUp">
         <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
             <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
                 <div class="w-full text-center mb-3">
                     <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
-                        Kirim tanggapan kuesioner anda?
+                        Simpan nilai tanggapan kuesioner?
                     </p>
                     <p class="text-sm lg:text-base text-justify text-primary-50">
-                        Setelah mengirim tanggapan, anda tidak dapat mengubahnya lagi, karena tanggapan anda akan melalui proses penilaian. <br>
+                        Setelah mengirim nilai, anda tidak dapat mengubahnya lagi, karena penilaian anda akan segera dapat dilihat oleh responden terkait.<br>
                         <span class="mt-1 font-semibold text-primary-70 text-left">
-                            Catatan : Pertanyaan yang tidak/belum diisi akan mendapatkan nilai 0.
+                            Catatan : Tanggapan yang 'dapat' namun tidak/belum dinilai akan mendapatkan nilai yang bersesuaian dengan kategori <span class="font-bold">CUKUP</span>.
                         </span>
                     </p>
                 </div>
@@ -395,13 +579,20 @@
                     <button type="button" x-on:click="showEndExamPopUp = false" class="block w-[32%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
                         KEMBALI
                     </button>
-                    <form action="{{ route('questionnaire.submitResponse') }}" class="block w-[32%]"  method="POST">
-                        @csrf @method('PUT')
-                        <div class="w-full" id="additionalFormFields"></div>
-                        <button type="submit" class="block w-full text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
-                            KIRIM
+                    @if (Auth::user()->role === 'ADMIN' && $submission->jury_id)
+                        <button type="button" x-on:click="showEndExamPopUp = false, showAdminEndExamPopUp = true"
+                            class="block w-[32%] text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
+                            SIMPAN
                         </button>
-                    </form>
+                    @else
+                        <form action="{{ route('questionnaire.submitScore', $respondent->id) }}" class="block w-[32%]"  method="POST">
+                            @csrf @method('PUT')
+                            <div class="w-full" id="additionalFormFields"></div>
+                            <button type="submit" class="block w-full text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
+                                SIMPAN
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -418,18 +609,18 @@
                 </div>
                 <div class="w-full text-center mb-4 xl:mb-6">
                     <p class="text-base xl:text-lg text-gray-900 font-semibold tracking-wide">
-                        Anda yakin ingin meninggalkan halaman pengisian kuesioner?
+                        Anda yakin ingin meninggalkan halaman penilaian tanggapan kuesioner?
                     </p>
                 </div>
                 <div class="w-full text-center mb-8 xl:mb-10">
                     <p class="text-sm xl:text-base text-gray-900">
-                        Jawaban anda saat ini akan tersimpan.
+                        Nilai saat ini akan tersimpan.
                     </p>
                 </div>
                 <div class="w-full flex justify-center items-center gap-2 md:gap-4">
                     <button type="button" x-on:click="showExitPopUp = false" 
                         class="block w-40 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-xs xl:text-sm py-2.5 text-cente">
-                        Lanjutkan Mengisi
+                        Lanjutkan Menilai
                     </button>
                     <a href="{{ route('questionnaire.index') }}"
                         class=" block w-40 text-white bg-danger hover:bg-danger-70 border border-danger focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
@@ -446,10 +637,10 @@
     <script>
         let indicator_category_indices = [];
 
-        const ajaxCall = (url, question_id, new_answer, attachment = null) => {
+        const ajaxCall = (url, question_id, new_score) => {
             // console.log(url);
             // console.log(question_id);
-            // console.log(new_answer);
+            // console.log(new_score);
             $.ajax({
                 type    : "POST",
                 url     : url,
@@ -457,8 +648,7 @@
                     _method     : 'PUT',
                     _token      : '{{ csrf_token() }}',
                     question_id : question_id,
-                    answer      : new_answer,
-                    attachment  : attachment,
+                    score       : new_score,
                 },
                 dataType: 'JSON',
                 beforeSend : function(){
@@ -466,29 +656,29 @@
                     $(".saving").removeClass("hidden");
                 },
                 success: function (response){
-                    console.log(response);
+                    // console.log(response);
                     let i = 0;
+                    let questionnaire_all_count     = 0;
+                    let questionnaire_scored_count  = 0;
+                    let questionnaire_total_score   = 0;
+
                     $.each(response, function (indicator, categories) {
-                        let indicator_all_count      = 0;
-                        let indicator_answered_count = 0;
+                        let indicator_all_count     = 0;
+                        let indicator_scored_count  = 0;
+                        let indicator_total_score   = 0;
+
                         let j = 0;
                         $.each(categories, function (category, questions) {
-                            let category_answered_count   = 0;
-                            indicator_all_count      += questions.length;
-                            $.each(questions, function (index, question) { 
-                                if ( question.children.length > 0 ) {
-                                    let answered_child = 0;
-                                    $.each(question.children, function (id, child) { 
-                                        (child.answer == '1' || child.answer == '0') && answered_child ++;
-                                    });
-                                    (answered_child == question.children.length) && category_answered_count++;
-                                    (answered_child == question.children.length) && indicator_answered_count++;
-                                } else {
-                                    (question.answer == '1' || question.answer == '0') && category_answered_count++;
-                                    (question.answer == '1' || question.answer == '0') && indicator_answered_count++;
-                                }
+                            let category_scored_count   = 0;
+                            let category_total_score    = 0;
+                            indicator_all_count += questions.length;
+                            $.each(questions, function (index, question) {
+                                question.updated_by && category_scored_count++;
+                                question.updated_by && indicator_scored_count++;
+                                category_total_score += question.score;
                             });
-                            let category_percentage = Math.round((category_answered_count/questions.length)*100);
+                            indicator_total_score += category_total_score;
+                            let category_percentage = Math.round((category_scored_count/questions.length)*100);
 
                             $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-100");
                             $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-66");
@@ -513,12 +703,18 @@
                                 $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-default");
                                 $(`#progres_category_${i}_${j}`).addClass("category-progress-default");
                             }
-                            // $(`#progres_category_${i}_${j}`).removeAttr("style");
+                            
+                            $(`.category-total-score_${i}_${j}`).text(category_total_score.toFixed(1));
+                            $(`#category_scored_count_${i}_${j}`).text(category_scored_count);
                             $(`#progres_category_${i}_${j}`).attr("style", `width: ${category_percentage}%`);
                             j++;
                         });
-
-                        let indicator_percentage = Math.round((indicator_answered_count/indicator_all_count)*100);
+                        
+                        questionnaire_all_count     += indicator_all_count;
+                        questionnaire_scored_count  += indicator_scored_count;
+                        questionnaire_total_score   += indicator_total_score;
+                        
+                        let indicator_percentage = Math.round((indicator_scored_count/indicator_all_count)*100);
                         $(`#progress_indikator_${i}`).removeClass("indicator-progess-100");
                         $(`#progress_indikator_${i}`).removeClass("indicator-progess-66");
                         $(`#progress_indikator_${i}`).removeClass("indicator-progess-33");
@@ -534,8 +730,42 @@
                             $(`#progress_indikator_${i}`).addClass("indicator-progess-default");
                         }
                         $(`#progress_indikator_${i}`).text(`${indicator_percentage}%`);
+                        $(`#indicator_total_score_${i}`).text(indicator_total_score.toFixed(1));
                         i++;
                     });
+
+                    let questionnaire_percentage = Math.round((questionnaire_scored_count/questionnaire_all_count)*100);
+                    // console.log(questionnaire_scored_count);
+                    // console.log(questionnaire_all_count);
+                    // console.log(questionnaire_percentage);
+                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-100");
+                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-66");
+                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-33");
+                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-default");
+
+                    $(`#progress_questionnaire`).removeClass("category-progress-100");
+                    $(`#progress_questionnaire`).removeClass("category-progress-66");
+                    $(`#progress_questionnaire`).removeClass("category-progress-33");
+                    $(`#progress_questionnaire`).removeClass("category-progress-default");
+
+                    if ( questionnaire_percentage == 100 ) {
+                        $(`#progress_questionnaire_container`).addClass("category-progress-container-100");
+                        $(`#progress_questionnaire`).addClass("category-progress-100");
+                    } else if ( questionnaire_percentage >= 66 ) {
+                        $(`#progress_questionnaire_container`).addClass("category-progress-container-66");
+                        $(`#progress_questionnaire`).addClass("category-progress-66");
+                    } else if ( questionnaire_percentage >= 33 ) {
+                        $(`#progress_questionnaire_container`).addClass("category-progress-container-33");
+                        $(`#progress_questionnaire`).addClass("category-progress-33");
+                    } else {
+                        $(`#progress_questionnaire_container`).addClass("category-progress-container-default");
+                        $(`#progress_questionnaire`).addClass("category-progress-default");
+                    }
+
+                    $("#questionnaire_scored_count").text(questionnaire_scored_count);
+                    $("#questionnaire_all_count").text(questionnaire_all_count);
+                    $(".questionnaire_total_score").text(questionnaire_total_score.toFixed(1));
+                    $(`#progress_questionnaire`).attr("style", `width: ${questionnaire_percentage}%`);
                 },
                 complete: function(){
                     $(".saving").addClass("hidden");
@@ -557,94 +787,55 @@
             let currentIndicatorID  = currentRawID.split('_')[1];
             let currentCategoryID   = currentRawID.split('_')[2];
 
-            let groupedCurrentRadios         = {};
-            var groupsCheckedOnTrueButEmpty  = [];
-            
-            // GET ALL RADIOS BUTTON GROUP OF CURRENTLY ACTIVE CATEGORY
-            $('#questions-container_'+currentIndicatorID+'_'+currentCategoryID)
-                .find('[type="radio"]')
-                .each(function() {
-                    let rawID       = $(this).attr('id');
-                    let parts       = rawID.split("_");
-                    let newParts    = parts.slice(1, -1);
-                    let processedID = newParts.join("_");
-                    if (!groupedCurrentRadios[processedID]) {
-                        groupedCurrentRadios[processedID] = [];
-                    }
-                    groupedCurrentRadios[processedID].push(this);
+            let target_index;
+            for (let i = 0; i < indicator_category_indices.length; i++) {
+                if(indicator_category_indices[i] === targetRawID) {
+                    target_index = i;
+                    break;
                 }
-            );
-
-            // GET ALL RADIOS BUTTON GROUP THAT CHECKED ON TRUE BUT THE ATTACHMENT LINK TEXT INPUT IS EMPTY
-            $.each(groupedCurrentRadios, function(processedID, radios) {
-                let isCheckedOnTrue = radios.some(function(radio) {
-                    return $(radio).val() === '1' && $(radio).is(':checked');
-                });
-                let isTextInputEmpty = $("#attachment_"+processedID).val().trim() === '';
-                if (isCheckedOnTrue && isTextInputEmpty) {
-                    groupsCheckedOnTrueButEmpty.push(processedID);
-                }
-            });
-
-            if (groupsCheckedOnTrueButEmpty.length > 0) {
-                $.each(groupsCheckedOnTrueButEmpty, function(index, groupName) {
-                    let textInput = $("#attachment_"+groupName)
-                    if (textInput.val().trim() === '') {
-                        textInput.removeClass("border-gray-300");
-                        textInput.addClass("border-danger");
-                        $("#error_msg_"+groupName).removeClass("hidden");
-                    }
-                });
-            } else {
-                let target_index;
-                for (let i = 0; i < indicator_category_indices.length; i++) {
-                    if(indicator_category_indices[i] === targetRawID) {
-                        target_index = i;
-                        break;
-                    }
-                }
-                if(target_index == 0) {
-                    $("#submit_btn").removeClass("flex");
-                    $("#submit_btn").addClass("hidden");
-
-                    $(".prev-btn").removeClass("flex");
-                    $(".prev-btn").addClass("hidden");
-                    
-                    $(".next-btn").attr("id",`next--${indicator_category_indices[target_index+1]}`);
-                } else if (target_index == indicator_category_indices.length-1) {
-                    $(".next-btn").removeClass("flex");
-                    $(".next-btn").addClass("hidden");
-                    $("#submit_btn").removeClass("hidden");
-                    $("#submit_btn").addClass("flex");
-
-                    $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
-                    $(".prev-btn").removeClass("hidden");
-                    $(".prev-btn").addClass("flex");
-                } else {
-                    $("#submit_btn").removeClass("flex");
-                    $("#submit_btn").addClass("hidden");
-                    
-                    $(".prev-btn").removeClass("hidden");
-                    $(".prev-btn").addClass("flex");
-                    
-                    $(".next-btn").removeClass("hidden");
-                    $(".next-btn").addClass("flex");
-
-                    $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
-                    $(".next-btn").attr("id",`next--${indicator_category_indices[target_index+1]}`);
-                }
-
-                $(".category-button").removeClass("active-category-button");
-                $(`#${targetIndex}`).addClass("active-category-button");
-                $(".questions-container").addClass("hidden");
-                $("#questions-container_"+targetIndicatorID+"_"+targetCategoryID).removeClass("hidden");
             }
+            if(target_index == 0) {
+                $("#submit_btn").removeClass("flex");
+                $("#submit_btn").addClass("hidden");
+
+                $(".prev-btn").removeClass("flex");
+                $(".prev-btn").addClass("hidden");
+                
+                $(".next-btn").attr("id",`next--${indicator_category_indices[target_index+1]}`);
+            } else if (target_index == indicator_category_indices.length-1) {
+                $(".next-btn").removeClass("flex");
+                $(".next-btn").addClass("hidden");
+                $("#submit_btn").removeClass("hidden");
+                $("#submit_btn").addClass("flex");
+
+                $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
+                $(".prev-btn").removeClass("hidden");
+                $(".prev-btn").addClass("flex");
+            } else {
+                $("#submit_btn").removeClass("flex");
+                $("#submit_btn").addClass("hidden");
+                
+                $(".prev-btn").removeClass("hidden");
+                $(".prev-btn").addClass("flex");
+                
+                $(".next-btn").removeClass("hidden");
+                $(".next-btn").addClass("flex");
+
+                $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
+                $(".next-btn").attr("id",`next--${indicator_category_indices[target_index+1]}`);
+            }
+
+            $(".category-button").removeClass("active-category-button");
+            $(`#${targetIndex}`).addClass("active-category-button");
+            $(".questions-container").addClass("hidden");
+            $("#questions-container_"+targetIndicatorID+"_"+targetCategoryID).removeClass("hidden");
+            
         }
 
         $(document).ready(function () {
-            // $("#main-loading-indicator").removeClassß("flex");
-            // $("#main-loading-indicator").addClass("hidden");
-            let indicators = @json($indicators);
+            let indicators      = @json($indicators);
+            let respondent_id   = @json($respondent).id;
+            
             let i = 0;
             $.each(indicators, function (indicatorKey, categories) { 
                 let j = 0;
@@ -653,116 +844,39 @@
                 }); i++;
             });
 
-            $(".radio-button").change(function (e) { 
+            $(".score-radio").change(function (e) { 
                 e.preventDefault();
 
                 let rawID           = $(this).attr('id');
+                let cleanID         = rawID.split('--')[0];
                 let indicatorID     = rawID.split('_')[1];
                 let categoryID      = rawID.split('_')[2];
                 let questionID      = rawID.split('_')[3];
-                let value           = rawID.split('_').length == 6 ? rawID.split('_')[5] : rawID.split('_')[4];
-                let questionChildID = rawID.split('_').length == 6 ? rawID.split('_')[4] : null;
-
+                let value           = $(this).val();
                 let questionDBID    = $(this).attr("data-questionDBID");
-                
-                if (questionChildID != null && value == 1) {
-                    // SHOW INPUT TEXT
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_container").removeClass("hidden");
-                    // COLOR BUTTON
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").removeClass("bg-red-500 text-red-50");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").addClass("bg-gray-300 text-gray-500");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").removeClass("bg-gray-300 text-gray-500");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").addClass("bg-emerald-500 text-emerald-50");
-                } else if (questionChildID != null && value == 0) {
-                    // HIDE INPUT TEXT
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_container").addClass("hidden");
-                    // CLEAR INPUT TEXT VALUE
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID).val("");
-                    // REMOVE ERROR MESSAGE
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID).removeClass("border-danger");
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID).addClass("border-gray-300");
-                    // COLOR BUTTON
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").removeClass("bg-gray-300 text-gray-500");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_0").addClass("bg-red-500 text-red-50");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").removeClass("bg-emerald-500 text-emerald-50");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_"+questionChildID+"_1").addClass("bg-gray-300 text-gray-500");
-                    ajaxCall("{{ route('questionnaire.updateAnswerChild') }}", questionDBID, value);
-                } else if (questionChildID == null && value == 1) {
-                    // SHOW INPUT TEXT
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_container").removeClass("hidden");
-                    // COLOR BUTTON
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").removeClass("bg-red-500 text-red-50");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").addClass("bg-gray-300 text-gray-500");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_1").removeClass("bg-gray-300 text-gray-500");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_1").addClass("bg-emerald-500 text-emerald-50");
-                } else if (questionChildID == null && value == 0) {
-                    // HIDE INPUT TEXT
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID+"_container").addClass("hidden");
-                    // CLEAR INPUT TEXT VALUE
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID).val("");
-                    // REMOVE ERROR MESSAGE
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID).removeClass("border-danger");
-                    $("#attachment_"+indicatorID+"_"+categoryID+"_"+questionID).addClass("border-gray-300");
-                    // COLOR BUTTON
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").removeClass("bg-gray-300 text-gray-500");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_0").addClass("bg-red-500 text-red-50");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_1").removeClass("bg-emerald-500 text-emerald-50");
-                    $("#label_"+indicatorID+"_"+categoryID+"_"+questionID+"_1").addClass("bg-gray-300 text-gray-500");
-                    ajaxCall("{{ route('questionnaire.updateAnswer') }}", questionDBID, value);
-                }
-            });
-            
-            $(".attachment-link").on("focusout", async function (e) {
-                e.preventDefault();
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                let classSelector   = rawID.split('-')[0];
 
-                let questionDBID    = $(this).attr("data-questionDBID");
-                let oldAnswer       = $(this).attr("data-oldAnswer");
-                let newAnswer       = $(this).val();
+                // console.log("rawID           : "+rawID);
+                // console.log("cleanID         : "+cleanID);
+                // console.log("indicatorID     : "+indicatorID);
+                // console.log("categoryID      : "+categoryID);
+                // console.log("questionID      : "+questionID);
+                // console.log("value           : "+value);
+                // console.log("questionDBID    : "+questionDBID);
+                // console.log("respondentID    : "+respondent_id);
+                // console.log("classSelector   : "+classSelector);
 
-                let rawID           = $(this).attr('id');
-                let indicatorID     = rawID.split('_')[1];
-                let categoryID      = rawID.split('_')[2];
-                let questionID      = rawID.split('_')[3];
-                // let value           = rawID.split('_')[4];
-                
-                let radio = $('input[name="answer['+indicatorID+']['+categoryID+']['+questionID+']"]:checked').val();
+                $(`.${classSelector}`).removeClass('bg-primary text-white');
+                $(`.${classSelector}`).addClass('bg-gray-200 text-gray-500');
 
-                if (radio==1) {
-                    if(oldAnswer != newAnswer && newAnswer != "") {
-                        ajaxCall("{{ route('questionnaire.updateAnswer') }}", questionDBID, 1, newAnswer);
-                    }
-                }
-            });
+                $(`#label_${rawID}`).removeClass('bg-gray-200 text-gray-500');
+                $(`#label_${rawID}`).addClass('bg-primary text-white');
 
-            $(".child-attachment-link").on("focusout", async function (e) {
-                e.preventDefault();
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                $(`#updated_by_${cleanID}`).removeClass('hidden');
+                $(`#updated_by_name_${cleanID}`).text('Anda');
+                $(`#value_${cleanID}`).text(value);
 
-                let questionDBID    = $(this).attr("data-questionDBID");
-                let oldAnswer       = $(this).attr("data-oldAnswer");
-                let newAnswer       = $(this).val();
-
-                let rawID           = $(this).attr('id');
-                let indicatorID     = rawID.split('_')[1];
-                let categoryID      = rawID.split('_')[2];
-                let questionID      = rawID.split('_')[3];
-                let questionChildID = rawID.split('_')[4];
-                // let value           = rawID.split('_')[5];
-
-                
-                let radio = $('input[name="answer['+indicatorID+']['+categoryID+']['+questionID+']['+questionChildID+']"]:checked').val();
-
-                console.log(radio);
-                console.log(questionDBID);
-                console.log(oldAnswer);
-                console.log(newAnswer);
-
-                if (radio==1) {
-                    if(oldAnswer != newAnswer && newAnswer != "") {
-                        ajaxCall("{{ route('questionnaire.updateAnswerChild') }}", questionDBID, 1, newAnswer);
-                    }
-                }
+                ajaxCall("{{ route('questionnaire.updateScore', $respondent->id) }}", questionDBID, value);
             });
 
             // QUESTION NAVIGATION BY CATEGORIES BUTTON
