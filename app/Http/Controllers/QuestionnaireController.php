@@ -215,8 +215,6 @@ class QuestionnaireController extends Controller
     {
         $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
         $indicators = $this->load_respondent_question_answers($respondent_id);
-        // dd($indicators["INDIKATOR I"]["PPID"]);
-
         $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
         if($submission->is_done_filling){
             return view('pages.questionnaire.evaluate', compact('respondent', 'indicators', 'submission'));
@@ -251,15 +249,10 @@ class QuestionnaireController extends Controller
 
     public function submitScore(Request $request, $respondent_id)
     {
-        $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
-        
-        $indicators = $this->load_respondent_question_answers($respondent_id);
-        
-        $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
-        
-        $total_score = 0;
-
-
+        $respondent     = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
+        $indicators     = $this->load_respondent_question_answers($respondent_id);
+        $submission     = RespondentScore::firstWhere('respondent_id',$respondent_id);        
+        $total_score    = 0;
 
         foreach ($indicators as $indicator => $categories) {
             foreach ($categories as $category => $questions) {
@@ -281,14 +274,31 @@ class QuestionnaireController extends Controller
                 }
             }
         }
-
         $submission->update([
             'total_score'       => $total_score,
             'updated_by'        => Auth::user()->id,
             'updated_by_name'   => Auth::user()->name,
             'is_done_scoring'   => true
         ]);
-
         return Redirect::route('questionnaire.index')->with('success', 'Penilaian telah disimpan!');
+    }
+
+    public function showScore($respondent_id)
+    {
+        $respondent = User::find($respondent_id);
+        $submission = RespondentScore::firstWhere('respondent_id',$respondent->id);
+        $indicators = $this->load_respondent_question_answers($respondent->id);
+        
+        if(
+            (Auth::user()->role === 'RESPONDENT' && Auth::user()->id === $respondent->id) 
+            ||
+            (Auth::user()->role === 'JURY' && Auth::user()->id === $submission->jury_id)
+            || 
+            Auth::user()->role === 'ADMIN'
+        ) {
+            return view('pages.questionnaire.show', compact('respondent', 'indicators', 'submission'));
+        } else {
+            abort(404);
+        }
     }
 }

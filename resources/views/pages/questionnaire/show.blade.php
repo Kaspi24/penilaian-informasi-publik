@@ -30,14 +30,14 @@
     <!-- PAGE HEADER (EXAM TITLE) -->
     <nav class="fixed z-[999] top-0 w-full bg-primary text-white h-[3.5rem] flex justify-between xl:grid xl:grid-cols-3 items-center px-4">
         <div class="relative">
-            <button type="button" x-on:click="showExitPopUp = true" class="block xl:flex xl:items-center xl:gap-2 text-white hover:text-gray-200">
+            <a href="{{ route('questionnaire.index') }}" x-on:click="showExitPopUp = true" class="block xl:flex xl:items-center xl:gap-2 text-white hover:text-gray-200">
                 <span class="block m-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
                     </svg>
                 </span>
                 <span class="hidden text-xs xl:text-sm xl:block xl:m-0">Kembali</span>
-            </button>
+            </a>
         </div>
         <div class="flex justify-center items-center gap-2">
             <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
@@ -101,6 +101,34 @@
                                 <td class="py-1 inline-block mx-1">:</td>
                                 <td class="questionnaire_total_score py-1 text-left">{{ $total_score }}</td>
                             </tr>
+
+                            <tr class="">
+                                <th class="py-1 w-[24%] align-top text-left">Predikat</th>
+                                <td class="py-1 inline-block mx-1">:</td>
+                                <td class="questionnaire_total_score py-1 text-left">
+                                    @if ($submission->total_score >= 90)
+                                        <p class="text-[0.65rem] w-fit font-bold text-green-200 bg-green-600 py-0.5 px-1.5 rounded">
+                                            INFORMATIF
+                                        </p>
+                                    @elseif ($submission->total_score >= 80)
+                                        <p class="text-[0.65rem] w-fit font-bold text-lime-200 bg-lime-600 py-0.5 px-1.5 rounded">
+                                            MENUJU INFORMATIF
+                                        </p>
+                                    @elseif ($submission->total_score >= 60)
+                                        <p class="text-[0.65rem] w-fit font-bold text-yellow-50 bg-yellow-300 py-0.5 px-1.5 rounded">
+                                            CUKUP INFORMATIF
+                                        </p>
+                                    @elseif ($submission->total_score >= 40)
+                                        <p class="text-[0.65rem] w-fit font-bold text-orange-100 bg-orange-500 py-0.5 px-1.5 rounded">
+                                            KURANG INFORMATIF
+                                        </p>
+                                    @else
+                                        <p class="text-[0.65rem] w-fit font-bold text-red-200 bg-red-600 py-0.5 px-1.5 rounded">
+                                            TIDAK INFORMATIF
+                                        </p>
+                                    @endif
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -132,6 +160,33 @@
                                 <td class="py-1 inline-block mx-1">:</td>
                                 <td class="questionnaire_total_score py-1 text-left">{{ $total_score }}</td>
                             </tr>
+                            <tr class="">
+                                <th class="py-1 w-[24%] align-top text-left">Predikat</th>
+                                <td class="py-1 inline-block mx-1">:</td>
+                                <td class="questionnaire_total_score py-1 text-left">
+                                    @if ($submission->total_score >= 90)
+                                        <p class="text-[0.65rem] w-fit font-bold text-green-200 bg-green-600 py-0.5 px-1.5 rounded">
+                                            INFORMATIF
+                                        </p>
+                                    @elseif ($submission->total_score >= 80)
+                                        <p class="text-[0.65rem] w-fit font-bold text-lime-200 bg-lime-600 py-0.5 px-1.5 rounded">
+                                            MENUJU INFORMATIF
+                                        </p>
+                                    @elseif ($submission->total_score >= 60)
+                                        <p class="text-[0.65rem] w-fit font-bold text-yellow-50 bg-yellow-300 py-0.5 px-1.5 rounded">
+                                            CUKUP INFORMATIF
+                                        </p>
+                                    @elseif ($submission->total_score >= 40)
+                                        <p class="text-[0.65rem] w-fit font-bold text-orange-100 bg-orange-500 py-0.5 px-1.5 rounded">
+                                            KURANG INFORMATIF
+                                        </p>
+                                    @else
+                                        <p class="text-[0.65rem] w-fit font-bold text-red-200 bg-red-600 py-0.5 px-1.5 rounded">
+                                            TIDAK INFORMATIF
+                                        </p>
+                                    @endif
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -139,16 +194,6 @@
 
             <div class="flex gap-1 w-full items-center m-0 mb-2 font-semibold text-primary">
                 <p class="text-base">Tanggapan Kuesioner</p>
-                <span id="saving" class="saving hidden text-gray-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 animate-spin">
-                        <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
-                    </svg>
-                </span>
-                <span id="saved" class="saved text-emerald-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.7427 10.2859C17.7427 10.578 17.7184 10.8643 17.6716 11.1431H18.5999C20.7301 11.1431 22.457 12.87 22.457 15.0002C22.457 17.1305 20.7301 18.8574 18.5999 18.8574L12.5999 18.8574H5.74275C3.37581 18.8574 1.45703 16.9386 1.45703 14.5716C1.45703 12.2047 3.37581 10.2859 5.74275 10.2859H7.45703C7.45703 7.4456 9.75957 5.14307 12.5999 5.14307C15.4402 5.14307 17.7427 7.4456 17.7427 10.2859ZM16.08 11.8088L12.298 15.5908L12.298 15.5908L11.0374 16.8515L7.88569 13.6998L9.14636 12.4392L11.0373 14.3301L14.8193 10.5481L16.08 11.8088Z"/>
-                    </svg>
-                </span>
             </div>
             <div class="relative w-full h-fit max-h-[calc(100vh-17.5rem)] p-2 rounded-md bg-primary-10 overflow-y-auto custom-scrollbar border border-primary-20 shadow-inner">
                 <div class="w-full h-fit" x-data="{
@@ -188,7 +233,7 @@
                         <button type="button" x-on:click="showIndicator_{{ $loop->index }} =! showIndicator_{{ $loop->index }}" 
                             class="flex justify-between items-center w-full box-border font-mono font-bold text-base p-1 lg:p-1.5 pr-2 bg-primary rounded-md text-white border {{ $loop->index === 0 ? '' : 'mt-2 lg:mt-3' }}">
                             <div class="flex gap-2 items-center">
-                                <span id="progress_indikator_{{ $loop->index }}" class="w-12 {{ $indicator_percentage_classlist }} text-xs text-center rounded-md h-fit">{{ $indicator_percentage }}%</span>
+                                {{-- <span id="progress_indikator_{{ $loop->index }}" class="w-12 {{ $indicator_percentage_classlist }} text-xs text-center rounded-md h-fit">{{ $indicator_percentage }}%</span> --}}
                                 <span>{{ $indicator }}</span>
                                 <span id="indicator_total_score_{{ $loop->index }}" class="font-sans font-medium text-warning">({{ $indicator_score }})</span>
                             </div>
@@ -272,28 +317,7 @@
                                                             <span class="text-xs text-primary-50 font-medium">{{ $question->details }}</span>
                                                         @endif
                                                     </p>
-
-                                                    <!-- RADIOS FOR SCORES IF QUESTION HAS NO CHILDREN -->
-                                                    @if ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0))
-                                                        <div>
-                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
-                                                                id="score_{{$i}}_{{$j}}_{{$k}}--less-good"
-                                                                value="{{ $question->less_good }}"
-                                                                @checked($question->score ==$question->less_good)>
-                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
-                                                                id="score_{{$i}}_{{$j}}_{{$k}}--good-enough"
-                                                                value="{{ $question->good_enough }}"
-                                                                @checked($question->score ==$question->good_enough)>
-                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
-                                                                id="score_{{$i}}_{{$j}}_{{$k}}--good"
-                                                                value="{{ $question->good }}"
-                                                                @checked($question->score ==$question->good)>
-                                                            <input type="radio" data-questionDBID="{{ $question->id }}" name="score_{{ $question->id }}" class="score-radio hidden"
-                                                                id="score_{{$i}}_{{$j}}_{{$k}}--very-good"
-                                                                value="{{ $question->very_good }}"
-                                                                @checked($question->score ==$question->very_good)>
-                                                        </div>
-                                                    @endif
+                                                    
                                                     
                                                     <!-- RESPONSE -->
                                                     @if ($question->children->count() === 0)
@@ -322,30 +346,18 @@
                                                                     <div class="w-[calc(100%-3.5rem)] md:w-[calc(100%-4.75rem)] p-1 md:p-2 rounded-md bg-primary-10 shadow shadow-primary-20">
                                                                         <p class="text-xs md:text-sm mb-1 text-center text-primary font-bold">KESESUAIAN BUKTI PENDUKUNG</p>
                                                                         <div class="w-full grid grid-cols-4 gap-1 md:gap-1.5 xl:gap-2 p-1 md:p-1.5 xl:p-[0.4rem] rounded-md bg-gray-50 border border-primary-20">
-                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--less-good"
-                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--less-good"
-                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                                {{ $question->score == $question->less_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            <div class="flex justify-center items-center rounded-md {{ $question->score == $question->less_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                                 <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">KURANG</p>
-                                                                            </label>
-                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good-enough"
-                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--good-enough"
-                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                                {{ $question->score == $question->good_enough ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            </div>
+                                                                            <div class="flex justify-center items-center rounded-md {{ $question->score == $question->good_enough ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                                 <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">CUKUP</p>
-                                                                            </label>
-                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good"
-                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--good"
-                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                                {{ $question->score == $question->good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            </div>
+                                                                            <div class="flex justify-center items-center rounded-md {{ $question->score == $question->good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                                 <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">HAMPIR</p>
-                                                                            </label>
-                                                                            <label id="label_score_{{$i}}_{{$j}}_{{$k}}--very-good"
-                                                                                for="score_{{$i}}_{{$j}}_{{$k}}--very-good"
-                                                                                class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                                {{ $question->score == $question->very_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                            </div>
+                                                                            <div class="flex justify-center items-center rounded-md {{ $question->score == $question->very_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                                 <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">SESUAI</p>
-                                                                            </label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="border border-primary rounded-md overflow-hidden w-12 md:w-16 bg-primary-10/25">
@@ -423,30 +435,18 @@
                                                                 <div class="w-[calc(100%-3.5rem)] md:w-[calc(100%-4.75rem)] p-1 md:p-2 rounded-md bg-primary-10 shadow shadow-primary-20">
                                                                     <p class="text-xs md:text-sm mb-1 text-center text-primary font-bold">KESESUAIAN BUKTI PENDUKUNG</p>
                                                                     <div class="w-full grid grid-cols-4 gap-1 md:gap-1.5 xl:gap-2 p-1 md:p-1.5 xl:p-[0.4rem] rounded-md bg-gray-50 border border-primary-20">
-                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--less-good"
-                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--less-good" 
-                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                            {{ $question->score == $question->less_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                        <div class="flex justify-center items-center rounded-md {{ $question->score == $question->less_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                             <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">KURANG</p>
-                                                                        </label>
-                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good-enough"
-                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--good-enough" 
-                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                            {{ $question->score == $question->good_enough ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                        </div>
+                                                                        <div class="flex justify-center items-center rounded-md {{ $question->score == $question->good_enough ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                             <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">CUKUP</p>
-                                                                        </label>
-                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--good"
-                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--good" 
-                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                            {{ $question->score == $question->good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                        </div>
+                                                                        <div class="flex justify-center items-center rounded-md {{ $question->score == $question->good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                             <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">HAMPIR</p>
-                                                                        </label>
-                                                                        <label id="label_score_{{$i}}_{{$j}}_{{$k}}--very-good"
-                                                                            for="score_{{$i}}_{{$j}}_{{$k}}--very-good" 
-                                                                            class="score_{{$i}}_{{$j}}_{{$k}} flex justify-center items-center cursor-pointer rounded-md hover:bg-primary-20 hover:text-primary-40
-                                                                            {{ $question->score == $question->very_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
+                                                                        </div>
+                                                                        <div class="flex justify-center items-center rounded-md {{ $question->score == $question->very_good ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }}">
                                                                             <p class="text-[0.6rem] md:text-[0.65rem] xl:text-[0.7rem] leading-3 font-bold py-3 md:p-1.5 tracking-tighter xl:tracking-tight text-center">SESUAI</p>
-                                                                        </label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="border border-primary rounded-md overflow-hidden w-12 md:w-16 bg-primary-10/25">
@@ -506,273 +506,16 @@
                             </svg>
                         </span>
                     </button>
-                    <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                        <span>SIMPAN NILAI</span>
-                    </button>
                 </div>
             </div>
         </div>
     </main>
 
 
-    <!-- SUBMIT EXAM ANSWERS POP UP -->
-    <div class="fixed z-[2220] inset-0" x-cloak x-show="showAdminEndExamPopUp">
-        <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
-            <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
-                <div class="w-full text-center mb-3">
-                    <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
-                        Konfirmasi Aksi Sebagai ADMIN
-                    </p>
-                    <p class="text-sm lg:text-base text-justify text-primary-50">
-                        Saat ini terdapat juri yang ditugaskan untuk menilai tanggapan kuesioner ini. Aapakah Anda tetap ingin melanjutkan aksi sebagai <span class="font-bold">ADMIN</span>?
-                    </p>
-                </div>
-                <div class="w-full flex gap-2 justify-center items-center bg-warning-10 border border-warning text-warning p-1 rounded-md mb-6 xl:mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    <p class="text-sm">Aksi tidak dapat dibatalkan!</p>
-                </div>
-                <div class="w-full flex justify-center items-center gap-4">
-                    <button type="button" x-on:click="showAdminEndExamPopUp = false" class="block w-[32%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
-                        KEMBALI
-                    </button>
-                    <form action="{{ route('questionnaire.submitScore', $respondent->id) }}" class="block w-[32%]"  method="POST">
-                        @csrf @method('PUT')
-                        <div class="w-full" id="additionalFormFields"></div>
-                        <button type="submit" class="block w-full text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
-                            SIMPAN
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SUBMIT EXAM ANSWERS POP UP -->
-    <div class="fixed z-[2220] inset-0" x-cloak x-show="showEndExamPopUp">
-        <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
-            <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
-                <div class="w-full text-center mb-3">
-                    <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
-                        Simpan nilai tanggapan kuesioner?
-                    </p>
-                    <p class="text-sm lg:text-base text-justify text-primary-50">
-                        Setelah mengirim nilai, anda tidak dapat mengubahnya lagi, karena penilaian anda akan segera dapat dilihat oleh responden terkait.<br>
-                        <span class="mt-1 font-semibold text-primary-70 text-left">
-                            Catatan : Tanggapan yang 'dapat' namun tidak/belum dinilai akan mendapatkan nilai yang bersesuaian dengan kategori <span class="font-bold">CUKUP</span>.
-                        </span>
-                    </p>
-                </div>
-                <div class="w-full flex gap-2 justify-center items-center bg-warning-10 border border-warning text-warning p-1 rounded-md mb-6 xl:mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    <p class="text-sm">Aksi tidak dapat dibatalkan!</p>
-                </div>
-                <div class="w-full flex justify-center items-center gap-4">
-                    <button type="button" x-on:click="showEndExamPopUp = false" class="block w-[32%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
-                        KEMBALI
-                    </button>
-                    @if (Auth::user()->role === 'ADMIN' && $submission->jury_id)
-                        <button type="button" x-on:click="showEndExamPopUp = false, showAdminEndExamPopUp = true"
-                            class="block w-[32%] text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
-                            SIMPAN
-                        </button>
-                    @else
-                        <form action="{{ route('questionnaire.submitScore', $respondent->id) }}" class="block w-[32%]"  method="POST">
-                            @csrf @method('PUT')
-                            <div class="w-full" id="additionalFormFields"></div>
-                            <button type="submit" class="block w-full text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
-                                SIMPAN
-                            </button>
-                        </form>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- QUIT EXAM POP UP -->
-    <div class="fixed z-[2220] inset-0" x-cloak x-show="showExitPopUp">
-        <div class="absolute z-[2222] inset-0 bg-black bg-opacity-30 flex justify-center items-center py-4">
-            <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 py-10 xl:py-12 flex flex-col justify-center items-center">
-                <div class="w-fit text-warning mb-6 xl:mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div class="w-full text-center mb-4 xl:mb-6">
-                    <p class="text-base xl:text-lg text-gray-900 font-semibold tracking-wide">
-                        Anda yakin ingin meninggalkan halaman penilaian tanggapan kuesioner?
-                    </p>
-                </div>
-                <div class="w-full text-center mb-8 xl:mb-10">
-                    <p class="text-sm xl:text-base text-gray-900">
-                        Nilai saat ini akan tersimpan.
-                    </p>
-                </div>
-                <div class="w-full flex justify-center items-center gap-2 md:gap-4">
-                    <button type="button" x-on:click="showExitPopUp = false" 
-                        class="block w-40 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-xs xl:text-sm py-2.5 text-cente">
-                        Lanjutkan Menilai
-                    </button>
-                    <a href="{{ route('questionnaire.index') }}"
-                        class=" block w-40 text-white bg-danger hover:bg-danger-70 border border-danger focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
-                        Tinggalkan Halaman
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script>
         let indicator_category_indices = [];
-
-        const ajaxCall = (url, question_id, new_score) => {
-            // console.log(url);
-            // console.log(question_id);
-            // console.log(new_score);
-            $.ajax({
-                type    : "POST",
-                url     : url,
-                data    : {
-                    _method     : 'PUT',
-                    _token      : '{{ csrf_token() }}',
-                    question_id : question_id,
-                    score       : new_score,
-                },
-                dataType: 'JSON',
-                beforeSend : function(){
-                    $(".saved").addClass("hidden");
-                    $(".saving").removeClass("hidden");
-                },
-                success: function (response){
-                    // console.log(response);
-                    let i = 0;
-                    let questionnaire_all_count     = 0;
-                    let questionnaire_scored_count  = 0;
-                    let questionnaire_total_score   = 0;
-
-                    $.each(response, function (indicator, categories) {
-                        let indicator_all_count     = 0;
-                        let indicator_scored_count  = 0;
-                        let indicator_total_score   = 0;
-
-                        let j = 0;
-                        $.each(categories, function (category, questions) {
-                            let category_scored_count   = 0;
-                            let category_total_score    = 0;
-                            indicator_all_count += questions.length;
-                            $.each(questions, function (index, question) {
-                                question.updated_by && category_scored_count++;
-                                question.updated_by && indicator_scored_count++;
-                                category_total_score += question.score;
-                            });
-                            indicator_total_score += category_total_score;
-                            let category_percentage = Math.round((category_scored_count/questions.length)*100);
-
-                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-100");
-                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-66");
-                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-33");
-                            $(`#progres_category_container_${i}_${j}`).removeClass("category-progress-container-default");
-
-                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-100");
-                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-66");
-                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-33");
-                            $(`#progres_category_${i}_${j}`).removeClass("category-progress-default");
-
-                            if ( category_percentage == 100 ) {
-                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-100");
-                                $(`#progres_category_${i}_${j}`).addClass("category-progress-100");
-                            } else if ( category_percentage >= 66 ) {
-                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-66");
-                                $(`#progres_category_${i}_${j}`).addClass("category-progress-66");
-                            } else if ( category_percentage >= 33 ) {
-                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-33");
-                                $(`#progres_category_${i}_${j}`).addClass("category-progress-33");
-                            } else {
-                                $(`#progres_category_container_${i}_${j}`).addClass("category-progress-container-default");
-                                $(`#progres_category_${i}_${j}`).addClass("category-progress-default");
-                            }
-                            
-                            $(`.category-total-score_${i}_${j}`).text(category_total_score.toFixed(1));
-                            $(`#category_scored_count_${i}_${j}`).text(category_scored_count);
-                            $(`#progres_category_${i}_${j}`).attr("style", `width: ${category_percentage}%`);
-                            j++;
-                        });
-                        
-                        questionnaire_all_count     += indicator_all_count;
-                        questionnaire_scored_count  += indicator_scored_count;
-                        questionnaire_total_score   += indicator_total_score;
-                        
-                        let indicator_percentage = Math.round((indicator_scored_count/indicator_all_count)*100);
-                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-100");
-                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-66");
-                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-33");
-                        $(`#progress_indikator_${i}`).removeClass("indicator-progess-default");
-
-                        if ( indicator_percentage == 100 ) {
-                            $(`#progress_indikator_${i}`).addClass("indicator-progess-100");
-                        } else if ( indicator_percentage >= 66 ) {
-                            $(`#progress_indikator_${i}`).addClass("indicator-progess-66");
-                        } else if ( indicator_percentage >= 33 ) {
-                            $(`#progress_indikator_${i}`).addClass("indicator-progess-33");
-                        } else {
-                            $(`#progress_indikator_${i}`).addClass("indicator-progess-default");
-                        }
-                        $(`#progress_indikator_${i}`).text(`${indicator_percentage}%`);
-                        $(`#indicator_total_score_${i}`).text(indicator_total_score.toFixed(1));
-                        i++;
-                    });
-
-                    let questionnaire_percentage = Math.round((questionnaire_scored_count/questionnaire_all_count)*100);
-                    // console.log(questionnaire_scored_count);
-                    // console.log(questionnaire_all_count);
-                    // console.log(questionnaire_percentage);
-                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-100");
-                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-66");
-                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-33");
-                    $(`#progress_questionnaire_container`).removeClass("category-progress-container-default");
-
-                    $(`#progress_questionnaire`).removeClass("category-progress-100");
-                    $(`#progress_questionnaire`).removeClass("category-progress-66");
-                    $(`#progress_questionnaire`).removeClass("category-progress-33");
-                    $(`#progress_questionnaire`).removeClass("category-progress-default");
-
-                    if ( questionnaire_percentage == 100 ) {
-                        $(`#progress_questionnaire_container`).addClass("category-progress-container-100");
-                        $(`#progress_questionnaire`).addClass("category-progress-100");
-                    } else if ( questionnaire_percentage >= 66 ) {
-                        $(`#progress_questionnaire_container`).addClass("category-progress-container-66");
-                        $(`#progress_questionnaire`).addClass("category-progress-66");
-                    } else if ( questionnaire_percentage >= 33 ) {
-                        $(`#progress_questionnaire_container`).addClass("category-progress-container-33");
-                        $(`#progress_questionnaire`).addClass("category-progress-33");
-                    } else {
-                        $(`#progress_questionnaire_container`).addClass("category-progress-container-default");
-                        $(`#progress_questionnaire`).addClass("category-progress-default");
-                    }
-
-                    $("#questionnaire_scored_count").text(questionnaire_scored_count);
-                    $("#questionnaire_all_count").text(questionnaire_all_count);
-                    $(".questionnaire_total_score").text(questionnaire_total_score.toFixed(1));
-                    $(`#progress_questionnaire`).attr("style", `width: ${questionnaire_percentage}%`);
-                },
-                complete: function(){
-                    $(".saving").addClass("hidden");
-                    $(".saved").removeClass("hidden");
-                },
-            });
-        }
 
         function processQuestion(currentIndex, targetIndex){
             $(".error-msg").addClass("hidden");
@@ -795,9 +538,6 @@
                 }
             }
             if(target_index == 0) {
-                $("#submit_btn").removeClass("flex");
-                $("#submit_btn").addClass("hidden");
-
                 $(".prev-btn").removeClass("flex");
                 $(".prev-btn").addClass("hidden");
                 
@@ -805,15 +545,11 @@
             } else if (target_index == indicator_category_indices.length-1) {
                 $(".next-btn").removeClass("flex");
                 $(".next-btn").addClass("hidden");
-                $("#submit_btn").removeClass("hidden");
-                $("#submit_btn").addClass("flex");
 
                 $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
                 $(".prev-btn").removeClass("hidden");
                 $(".prev-btn").addClass("flex");
             } else {
-                $("#submit_btn").removeClass("flex");
-                $("#submit_btn").addClass("hidden");
                 
                 $(".prev-btn").removeClass("hidden");
                 $(".prev-btn").addClass("flex");
@@ -842,41 +578,6 @@
                 $.each(categories, function (categoryKey, value) { 
                     indicator_category_indices.push(`category-button_${i}_${j}`); j++;
                 }); i++;
-            });
-
-            $(".score-radio").change(function (e) { 
-                e.preventDefault();
-
-                let rawID           = $(this).attr('id');
-                let cleanID         = rawID.split('--')[0];
-                let indicatorID     = rawID.split('_')[1];
-                let categoryID      = rawID.split('_')[2];
-                let questionID      = rawID.split('_')[3];
-                let value           = $(this).val();
-                let questionDBID    = $(this).attr("data-questionDBID");
-                let classSelector   = rawID.split('-')[0];
-
-                // console.log("rawID           : "+rawID);
-                // console.log("cleanID         : "+cleanID);
-                // console.log("indicatorID     : "+indicatorID);
-                // console.log("categoryID      : "+categoryID);
-                // console.log("questionID      : "+questionID);
-                // console.log("value           : "+value);
-                // console.log("questionDBID    : "+questionDBID);
-                // console.log("respondentID    : "+respondent_id);
-                // console.log("classSelector   : "+classSelector);
-
-                $(`.${classSelector}`).removeClass('bg-primary text-white');
-                $(`.${classSelector}`).addClass('bg-gray-200 text-gray-500');
-
-                $(`#label_${rawID}`).removeClass('bg-gray-200 text-gray-500');
-                $(`#label_${rawID}`).addClass('bg-primary text-white');
-
-                $(`#updated_by_${cleanID}`).removeClass('hidden');
-                $(`#updated_by_name_${cleanID}`).text('Anda');
-                $(`#value_${cleanID}`).text(value);
-
-                ajaxCall("{{ route('questionnaire.updateScore', $respondent->id) }}", questionDBID, value);
             });
 
             // QUESTION NAVIGATION BY CATEGORIES BUTTON

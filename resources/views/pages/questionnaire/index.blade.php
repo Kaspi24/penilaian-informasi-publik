@@ -142,7 +142,7 @@
                                 <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Tanggapan kuesioner <br>anda telah dinilai.</p>
                             </div>
                             <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/2 bg-primary text-white ">
-                                <span>
+                                <div class="w-full">
                                     <p class="flex justify-start items-center gap-2 text-sm lg:text-base text-warning lg:tracking-wide font-semibold mb-3">
                                         Skor Pelayanan Informasi Publik Unit Kerja Anda adalah
                                     </p>
@@ -177,7 +177,17 @@
                                             @endif
                                         </span>
                                     </span>
-                                </span>
+                                    <div class="flex justify-end mt-4">
+                                        <a href="{{ route('questionnaire.showScore', Auth::user()->id) }}" class="flex justify-end px-2 items-center gap-2 w-fit rounded-md bg-primary-40 hover:bg-primary-50 text-white hover:text-warning hover:shadow-inner group transition duration-300 ease-in-out">
+                                            <p class=" font-bold">LIHAT PENILAIAN</p>
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 lg:size-7">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

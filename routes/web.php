@@ -33,7 +33,8 @@ Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(Questi
         Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
         Route::put('submit-response',       'submitResponse')->name('submitResponse');
     });
-    Route::get('nilai-kuesioner/{respondent_id}', 'evaluate')->name('evaluate');
+    Route::get('show-score/{respondent_id}',        'showScore')->name('showScore');
+    Route::get('nilai-kuesioner/{respondent_id}',   'evaluate')->name('evaluate');
     Route::put('update-score/{respondent_id}',      'updateScore')->name('updateScore');
     Route::put('submit-score/{respondent_id}',      'submitScore')->name('submitScore');
 });
