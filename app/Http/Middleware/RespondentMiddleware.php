@@ -13,7 +13,7 @@ class RespondentMiddleware
     {
         $user = auth()->user();
         if ($user->role !== "RESPONDENT") {
-            return response()->view('404');
+            abort(404);
         }
         return $next($request);
     }

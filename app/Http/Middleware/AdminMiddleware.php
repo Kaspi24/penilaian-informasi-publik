@@ -13,7 +13,7 @@ class AdminMiddleware
     {
         $user = auth()->user();
         if ($user->role !== "ADMIN") {
-            return response()->view('notfound');
+            abort(404);
         }
         return $next($request);
     }

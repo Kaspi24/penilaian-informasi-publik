@@ -5,14 +5,17 @@
         </h2>
 
         <p class="mt-1 text-sm text-primary-40">
-            {{-- Update your account's profile information and email address. --}}
-            Perbarui data unit kerja anda.
+                {{
+                    (
+                        $user->work_unit->name &&
+                        $user->work_unit->head_name &&
+                        $user->work_unit->email &&
+                        $user->work_unit->phone
+                    ) ? 'Perbarui' : 'Lengkapi' 
+                }}
+                data unit kerja anda.
         </p>
     </header>
-
-    <form id="send-unit-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
 
     <form method="post" action="{{ route('profile.updateWorkUnit') }}" class="mt-6 space-y-6">
         @csrf

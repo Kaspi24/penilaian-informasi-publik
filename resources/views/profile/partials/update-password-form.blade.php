@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-primary-40">
-            Pastikan anda menggunakan password acak dan panjang yang aman.
+            Pastikan anda menggunakan password yang panjang dan acak untuk keamanan.
         </p>
     </header>
 

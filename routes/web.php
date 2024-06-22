@@ -1,15 +1,20 @@
 <?php
 
-use App\Http\Controllers\JuryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\EmailVerified;
+use App\Http\Controllers\JuryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\WorkUnitController;
-use App\Http\Middleware\ProfileCompletedMiddleware;
 use App\Http\Middleware\RespondentMiddleware;
+use App\Http\Controllers\QuestionnaireController;
+use App\Http\Middleware\ProfileCompletedMiddleware;
+
+Route::get('/test', function () {
+    return view('auth.verify-email');
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Questions
 Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(QuestionController::class)->as('question.')->prefix('pertanyaan')->group(function() {
@@ -25,7 +30,7 @@ Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(Questi
 });
 
 // Questionnaire
-Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(QuestionnaireController::class)->as('questionnaire.')->group(function() {
+Route::middleware(['auth', ProfileCompletedMiddleware::class, EmailVerified::class])->controller(QuestionnaireController::class)->as('questionnaire.')->group(function() {
     Route::get('kuesioner',             'index')->name('index');
     Route::middleware(RespondentMiddleware::class)->group(function() {
         Route::get('isi-kuesioner',         'start')->name('start');

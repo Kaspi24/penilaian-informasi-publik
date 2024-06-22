@@ -5,14 +5,17 @@
         </h2>
 
         <p class="mt-1 text-sm text-primary-40">
-            {{-- Update your account's profile information and email address. --}}
-            Perbarui data pribadi akun anda.
+            @if($user->role === 'RESPONDENT' || $user->role === 'JURY') {{{
+                (
+                    $user->name 
+                    && $user->username && $user->email 
+                    && $user->phone && $user->whatsapp
+                ) ? 'Perbarui' : 'Lengkapi'
+            }}}
+            @else Perbarui @endif
+            data pribadi akun anda.
         </p>
     </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
 
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
@@ -34,11 +37,12 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
+                
+            
             {{-- @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
-                        Your email address is unverified.
+                        Email anda belum diverifikasi.
 
                         <button form="send-verification" class="underline text-sm text-primary-40 hover:text-primary-70 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">
                             Click here to re-send the verification email.

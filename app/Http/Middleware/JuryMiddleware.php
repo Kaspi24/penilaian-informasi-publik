@@ -13,7 +13,7 @@ class JuryMiddleware
     {
         $user = auth()->user();
         if ($user->role !== UserRole::JURY) {
-            return response()->view('notfound');
+            abort(404);
         }
         return $next($request);
     }

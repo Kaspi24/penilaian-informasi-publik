@@ -5,7 +5,11 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            Setelah akun Anda dihapus, seluruh data termasuk jawaban kuesioner yang tersimpan akan dihapus secara permanen.
+            @if (Auth::user()->role === 'RESPONDENT')
+                Setelah akun Anda dihapus, seluruh data termasuk jawaban kuesioner yang tersimpan akan dihapus secara permanen.
+            @else
+                Setelah akun Anda dihapus, seluruh data termasuk penilaian kuesioner yang tersimpan akan dihapus secara permanen.
+            @endif
         </p>
     </header>
 
@@ -24,7 +28,11 @@
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Setelah akun Anda dihapus, seluruh data termasuk jawaban kuesioner yang tersimpan akan dihapus secara permanen. Harap masukkan Password untuk melanjutkan penghapusan akun.
+                @if (Auth::user()->role === 'RESPONDENT')
+                    Setelah akun Anda dihapus, seluruh data termasuk jawaban kuesioner yang tersimpan akan dihapus secara permanen. Harap masukkan Password untuk melanjutkan penghapusan akun.
+                @else
+                    Setelah akun Anda dihapus, seluruh data termasuk penilaian kuesioner yang tersimpan akan dihapus secara permanen. Harap masukkan Password untuk melanjutkan penghapusan akun.
+                @endif
             </p>
 
             <div class="mt-6">

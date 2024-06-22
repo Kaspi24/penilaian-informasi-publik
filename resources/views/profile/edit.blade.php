@@ -29,11 +29,13 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow rounded-sm">
-                <div class="max-w-xl mx-auto">
-                    @include('profile.partials.delete-user-form')
+            @if (Auth::user()->role === 'RESPONDENT' || Auth::user()->role === 'JURY')
+                <div class="p-4 sm:p-8 bg-white shadow rounded-sm">
+                    <div class="max-w-xl mx-auto">
+                        @include('profile.partials.delete-user-form')
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
