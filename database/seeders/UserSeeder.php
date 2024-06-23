@@ -50,13 +50,14 @@ class UserSeeder extends Seeder
         foreach ($work_units as $work_unit) {
             $number = rand(0,1);
             $user = User::factory()->create([
-                'username'      => fake()->userName(),
-                'work_unit_id'  => $work_unit->id,
-                'role'          => UserRole::RESPONDENT,
-                'email'         => fake()->safeEmail(),
-                'name'          => $number === 0 ? null : fake()->name(),
-                'phone'         => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
-                'whatsapp'      => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
+                'username'          => fake()->userName(),
+                'work_unit_id'      => $work_unit->id,
+                'role'              => UserRole::RESPONDENT,
+                'email'             => fake()->safeEmail(),
+                'name'              => $number === 0 ? null : fake()->name(),
+                'phone'             => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
+                'whatsapp'          => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
+                'email_verified_at' => $number === 0 ? null : now(),
             ]);
 
             if ($number === 1) {
