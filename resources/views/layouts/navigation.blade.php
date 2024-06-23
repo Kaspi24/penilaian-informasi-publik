@@ -5,10 +5,12 @@
             <!-- Logo -->
             <div class="shrink-0 flex items-center">
                 <a href="{{ route('dashboard') }}" class="flex w-fit gap-2 lg:gap-3 items-center">
-                    {{-- <x-application-logo class="block h-9 w-auto fill-current text-primary-70" /> --}}
                     <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-10 w-auto" alt="">
-                    <span class="text-xs lg:text-sm text-primary font-extrabold tracking-tight">
-                        KEMENTERIAN PERHUBUNGAN<br>REPUBLIK INDONESIA
+                    <span class="text-primary font-extrabold mb-0.5 lg:mb-1">
+                        <p class="text-sm lg:text-base lg:tracking-wide">PENILAIAN INFORMASI PUBLIK</p>
+                        <p class="text-[0.6rem] lg:text-xs tracking-tighter lg:tracking-tight">
+                            KEMENTERIAN PERHUBUNGAN REPUBLIK INDONESIA
+                        </p>
                     </span>
                 </a>
             </div>

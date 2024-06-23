@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Auth;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EmailVerificationToken extends Model
 {
-    use HasFactory;
-
     protected $table = 'email_verification_tokens';
     
     protected $fillable = [

@@ -5,15 +5,13 @@ namespace App\Http\Controllers\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 
-// use Illuminate\Auth\Events\Verified;
-// use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Mail\VerifyEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
-use App\Models\EmailVerificationToken;
+use App\Models\Auth\EmailVerificationToken;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Redirect;
 

@@ -16,11 +16,14 @@
         <div class="p-6 max-w-sm w-full bg-white shadow-md rounded-md">
             <a href="/" class="flex gap-3 justify-center items-center mb-4 border-b-2 border-primary-20 pb-4">
                 <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-11 h-auto">
-                <p class="text-lg font-semibold text-primary mb-1">Kementerian Perhubungan<br>Republik Indonesia</p>
+                <div class="text-primary mb-1">
+                    <p class="font-bold uppercase text-lg">{{ config('app.name') }}</p>
+                    <p class="text-xs font-semibold tracking-tight">Kementerian Perhubungan Republik Indonesia</p>
+                </div>
             </a>
             <p class="mb-4 text-xl font-bold text-primary text-center">Verifikasi Alamat Email</p>
             
-            @include('components.alert')
+            @include('components.auth-alert')
         
             <div class="mb-4 text-[13px] p-2 rounded-md border border-primary bg-primary-10 bg-opacity-25 text-primary">
                 Silakan cek kotak masuk pada 

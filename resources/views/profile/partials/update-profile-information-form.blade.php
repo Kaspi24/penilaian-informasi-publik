@@ -37,25 +37,6 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-                
-            
-            {{-- @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        Email anda belum diverifikasi.
-
-                        <button form="send-verification" class="underline text-sm text-primary-40 hover:text-primary-70 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">
-                            Click here to re-send the verification email.
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 ">
-                            A new verification link has been sent to your email address.
-                        </p>
-                    @endif
-                </div>
-            @endif --}}
         </div>
         @if (Auth::user()->role === 'RESPONDENT')
             <div>

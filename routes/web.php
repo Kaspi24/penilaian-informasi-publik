@@ -12,10 +12,6 @@ use App\Http\Middleware\RespondentMiddleware;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Middleware\ProfileCompletedMiddleware;
 
-Route::get('/test', function () {
-    return view('auth.verify-email');
-});
-
 Route::get('/', function () {
     return view('welcome');
 });
