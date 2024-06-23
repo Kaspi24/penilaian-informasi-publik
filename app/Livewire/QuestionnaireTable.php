@@ -113,6 +113,19 @@ class QuestionnaireTable extends DataTableComponent
                     }
                 })
                 ->html(),
+            Column::make("Nilai akhir",'id')
+                ->label(function($row) {
+                    if (!$row->score->is_done_scoring) {
+                        if($row->score->is_done_filling){
+                            return "<p class=\"w-32 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-red-200 text-red-800\">BELUM DINILAI</p>";
+                        } else {
+                            return "<p class=\"w-32 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-gray-200 text-gray-500\">BELUM DIKIRIM</p>";
+                        }
+                    } else {
+                        return $row->score->total_score;
+                    }
+                })
+                ->html(),
             Column::make("Aksi", "id")
                 ->label(fn($row) => view('components.datatable.respondent-datatable-actions', compact('row'))),
             // COLLAPSED COLUMNS

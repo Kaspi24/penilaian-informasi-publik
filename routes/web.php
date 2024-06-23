@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EmailVerified;
 use App\Http\Controllers\JuryController;
@@ -16,13 +17,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
-// Questions
-Route::middleware(['auth',ProfileCompletedMiddleware::class])->controller(QuestionController::class)->as('question.')->prefix('pertanyaan')->group(function() {
-    Route::get('/', 'index')->name('index');
+// Dashboard
+Route::middleware(['auth'])->controller(DashboardController::class)->group(function() {
+    Route::get('/dashboard', 'index')->name('dashboard');
+});
+
+// Admin Pages
+Route::middleware(['auth', AdminMiddleware::class])->group(function() {
+    // Work Units
+    Route::get('/unit-kerja',   [WorkUnitController::class, 'index'])->name('work-unit.index');
+    // Juries
+    Route::get('/juri',         [JuryController::class, 'index'])->name('jury.index');
+    Route::post('/juri',        [JuryController::class, 'store'])->name('jury.store');
+    // Users
+    Route::get('/pengguna',     [UserController::class, 'index'])->name('user.index');
+    // Questions
+    Route::get('/pertanyaan',   [QuestionController::class, 'index'])->withoutMiddleware(AdminMiddleware::class)->name('question.index');
 });
 
 // Questionnaire
@@ -40,27 +54,11 @@ Route::middleware(['auth', ProfileCompletedMiddleware::class, EmailVerified::cla
     Route::put('submit-score/{respondent_id}',      'submitScore')->name('submitScore');
 });
 
-// Work Units
-Route::middleware(['auth',AdminMiddleware::class])->controller(WorkUnitController::class)->as('work-unit.')->prefix('unit-kerja')->group(function() {
-    Route::get('/', 'index')->name('index');
-});
-
-// Users
-Route::middleware(['auth',AdminMiddleware::class])->controller(UserController::class)->as('user.')->prefix('pengguna')->group(function() {
-    Route::get('/', 'index')->name('index');
-});
-
-// Juries
-Route::middleware(['auth',AdminMiddleware::class])->controller(JuryController::class)->as('jury.')->prefix('juri')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-});
-
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::patch('/profile-unit', [ProfileController::class, 'updateWorkUnit'])->name('profile.updateWorkUnit');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile',          [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile',        [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile-unit',   [ProfileController::class, 'updateWorkUnit'])->name('profile.updateWorkUnit');
+    Route::delete('/profile',       [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
