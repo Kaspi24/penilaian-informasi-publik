@@ -13,13 +13,16 @@ use App\Http\Middleware\RespondentMiddleware;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Middleware\ProfileCompletedMiddleware;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+Route::middleware('guest')->get('/', function () {
+    return redirect('login');
+});
+Route::middleware('auth')->get('/', function () {
+    return redirect('dashboard');
+});
 
 // Dashboard
 Route::middleware(['auth'])->controller(DashboardController::class)->group(function() {
