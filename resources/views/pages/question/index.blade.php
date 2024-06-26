@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-primary leading-tight">
-            {{ __('Daftar Pertanyaan Kuesioner') }}
+            {{ __('Daftar Pertanyaan Penilaian') }}
         </h2>
     </x-slot>
 
@@ -28,7 +28,7 @@
                                     <thead class="text-xs text-primary-70 uppercase bg-primary-10">
                                         <tr >
                                             <th scope="col" rowspan="2" class="border-r border-b p-1.5 lg:p-2 w-10">No.</th>
-                                            <th colspan="2" scope="col" rowspan="2" class="border-r border-b p-1.5 lg:p-2">Kuesioner</th>
+                                            <th colspan="2" scope="col" rowspan="2" class="border-r border-b p-1.5 lg:p-2">Penilaian</th>
                                             <th colspan="5" class="border-b p-1.5 lg:p-2">Bobot Nilai Berdasarkan Kesesuaian Bukti</th>
                                         </tr>
                                         <tr>

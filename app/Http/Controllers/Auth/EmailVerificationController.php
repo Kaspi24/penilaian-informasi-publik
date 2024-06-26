@@ -61,7 +61,7 @@ class EmailVerificationController extends Controller
             EmailVerificationToken::where('email', $user->email)->delete();
             
             return Redirect::route('dashboard')
-                ->with("success", "Email anda telah terverifikasi, sekarang anda dapat melakukan pengisian kuesioner!");
+                ->with("success", "Email anda telah terverifikasi, sekarang anda dapat melakukan pengisian penilaian!");
         }
 
     }

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WorkUnit;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\WorkUnitUpdateRequest;
-use App\Models\WorkUnit;
 
 class ProfileController extends Controller
 {
@@ -22,7 +23,20 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
+        $validated = $request->validated();
+        
+        if(isset($request->profile_picture)) {
+            if($user->profile_picture){
+                if( Storage::exists($user->profile_picture)){
+                    Storage::delete($user->profile_picture);
+                }
+            }
+            $storeFile = $request->file('profile_picture')->store('ID-Cards');
+            $validated["profile_picture"] = $storeFile;
+        }
+
+        $request->user()->fill($validated);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;

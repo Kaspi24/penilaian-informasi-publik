@@ -76,7 +76,7 @@
                                 @else
                                     <div class="w-full bg-white rounded-md shadow p-2 lg:p-4 text-xs md:text-sm lg:text-base font-bold">
                                         <div class="bg-gray-100 text-gray-400 shadow-inner p-2 rounded-md">
-                                            DATA SELENGKAPNYA AKAN DITAMPILKAN SETELAH LEBIH BANYAK TANGGAPAN KUESIONER RESPONDEN UNIT KERJA YANG TELAH DINILAI
+                                            DATA SELENGKAPNYA AKAN DITAMPILKAN SETELAH LEBIH BANYAK TANGGAPAN PENILAIAN RESPONDEN UNIT KERJA YANG TELAH DIEVALUASI
                                         </div>
                                     </div>
                                 @endif
@@ -84,7 +84,7 @@
                         @else
                             <div class="w-full bg-white rounded-md shadow p-2 lg:p-4 text-xs md:text-sm lg:text-base font-bold">
                                 <div class="bg-gray-100 text-gray-400 shadow-inner p-2 rounded-md">
-                                    DATA SELENGKAPNYA AKAN DITAMPILKAN SETELAH LEBIH BANYAK TANGGAPAN KUESIONER RESPONDEN UNIT KERJA YANG TELAH DINILAI
+                                    DATA SELENGKAPNYA AKAN DITAMPILKAN SETELAH LEBIH BANYAK TANGGAPAN PENILAIAN RESPONDEN UNIT KERJA YANG TELAH DIEVALUASI
                                 </div>
                             </div>
                         @endif
@@ -107,7 +107,7 @@
         <!-- SUBMISSION CHARTS -->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
             <div class="bg-white overflow-hidden shadow-sm rounded">
-                <p class="p-4 border-b border-primary-20 text-center uppercase tracking-tighter text-lg font-extrabold text-primary">Pengisian Kuesioner Unit Kerja</p>
+                <p class="p-4 border-b border-primary-20 text-center uppercase tracking-tighter text-lg font-extrabold text-primary">Pengisian Penilaian Unit Kerja</p>
                 <div class="p-4 lg:p-6 text-primary-70 grid grid-cols-1 lg:grid-cols-2 gap-4 border-t border-primary-20">
                     <div id="submissionDonutChart" class="bg-primary-10/25 shadow-inner rounded p-2"></div>
                     <div id="submissionBarChart" class="bg-primary-10/25 shadow-inner rounded p-2"></div>
@@ -118,7 +118,7 @@
         <!-- EVALUATION CHARTS -->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
             <div class="bg-white overflow-hidden shadow-sm rounded">
-                <p class="p-4 border-b border-primary-20 text-center uppercase tracking-tighter text-lg font-extrabold text-primary">Penilaian Kuesioner Unit Kerja</p>
+                <p class="p-4 border-b border-primary-20 text-center uppercase tracking-tighter text-lg font-extrabold text-primary">Evaluasi Penilaian Unit Kerja</p>
                 <div class="p-4 lg:p-6 text-primary-70 grid grid-cols-1 lg:grid-cols-2 gap-4 border-t border-primary-20">
                     <div id="evaluationDonutChart" class="bg-primary-10/25 shadow-inner rounded p-2"></div>
                     <div id="evaluationBarChart" class="bg-primary-10/25 shadow-inner rounded p-2"></div>
@@ -301,7 +301,7 @@
 
                 renderApexChart(original_arr,registered_arr,"#registrationBarChart","#registrationDonutChart", "Mendaftar", "Responden Mendaftar");
                 renderApexChart(registered_arr,submitted_arr,"#submissionBarChart","#submissionDonutChart", "Mengisi", "Responden Mengisi");
-                renderApexChart(submitted_arr,scored_arr,"#evaluationBarChart","#evaluationDonutChart", "Dinilai", "Tanggapan Dinilai");
+                renderApexChart(submitted_arr,scored_arr,"#evaluationBarChart","#evaluationDonutChart", "Dievaluasi", "Tanggapan Dievaluasi");
             });
         </script>
     </x-slot>

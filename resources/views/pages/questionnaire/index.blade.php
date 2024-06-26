@@ -1,7 +1,7 @@
 <x-app-layout x-data="{showEndExamPopUp : false}">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-primary leading-tight">
-            {{ __('Kuesioner') }}
+            {{ __('Penilaian') }}
         </h2>
     </x-slot>
 
@@ -12,7 +12,7 @@
             <!--  -->
             <div class="bg-white shadow-sm rounded-sm mb-6">
                 <div class="p-4 text-primary">
-                    <p class="text-lg lg:text-xl font-bold">Kuesioner Penilaian Informasi Publik</p>
+                    <p class="text-lg lg:text-xl font-bold">Penilaian Anugerah Keterbukaan Informasi Publik</p>
                 </div>
             </div>
             
@@ -27,10 +27,10 @@
                                         <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                     </svg>
                                 </span>
-                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Silakan mulai <br>mengisi kuesioner</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Silakan mulai <br>mengisi penilaian</p>
                             </div>
                             <a href="{{ route('questionnaire.start') }}" class="flex justify-end items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/3 bg-primary hover:bg-primary-70 text-white hover:text-warning hover:shadow-inner group transition duration-300 ease-in-out">
-                                <p class="text-lg lg:text-2xl lg:tracking-wide font-bold">MULAI MENGISI KUESIONER</p>
+                                <p class="text-lg lg:text-2xl lg:tracking-wide font-bold">MULAI MENGISI PENILAIAN</p>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 lg:size-8">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
@@ -43,7 +43,7 @@
                     <div class="w-full bg-white p-3">
                         <div class="w-full p-3 rounded-lg bg-primary-10/40 text-primary-50 block lg:flex">
                             <div class="w-full lg:w-2/3 p-6 flex flex-col gap-3 items-start">
-                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Progres pengisian <br> kuesioner anda</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Progres pengisian <br> penilaian anda</p>
                                 @php
                                     $percentage = round(($answered_count/$questions->count())*100, 0);
                                     if ($percentage==100) {
@@ -67,7 +67,7 @@
                             </div>
                             @if ($answered_count !== $questions->count())
                                 <a href="{{ route('questionnaire.start') }}" class="flex justify-end items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/3 bg-primary hover:bg-primary-70 text-white hover:text-warning hover:shadow-inner group transition duration-300 ease-in-out">
-                                    <p class="text-lg lg:text-xl lg:tracking-wide font-bold">LANJUT MENGISI KUESIONER</p>
+                                    <p class="text-lg lg:text-xl lg:tracking-wide font-bold">LANJUT MENGISI PENILAIAN</p>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 lg:size-7">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
@@ -76,7 +76,7 @@
                                 </a>
                             @else
                                 <div class="flex flex-col justify-center w-full p-2 rounded-md lg:w-1/3 bg-primary-40 text-primary-10">
-                                    <p class="text-base lg:px-2 md:text-lg lg:text-xl font-semibold mb-1 lg:mb-3">Anda telah mengisi <br class="hidden lg:block"> semua pertanyaan kuesioner.</p>
+                                    <p class="text-base lg:px-2 md:text-lg lg:text-xl font-semibold mb-1 lg:mb-3">Anda telah mengisi <br class="hidden lg:block"> semua pertanyaan penilaian.</p>
                                     <div class="flex justify-between items-center">
                                         <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="flex gap-2 items-center justify-center uppercase w-[49%] text-white bg-emerald-600 hover:bg-emerald-700 font-bold rounded-md text-xs pr-5 pl-2.5 py-2.5">
                                             <span>
@@ -111,7 +111,7 @@
                                         <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                     </svg>
                                 </span>
-                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Anda telah mengirim <br>tanggapan kuesioner.</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Anda telah mengirim <br>tanggapan penilaian.</p>
                             </div>
                             <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/3 bg-primary text-white ">
                                 <span>
@@ -139,7 +139,7 @@
                                         <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
                                     </svg>
                                 </span>
-                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Tanggapan kuesioner <br>anda telah dinilai.</p>
+                                <p class="text-lg md:text-3xl lg:text-4xl font-semibold mb-1 lg:mb-1.5">Terima kasih. <br>Tanggapan penilaian <br>anda telah dievaluasi.</p>
                             </div>
                             <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md lg:w-1/2 bg-primary text-white ">
                                 <div class="w-full">
@@ -204,10 +204,10 @@
                     <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
                         <div class="w-full text-center mb-3">
                             <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
-                                Kirim tanggapan kuesioner anda?
+                                Kirim tanggapan penilaian anda?
                             </p>
                             <p class="text-sm lg:text-base text-justify text-primary-50">
-                                Setelah mengirim tanggapan, anda tidak dapat mengubahnya lagi, karena tanggapan anda akan melalui proses penilaian. <br>
+                                Setelah mengirim tanggapan, anda tidak dapat mengubahnya lagi, karena tanggapan anda akan melalui proses evaluasi. <br>
                                 <span class="mt-1 font-semibold text-primary-70 text-left">
                                     Catatan : Pertanyaan yang tidak/belum diisi akan mendapatkan nilai 0.
                                 </span>

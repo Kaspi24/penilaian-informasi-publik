@@ -51,7 +51,7 @@
                             <div class="w-full bg-primary-10 text-primary-100 p-10 rounded-sm shadow-inner">
                                 <p class="text-lg lg:text-xl mb-4">
                                     Saat ini Anda belum melengkapi <span class="font-bold text-primary-40">Profile Responden</span> dan <span class="font-bold text-primary-40">Informasi Unit Kerja</span> Anda.<br>
-                                    Harap lengkapi terlebih dahulu pada halaman <span class="font-bold text-primary hover:underline"><a href="{{ route('profile.edit') }}">Profile</a></span> untuk bisa mulai mengisi kuesioner.
+                                    Harap lengkapi terlebih dahulu pada halaman <span class="font-bold text-primary hover:underline"><a href="{{ route('profile.edit') }}">Profile</a></span> untuk bisa mulai mengisi penilaian.
                                 </p>
                                 <p class="mb-2">Kelengkapan Profile Anda saat ini :</p>
                                 <div class="flex justify-between items-center w-full">
@@ -80,7 +80,7 @@
                             <div class="w-full bg-primary-10 text-primary-100 p-10 rounded-sm shadow-inner">
                                 <p class="text-lg lg:text-xl mb-4">
                                     Terima kasih telah melengkapi <span class="font-bold text-primary-40">Profile Responden</span> dan <span class="font-bold text-primary-40">Informasi Unit Kerja</span> Anda.<br>
-                                    Satu langkah terakhir, harap <span class="font-bold text-primary hover:underline"><a href="{{ route('email-verification') }}">verifikasi alamat email</a></span> anda, untuk bisa mulai mengisi kuesioner.
+                                    Satu langkah terakhir, harap <span class="font-bold text-primary hover:underline"><a href="{{ route('email-verification') }}">verifikasi alamat email</a></span> anda, untuk bisa mulai mengisi penilaian.
                                 </p>
                                 <p class="mb-2">Kelengkapan Profile Anda saat ini :</p>
                                 <div class="flex justify-between items-center w-full">

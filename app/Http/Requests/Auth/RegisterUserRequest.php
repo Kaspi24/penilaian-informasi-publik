@@ -17,6 +17,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'work_unit' => ['required', 'integer'],
+            'idcard'    => ['required', 'file'],
             'email'     => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'username'  => ['required', 'string', 'max:255', 'unique:'.User::class],
             'password'  => ['required', 'confirmed', Rules\Password::defaults()],
@@ -27,6 +28,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'work_unit' => 'Unit Kerja',
+            'idcard'    => 'Foto Kartu Pegawai',
             'email'     => 'Email',
             'username'  => 'Username',
             'password'  => 'Password',

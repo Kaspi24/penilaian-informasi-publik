@@ -68,7 +68,7 @@ class RespondentTable extends DataTableComponent
                 })
                 ->html()
                 ->sortable(),
-            Column::make("Status Kuesioner")
+            Column::make("Status Penilaian")
                 ->label(
                     fn($row) => view('components.datatable.respondent-questionnaire-status', compact('row'))
                 ),
@@ -88,7 +88,7 @@ class RespondentTable extends DataTableComponent
             Column::make("Aksi",'id')
                 ->label(fn($row) => view('components.datatable.respondent-datatable-actions', compact('row'))),
             // COLLAPSED COLUMNS
-            Column::make("Detail Pengerjaan Kuesioner")
+            Column::make("Detail Pengerjaan Penilaian")
                 ->label(fn($row) => view('components.datatable.questionnaire-progress-details', compact('row')))
                 ->collapseAlways(),
             // HIDDEN COLUMNS

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Penilaian Informasi Publik') }}</title>
-    <link rel="icon" href="{{ asset('logo/KEMENHUB.png') }}" type="image/png" sizes="32x32 16x16">
+    <title>{{ config('app.name', 'Penilaian Anugerah Keterbukaan Informasi Publik') }}</title>
+    <link rel="icon" href="{{ asset('logo/KEMENHUB64.png') }}" type="image/png" sizes="32x32 16x16">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -41,7 +41,7 @@
         </div>
         <div class="flex justify-center items-center gap-2">
             <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
-            <p class="block m-0 text-xs xl:text-sm xl:text-center">KUESIONER PENILAIAN <br class="lg:hidden"> INFORMASI PUBLIK</p>
+            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden">KETERBUKAAN INFORMASI PUBLIK</p>
         </div>
     </nav>
 
@@ -193,7 +193,7 @@
             </div>
 
             <div class="flex gap-1 w-full items-center m-0 mb-2 font-semibold text-primary">
-                <p class="text-base">Tanggapan Kuesioner</p>
+                <p class="text-base">Tanggapan Penilaian</p>
             </div>
             <div class="relative w-full h-fit max-h-[calc(100vh-17.5rem)] p-2 rounded-md bg-primary-10 overflow-y-auto custom-scrollbar border border-primary-20 shadow-inner">
                 <div class="w-full h-fit" x-data="{

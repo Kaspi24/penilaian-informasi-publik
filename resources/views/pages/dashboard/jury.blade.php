@@ -42,7 +42,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
                 <div class="bg-white overflow-hidden shadow-sm rounded">
                     <p class="p-4 border-b border-primary-20 text-center uppercase tracking-tighter text-lg font-extrabold text-primary">
-                        Pengisian Kuesioner Unit Kerja<br>
+                        Pengisian Penilaian Unit Kerja<br>
                         <span class="text-xs text-gray-500">(YANG DITUGASKAN PADA ANDA UNTUK DINILAI)</span>
                     </p>
                     <div class="p-4 lg:p-6 text-primary-70 grid grid-cols-1 lg:grid-cols-2 gap-4 border-t border-primary-20">
@@ -56,7 +56,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
                 <div class="bg-white overflow-hidden shadow-sm rounded">
                     <p class="p-4 border-b border-primary-20 text-center uppercase tracking-tighter text-lg font-extrabold text-primary">
-                        Penilaian Kuesioner Unit Kerja<br>
+                        Evaluasi Penilaian Unit Kerja<br>
                         <span class="text-xs text-gray-500">(YANG DITUGASKAN PADA ANDA UNTUK DINILAI)</span>
                     </p>
                     <div class="p-4 lg:p-6 text-primary-70 grid grid-cols-1 lg:grid-cols-2 gap-4 border-t border-primary-20">
@@ -71,7 +71,7 @@
                     <div class="p-4 text-primary-70">
                         <div class="w-full bg-primary-10 text-primary-100 p-10 py-14 rounded-sm shadow-inner">
                             <p class="text-lg lg:text-xl ">
-                                Saat ini Anda belum ditugaskan untuk menilai tanggapan kuesioner yang diisi oleh responden Unit Kerja manapun.<br>
+                                Saat ini Anda belum ditugaskan untuk mengevaluasi penilaian yang diisi oleh responden Unit Kerja manapun.<br>
                                 Informasi akan muncul di halaman ini ketika Administrator telah menugaskan Anda.
                             </p>
                         </div>

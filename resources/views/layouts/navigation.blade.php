@@ -1,15 +1,15 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-primarbg-primary-10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-16 lg:h-[4.5rem]">
             <!-- Logo -->
-            <div class="shrink-0 flex items-center">
+            <div class="shrink-0 flex items-center  max-w-[70%] lg:max-w-[30%]">
                 <a href="{{ route('dashboard') }}" class="flex w-fit gap-2 lg:gap-3 items-center">
                     <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-10 w-auto" alt="">
-                    <span class="text-primary font-extrabold mb-0.5 lg:mb-1">
-                        <p class="text-sm lg:text-base lg:tracking-wide">PENILAIAN INFORMASI PUBLIK</p>
-                        <p class="text-[0.6rem] lg:text-xs tracking-tighter lg:tracking-tight">
-                            KEMENTERIAN PERHUBUNGAN REPUBLIK INDONESIA
+                    <span class="text-primary font-extrabold mb-0.5 lg:mb-1 sm:hidden lg:inline-block">
+                        <p class="text-[0.7rem] lg:text-xs xl:text-sm font-bold tracking-tight xl:tracking-normal uppercase break-words">Penilaian Anugerah<br>Keterbukaan Informasi Publik</p>
+                        <p class="text-[0.65rem] lg:text-[0.7rem] tracking-tighter lg:tracking-tight text-primary-30">
+                            Kementerian Perhubungan Republik Indonesia
                         </p>
                     </span>
                 </a>
@@ -22,7 +22,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('questionnaire.index')" :active="request()->routeIs('questionnaire.index')">
-                        {{ __('Kuesioner') }}
+                        {{ __('Penilaian') }}
                     </x-nav-link>
                     @if ( Auth::user()->role !== "RESPONDENT")
                         <x-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">
@@ -96,7 +96,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('questionnaire.index')" :active="request()->routeIs('questionnaire.index')">
-                {{ __('Kuesioner') }}
+                {{ __('Penilaian') }}
             </x-responsive-nav-link>
             @if ( Auth::user()->role !== "RESPONDENT")
                 <x-responsive-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Penilaian Informasi Publik') }}</title>
-    <link rel="icon" href="{{ asset('logo/KEMENHUB.png') }}" type="image/png" sizes="32x32 16x16">
+    <title>Penilaian AKIP - Atur Ulang Password</title>
+    <link rel="icon" href="{{ asset('logo/KEMENHUB64.png') }}" type="image/png" sizes="32x32 16x16">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -17,8 +17,8 @@
             <a href="/" class="flex gap-3 justify-center items-center mb-4 border-b-2 border-primary-20 pb-4">
                 <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-11 h-auto">
                 <div class="text-primary mb-1">
-                    <p class="font-bold uppercase text-lg">{{ config('app.name') }}</p>
-                    <p class="text-xs font-semibold tracking-tight">Kementerian Perhubungan Republik Indonesia</p>
+                    <p class="font-bold uppercase text-sm lg:text-base leading-[1.125rem] mb-0.5 lg:mb-1">{{ config('app.name') }}</p>
+                    <p class="text-xs font-semibold tracking-tight text-primary-40">Kementerian Perhubungan Republik Indonesia</p>
                 </div>
             </a>
             <p class="mb-4 text-xl font-bold text-primary text-center">Buat Password Baru</p>

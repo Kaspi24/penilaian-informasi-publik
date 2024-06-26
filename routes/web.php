@@ -17,6 +17,16 @@ use App\Http\Middleware\ProfileCompletedMiddleware;
 //     return view('welcome');
 // });
 
+// Route::get('/test-123', function () {
+//     $token = 123456;
+//     $expiry_time = '2024-06-14 23:00:00';
+
+//     return new \App\Mail\VerifyEmail($token, $expiry_time);
+//     // return view('welcome');
+// });
+
+
+
 Route::middleware('guest')->get('/', function () {
     return redirect('login');
 });
@@ -44,15 +54,15 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function() {
 
 // Questionnaire
 Route::middleware(['auth', ProfileCompletedMiddleware::class, EmailVerified::class])->controller(QuestionnaireController::class)->as('questionnaire.')->group(function() {
-    Route::get('kuesioner',             'index')->name('index');
+    Route::get('penilaian',             'index')->name('index');
     Route::middleware(RespondentMiddleware::class)->group(function() {
-        Route::get('isi-kuesioner',         'start')->name('start');
+        Route::get('isi-penilaian',         'start')->name('start');
         Route::put('update-answer',         'updateAnswer')->name('updateAnswer');
         Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
         Route::put('submit-response',       'submitResponse')->name('submitResponse');
     });
     Route::get('show-score/{respondent_id}',        'showScore')->name('showScore');
-    Route::get('nilai-kuesioner/{respondent_id}',   'evaluate')->name('evaluate');
+    Route::get('evaluasi-penilaian/{respondent_id}',   'evaluate')->name('evaluate');
     Route::put('update-score/{respondent_id}',      'updateScore')->name('updateScore');
     Route::put('submit-score/{respondent_id}',      'submitScore')->name('submitScore');
 });

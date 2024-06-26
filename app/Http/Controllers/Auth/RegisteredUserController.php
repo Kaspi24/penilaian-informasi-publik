@@ -36,13 +36,17 @@ class RegisteredUserController extends Controller
     public function store(RegisterUserRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+        
+        $storeFile                      = $request->file('idcard')->store('ID-Cards');
+        $validated["profile_picture"]   = $storeFile;
 
         $user = User::create([
-            'work_unit_id'  => $validated["work_unit"],
-            'username'      => $validated["username"],
-            'email'         => $validated["email"],
-            'role'          => UserRole::RESPONDENT,
-            'password'      => Hash::make($validated["password"])
+            'work_unit_id'      => $validated["work_unit"],
+            'username'          => $validated["username"],
+            'email'             => $validated["email"],
+            'role'              => UserRole::RESPONDENT,
+            'password'          => Hash::make($validated["password"]),
+            'profile_picture'   => $validated["profile_picture"]
         ]);
 
         if ($user->role == UserRole::RESPONDENT)

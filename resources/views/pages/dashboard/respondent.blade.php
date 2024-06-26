@@ -25,13 +25,14 @@
 
         <!-- COUNT USER PROFILE COMPLETION PERCENTAGE -->
         @php
-            $field_count        = 8;
+            $field_count        = 9;
             $empty_field_count  = 0;
             if (Auth::user()->name                  == null) { $empty_field_count++; }
             if (Auth::user()->username              == null) { $empty_field_count++; }
             if (Auth::user()->email                 == null) { $empty_field_count++; }
             if (Auth::user()->phone                 == null) { $empty_field_count++; }
             if (Auth::user()->whatsapp              == null) { $empty_field_count++; }
+            if (Auth::user()->profile_picture       == null) { $empty_field_count++; }
             if (Auth::user()->work_unit->head_name  == null) { $empty_field_count++; }
             if (Auth::user()->work_unit->phone      == null) { $empty_field_count++; }
             if (Auth::user()->work_unit->email      == null) { $empty_field_count++; }
@@ -39,7 +40,7 @@
             if ($empty_field_count == 0) {
                 $profile_completed = 100;
             } else {
-                $profile_completed = (($field_count-$empty_field_count)/$field_count)*100;
+                $profile_completed = round((($field_count-$empty_field_count)/$field_count)*100);
             }
         @endphp
         <!-- USER PROFILE NOT COMPLETED -->
@@ -50,7 +51,7 @@
                         <div class="w-full bg-primary-10 text-primary-100 p-10 rounded-sm shadow-inner">
                             <p class="text-lg lg:text-xl mb-4">
                                 Saat ini Anda belum melengkapi <span class="font-bold text-primary-40">Profile Responden</span> dan <span class="font-bold text-primary-40">Informasi Unit Kerja</span> Anda.<br>
-                                Harap lengkapi terlebih dahulu pada halaman <span class="font-bold text-primary hover:underline"><a href="{{ route('profile.edit') }}">Profile</a></span> untuk bisa mulai mengisi kuesioner.
+                                Harap lengkapi terlebih dahulu pada halaman <span class="font-bold text-primary hover:underline"><a href="{{ route('profile.edit') }}">Profile</a></span> untuk bisa mulai mengisi penilaian.
                             </p>
                             <p class="mb-2">Kelengkapan Profile Anda saat ini :</p>
                             <div class="flex justify-between items-center w-full">
@@ -79,7 +80,7 @@
                         <div class="w-full bg-primary-10 text-primary-100 p-10 rounded-sm shadow-inner">
                             <p class="text-lg lg:text-xl mb-4">
                                 Terima kasih telah melengkapi <span class="font-bold text-primary-40">Profile Responden</span> dan <span class="font-bold text-primary-40">Informasi Unit Kerja</span> Anda.<br>
-                                Satu langkah terakhir, harap <span class="font-bold text-primary hover:underline"><a href="{{ route('email-verification') }}">verifikasi alamat email</a></span> anda, untuk bisa mulai mengisi kuesioner.
+                                Satu langkah terakhir, harap <span class="font-bold text-primary hover:underline"><a href="{{ route('email-verification') }}">verifikasi alamat email</a></span> anda, untuk bisa mulai mengisi penilaian.
                             </p>
                             <p class="mb-2">Kelengkapan Profile Anda saat ini :</p>
                             <div class="flex justify-between items-center w-full">
@@ -108,7 +109,7 @@
                         <div class="w-full bg-primary-10 text-primary-100 p-10 rounded-sm shadow-inner">
                             <p class="text-lg lg:text-xl mb-4">
                                 Terima kasih telah melengkapi <span class="font-bold text-primary-40">Profile Responden</span> dan <span class="font-bold text-primary-40">Informasi Unit Kerja</span> Anda.<br>
-                                Serta telah memverifikasi <span class="font-bold text-primary-40">Alamat Email</span> Anda. Sekarang anda dapat mulai mengisi kuesioner.
+                                Serta telah memverifikasi <span class="font-bold text-primary-40">Alamat Email</span> Anda. Sekarang anda dapat mulai mengisi penilaian.
                             </p>
                             <p class="mb-2">Kelengkapan Profile Anda saat ini :</p>
                             <div class="flex justify-between items-center w-full">
@@ -119,7 +120,7 @@
                                 </div>
                                 <a href="{{ route('questionnaire.index') }}" class="flex items-center w-32 py-1.5 pl-4 pr-3 bg-primary text-white rounded-sm font-semibold hover:bg-primary-70 hover:text-warning ease-in-out duration-150">
                                     <span class="mr-2 text-sm">
-                                        KUESIONER
+                                        PENILAIAN
                                     </span>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                         <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.28 10.28a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 1 0-1.06 1.06l1.72 1.72H8.25a.75.75 0 0 0 0 1.5h5.69l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3Z" clip-rule="evenodd" />

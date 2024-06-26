@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm rounded-sm mb-6">
                 <div class="p-4 text-primary flex justify-between items-center">
-                    <p class="text-lg lg:text-xl font-bold">Juri dan Progres Penilaian Kuesioner</p>
+                    <p class="text-lg lg:text-xl font-bold">Juri dan Progres Evaluasi Penilaian</p>
                     <button type="button" x-on:click="showaddJuryModal = true" class="w-fit aspect-square md:aspect-auto p-1 md:p-2 md:pr-4 rounded bg-emerald-600 text-white md:flex md:gap-2 md:items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

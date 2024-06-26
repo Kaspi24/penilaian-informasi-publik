@@ -1,7 +1,7 @@
 <x-app-layout x-data="{showEndExamPopUp : false}">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-primary leading-tight">
-            {{ __('Kuesioner') }}
+            {{ __('Penilaian') }}
         </h2>
     </x-slot>
 
@@ -12,7 +12,7 @@
 
             <div class="bg-white shadow-sm rounded-sm mb-6">
                 <div class="p-4 text-primary">
-                    <p class="text-lg lg:text-xl font-bold">Responden Kuesioner</p>
+                    <p class="text-lg lg:text-xl font-bold">Responden Penilaian</p>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                         TETAPKAN JURI
                     </p>
                     <p class="font-semibold text-left text-primary-50 mb-2">
-                        Anda akan menetapkan juri untuk Penilaian Tanggapan Kuesioner Unit Kerja di bawah ini :
+                        Anda akan menetapkan juri untuk Penilaian Tanggapan Penilaian Unit Kerja di bawah ini :
                     </p>
                     <div id="work_unit_name_container" class="text-primary text-left">
                     </div>

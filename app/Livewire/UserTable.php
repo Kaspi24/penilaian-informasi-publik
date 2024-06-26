@@ -47,7 +47,7 @@ class UserTable extends DataTableComponent
                 ->filter(function(Builder $builder, string $value) {
                     $builder->where('work_unit.category', $value);
                 }),
-            SelectFilter::make('Status Kuesioner')
+            SelectFilter::make('Status Penilaian')
                 ->options([
                     0  => "Semua",
                     1 => "Belum Dikirimkan",
@@ -100,7 +100,7 @@ class UserTable extends DataTableComponent
     {
         return [
             // DISPLAYED COLUMNS
-            Column::make("Status Kuesioner")
+            Column::make("Status Penilaian")
                 ->label(
                     fn($row) => view('components.datatable.respondent-questionnaire-status', compact('row'))
                 )
@@ -123,6 +123,11 @@ class UserTable extends DataTableComponent
             Column::make("Unit Kerja", "work_unit.name")
                 ->searchable()
                 ->sortable(),
+            Column::make("Foto Kartu Pegawai", "profile_picture")
+                ->label(function($row){
+                    return view('components.datatable.respondent-id-card',compact('row'));
+                })
+                ->collapseAlways(),
             // HIDDEN COLUMNS
             Column::make("hidden", "role")->hideIf(true),
             Column::make("hidden", "id")->hideIf(true),

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Penilaian Informasi Publik') }}</title>
-    <link rel="icon" href="{{ asset('logo/KEMENHUB.png') }}" type="image/png" sizes="32x32 16x16">
+    <title>{{ config('app.name', 'Penilaian Anugerah Keterbukaan Informasi Publik') }}</title>
+    <link rel="icon" href="{{ asset('logo/KEMENHUB64.png') }}" type="image/png" sizes="32x32 16x16">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -41,7 +41,7 @@
         </div>
         <div class="flex justify-center items-center gap-2">
             <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
-            <p class="block m-0 text-xs xl:text-sm xl:text-center">KUESIONER PENILAIAN <br class="lg:hidden"> INFORMASI PUBLIK</p>
+            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden">KETERBUKAAN INFORMASI PUBLIK</p>
         </div>
     </nav>
 
@@ -138,7 +138,7 @@
             </div>
 
             <div class="flex gap-1 w-full items-center m-0 mb-2 font-semibold text-primary">
-                <p class="text-base">Tanggapan Kuesioner</p>
+                <p class="text-base">Tanggapan Penilaian</p>
                 <span id="saving" class="saving hidden text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 animate-spin">
                         <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
@@ -529,7 +529,7 @@
                         Konfirmasi Aksi Sebagai ADMIN
                     </p>
                     <p class="text-sm lg:text-base text-justify text-primary-50">
-                        Saat ini terdapat juri yang ditugaskan untuk menilai tanggapan kuesioner ini. Aapakah Anda tetap ingin melanjutkan aksi sebagai <span class="font-bold">ADMIN</span>?
+                        Saat ini terdapat juri yang ditugaskan untuk mengevaluasi penilaian ini. Aapakah Anda tetap ingin melanjutkan aksi sebagai <span class="font-bold">ADMIN</span>?
                     </p>
                 </div>
                 <div class="w-full flex gap-2 justify-center items-center bg-warning-10 border border-warning text-warning p-1 rounded-md mb-6 xl:mb-8">
@@ -560,7 +560,7 @@
             <div class="bg-white w-10/12 md:w-1/2 lg:2/5 xl:w-1/3 rounded-md p-5 lg:p-6 py-10 lg:py-12 flex flex-col justify-center items-center">
                 <div class="w-full text-center mb-3">
                     <p class="text-lg lg:text-xl text-primary font-bold tracking-wide mb-2">
-                        Simpan nilai tanggapan kuesioner?
+                        Simpan hasil evaluasi penilaian?
                     </p>
                     <p class="text-sm lg:text-base text-justify text-primary-50">
                         Setelah mengirim nilai, anda tidak dapat mengubahnya lagi, karena penilaian anda akan segera dapat dilihat oleh responden terkait.<br>
@@ -609,7 +609,7 @@
                 </div>
                 <div class="w-full text-center mb-4 xl:mb-6">
                     <p class="text-base xl:text-lg text-gray-900 font-semibold tracking-wide">
-                        Anda yakin ingin meninggalkan halaman penilaian tanggapan kuesioner?
+                        Anda yakin ingin meninggalkan halaman evaluasi penilaian?
                     </p>
                 </div>
                 <div class="w-full text-center mb-8 xl:mb-10">
