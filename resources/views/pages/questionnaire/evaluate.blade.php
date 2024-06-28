@@ -41,7 +41,7 @@
         </div>
         <div class="flex justify-center items-center gap-2">
             <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
-            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden">KETERBUKAAN INFORMASI PUBLIK</p>
+            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="md:hidden"> KETERBUKAAN INFORMASI PUBLIK</p>
         </div>
     </nav>
 
@@ -262,7 +262,7 @@
                                             <!-- MAIN CONTENT -->
                                             <div class="w-full flex gap-2 border py-3 pl-1 pr-2 rounded-md bg-white {{ $loop->index === 0 ? '' : 'mt-6' }}">
                                                 <p class="text-primary-70 w-8 box-border text-sm lg:text-base text-right font-mono">{{ $k+1 }}.</p>
-                                                <div class="w-[calc(100%-2.5rem)] box-border pb-3 pr-3">
+                                                <div id="question_main_container_{{$i}}_{{$j}}_{{$k}}" class="w-[calc(100%-2.5rem)] box-border pb-3 pr-3">
                                                     <!-- QUESTION TEXT -->
                                                     <p class="text-primary-80 tracking-tight text-sm lg:text-base font-medium p-0 mb-2">
                                                         {{ $question->text }}
@@ -469,15 +469,43 @@
                                                             </div>
                                                         @endif
                                                     @endif
-                                                    <div id="updated_by_score_{{$i}}_{{$j}}_{{$k}}" 
-                                                        class="{{ $question->updated_by && ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0)) ? '' : 'hidden' }} w-full mt-4 p-1.5 bg-primary-10/25 rounded border border-primary-20/25">
-                                                        <p class="text-xs md:text-sm font-medium text-gray-500">
-                                                            Nilai terakhir diperbarui oleh
-                                                            <span id="updated_by_name_score_{{$i}}_{{$j}}_{{$k}}" class="text-primary font-semibold">
-                                                                {{ $question->updated_by === Auth::user()->id ? 'Anda' : $question->updated_by_name }}
-                                                            </span>
-                                                        </p>
-                                                    </div>
+                                                    <!-- AUDIT : SCORE CHANGES HISTORY -->
+                                                    @if ($question->audits->count() > 0)
+                                                        <div class="w-full" x-data="{ showScoreHistory_{{$i}}_{{$j}}_{{$k}} : false }">
+                                                            <div id="updated_by_score_{{$i}}_{{$j}}_{{$k}}" 
+                                                                class="{{ $question->audits->count() > 0 && ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0)) ? '' : 'hidden' }} 
+                                                                    w-full mt-4 p-1.5 ">
+                                                                <button x-on:click="showScoreHistory_{{$i}}_{{$j}}_{{$k}} =! showScoreHistory_{{$i}}_{{$j}}_{{$k}}" type="button" class="text-xs md:text-sm font-medium text-gray-500 flex items-center justify-start gap-2">
+                                                                    <span>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                                                                            <path fill-rule="evenodd" d="M10.53 3.47a.75.75 0 0 0-1.06 0L6.22 6.72a.75.75 0 0 0 1.06 1.06L10 5.06l2.72 2.72a.75.75 0 1 0 1.06-1.06l-3.25-3.25Zm-4.31 9.81 3.25 3.25a.75.75 0 0 0 1.06 0l3.25-3.25a.75.75 0 1 0-1.06-1.06L10 14.94l-2.72-2.72a.75.75 0 0 0-1.06 1.06Z" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <p>Riwayat perubahan nilai</p>
+                                                                </button>
+                                                            </div>
+                                                            <div id="history_outer_container_{{$i}}_{{$j}}_{{$k}}" class="w-fit p-2 bg-primary-10/5 rounded border border-primary-20/25" x-cloak x-show="showScoreHistory_{{$i}}_{{$j}}_{{$k}}">
+                                                                <table class="text-xs">
+                                                                    <thead>
+                                                                        <tr class="">
+                                                                            <th class="py-1 px-1 md:px-3 text-center text-xs bg-primary-40 text-gray-50 uppercase border">Waktu Diubah</th>
+                                                                            <th class="py-1 px-1 md:px-3 text-center text-xs bg-primary-40 text-gray-50 uppercase border">Pengubah</th>
+                                                                            <th class="py-1 px-1 md:px-3 text-center text-xs bg-primary-40 text-gray-50 uppercase border">Nilai</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="history_container_{{$i}}_{{$j}}_{{$k}}">
+                                                                        @foreach ($question->audits->sortByDesc('updated_at') as $history)
+                                                                            <tr>
+                                                                                <td class="py-1 px-1 md:px-3 border text-center text-gray-600">{{ \Carbon\Carbon::parse($history->updated_at)->isoFormat('D MMMM Y HH:mm:ss') }}</td>
+                                                                                <td class="py-1 px-1 md:px-3 border text-center text-gray-600">{{ $history->user_id === Auth::user()->id ? 'Anda' : $history->name }}</td>
+                                                                                <td class="py-1 px-1 md:px-3 border text-center text-gray-600">{{ $history->new_values["score"] }}</td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div> @php $k++; @endphp
                                         @endforeach
@@ -529,7 +557,7 @@
                         Konfirmasi Aksi Sebagai ADMIN
                     </p>
                     <p class="text-sm lg:text-base text-justify text-primary-50">
-                        Saat ini terdapat juri yang ditugaskan untuk mengevaluasi penilaian ini. Aapakah Anda tetap ingin melanjutkan aksi sebagai <span class="font-bold">ADMIN</span>?
+                        Saat ini terdapat juri yang ditugaskan untuk mengevaluasi penilaian ini. Apakah Anda tetap ingin melanjutkan aksi sebagai <span class="font-bold">ADMIN</span>?
                     </p>
                 </div>
                 <div class="w-full flex gap-2 justify-center items-center bg-warning-10 border border-warning text-warning p-1 rounded-md mb-6 xl:mb-8">
@@ -563,7 +591,7 @@
                         Simpan hasil evaluasi penilaian?
                     </p>
                     <p class="text-sm lg:text-base text-justify text-primary-50">
-                        Setelah mengirim nilai, anda tidak dapat mengubahnya lagi, karena penilaian anda akan segera dapat dilihat oleh responden terkait.<br>
+                        Setelah mengirim nilai, <span class="text-danger font-bold">anda tidak dapat mengubahnya lagi</span>, karena penilaian anda akan segera dapat dilihat oleh responden terkait.<br>
                         <span class="mt-1 font-semibold text-primary-70 text-left">
                             Catatan : Tanggapan yang 'dapat' namun tidak/belum dinilai akan mendapatkan nilai yang bersesuaian dengan kategori <span class="font-bold">CUKUP</span>.
                         </span>
@@ -622,10 +650,14 @@
                         class="block w-40 text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-xs xl:text-sm py-2.5 text-cente">
                         Lanjutkan Menilai
                     </button>
-                    <a href="{{ route('questionnaire.index') }}"
+                    {{-- <a href="{{ route('questionnaire.index') }}"
                         class=" block w-40 text-white bg-danger hover:bg-danger-70 border border-danger focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
                         Tinggalkan Halaman
-                    </a>
+                    </a> --}}
+                    <button type="button" id="leave-evaluation"
+                        class=" block w-40 text-white bg-danger hover:bg-danger-70 border border-danger focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-md text-xs xl:text-sm py-2.5 text-center">
+                        Tinggalkan Halaman
+                    </button>
                 </div>
             </div>
         </div>
@@ -636,6 +668,7 @@
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script>
         let indicator_category_indices = [];
+        let user_role;
 
         const ajaxCall = (url, question_id, new_score) => {
             // console.log(url);
@@ -805,8 +838,11 @@
             } else if (target_index == indicator_category_indices.length-1) {
                 $(".next-btn").removeClass("flex");
                 $(".next-btn").addClass("hidden");
-                $("#submit_btn").removeClass("hidden");
-                $("#submit_btn").addClass("flex");
+
+                if(user_role === 'ADMIN') {
+                    $("#submit_btn").removeClass("hidden");
+                    $("#submit_btn").addClass("flex");
+                }
 
                 $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
                 $(".prev-btn").removeClass("hidden");
@@ -832,9 +868,29 @@
             
         }
 
+        function formatDate() {
+            const date = new Date();
+
+            const months = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+        }
+
+
         $(document).ready(function () {
             let indicators      = @json($indicators);
             let respondent_id   = @json($respondent).id;
+            user_role       = @json(Auth::user()->role);
             
             let i = 0;
             $.each(indicators, function (indicatorKey, categories) { 
@@ -851,7 +907,7 @@
                 let cleanID         = rawID.split('--')[0];
                 let indicatorID     = rawID.split('_')[1];
                 let categoryID      = rawID.split('_')[2];
-                let questionID      = rawID.split('_')[3];
+                let questionID      = rawID.split('_')[3].split('--')[0];
                 let value           = $(this).val();
                 let questionDBID    = $(this).attr("data-questionDBID");
                 let classSelector   = rawID.split('-')[0];
@@ -865,6 +921,56 @@
                 // console.log("questionDBID    : "+questionDBID);
                 // console.log("respondentID    : "+respondent_id);
                 // console.log("classSelector   : "+classSelector);
+
+                let history_outer_container = $(`#history_outer_container_${indicatorID}_${categoryID}_${questionID}`);
+
+                if (history_outer_container.length > 0) {
+                    let current_histories = $(`#history_container_${indicatorID}_${categoryID}_${questionID}`).html();
+                    let new_history = `
+                        <tr>
+                            <td class="py-1 px-1 md:px-3 border text-center text-gray-600">${ formatDate() }</td>
+                            <td class="py-1 px-1 md:px-3 border text-center text-gray-600">Anda</td>
+                            <td class="py-1 px-1 md:px-3 border text-center text-gray-600">${value}</td>
+                        </tr>
+                    `;
+                    $(`#history_container_${indicatorID}_${categoryID}_${questionID}`).html(new_history+current_histories);
+                } else {
+                    let content = `
+                        <div class="w-full" x-data="{ showScoreHistory_${indicatorID}_${categoryID}_${questionID} : false }">
+                            <div id="updated_by_score_${indicatorID}_${categoryID}_${questionID}" 
+                                class="w-full mt-4 p-1.5 ">
+                                <button x-on:click="showScoreHistory_${indicatorID}_${categoryID}_${questionID} =! showScoreHistory_${indicatorID}_${categoryID}_${questionID}" type="button" class="text-xs md:text-sm font-medium text-gray-500 flex items-center justify-start gap-2">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                                            <path fill-rule="evenodd" d="M10.53 3.47a.75.75 0 0 0-1.06 0L6.22 6.72a.75.75 0 0 0 1.06 1.06L10 5.06l2.72 2.72a.75.75 0 1 0 1.06-1.06l-3.25-3.25Zm-4.31 9.81 3.25 3.25a.75.75 0 0 0 1.06 0l3.25-3.25a.75.75 0 1 0-1.06-1.06L10 14.94l-2.72-2.72a.75.75 0 0 0-1.06 1.06Z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                    <p>Riwayat perubahan nilai</p>
+                                </button>
+                            </div>
+                            <div id="history_outer_container_${indicatorID}_${categoryID}_${questionID}" class="w-fit p-2 bg-primary-10/5 rounded border border-primary-20/25" x-cloak x-show="showScoreHistory_${indicatorID}_${categoryID}_${questionID}">
+                                <table class="text-xs">
+                                    <thead>
+                                        <tr class="">
+                                            <th class="py-1 px-1 md:px-3 text-center text-xs bg-primary-40 text-gray-50 uppercase border">Waktu Diubah</th>
+                                            <th class="py-1 px-1 md:px-3 text-center text-xs bg-primary-40 text-gray-50 uppercase border">Pengubah</th>
+                                            <th class="py-1 px-1 md:px-3 text-center text-xs bg-primary-40 text-gray-50 uppercase border">Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="history_container_${indicatorID}_${categoryID}_${questionID}">
+                                        <tr>
+                                            <td class="py-1 px-1 md:px-3 border text-center text-gray-600">${ formatDate() }</td>
+                                            <td class="py-1 px-1 md:px-3 border text-center text-gray-600">Anda</td>
+                                            <td class="py-1 px-1 md:px-3 border text-center text-gray-600">${value}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+
+                    $(`#question_main_container_${indicatorID}_${categoryID}_${questionID}`).append(content);
+                }
 
                 $(`.${classSelector}`).removeClass('bg-primary text-white');
                 $(`.${classSelector}`).addClass('bg-gray-200 text-gray-500');
@@ -906,6 +1012,11 @@
                 
                 // CALL THE MAIN PROCESS
                 processQuestion(currentRawID, targetRawID);
+            });
+
+            $("#leave-evaluation").click(function (e) { 
+                e.preventDefault();
+                window.close();
             });
         });
     </script>

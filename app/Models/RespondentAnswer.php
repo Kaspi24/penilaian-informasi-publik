@@ -4,12 +4,16 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Question;
+use OwenIt\Auditing\Models\Audit;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class RespondentAnswer extends Model
+class RespondentAnswer extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $table = 'respondent_answer';
     
     protected $fillable = [
@@ -20,6 +24,10 @@ class RespondentAnswer extends Model
         'score',
         'updated_by',
         'updated_by_name',
+    ];
+
+    protected $auditInclude = [
+        'score'
     ];
 
     public function respondent(): BelongsTo
@@ -37,4 +45,9 @@ class RespondentAnswer extends Model
     {
         return $this->hasMany(RespondentAnswerChildren::class,'respondent_answer_id','id');
     }
+
+    // public function audits(): HasMany
+    // {
+    //     return $this->hasMany(Audit::class, 'auditable_id')->where('auditable_type', self::class);
+    // }
 }

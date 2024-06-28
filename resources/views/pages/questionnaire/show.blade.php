@@ -41,7 +41,7 @@
         </div>
         <div class="flex justify-center items-center gap-2">
             <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
-            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden">KETERBUKAAN INFORMASI PUBLIK</p>
+            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden"> KETERBUKAAN INFORMASI PUBLIK</p>
         </div>
     </nav>
 
@@ -469,15 +469,17 @@
                                                             </div>
                                                         @endif
                                                     @endif
-                                                    <div id="updated_by_score_{{$i}}_{{$j}}_{{$k}}" 
-                                                        class="{{ $question->updated_by && ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0)) ? '' : 'hidden' }} w-full mt-4 p-1.5 bg-primary-10/25 rounded border border-primary-20/25">
-                                                        <p class="text-xs md:text-sm font-medium text-gray-500">
-                                                            Nilai terakhir diperbarui oleh
-                                                            <span id="updated_by_name_score_{{$i}}_{{$j}}_{{$k}}" class="text-primary font-semibold">
-                                                                {{ $question->updated_by === Auth::user()->id ? 'Anda' : $question->updated_by_name }}
-                                                            </span>
-                                                        </p>
-                                                    </div>
+                                                    @if (Auth::user()->role != 'RESPONDENT')
+                                                        <div id="updated_by_score_{{$i}}_{{$j}}_{{$k}}" 
+                                                            class="{{ $question->updated_by && ($question->answer === 1 || ($question->children->count() > 0 && $question->children->where('answer',1)->count() > 0)) ? '' : 'hidden' }} w-full mt-4 p-1.5 bg-primary-10/25 rounded border border-primary-20/25">
+                                                            <p class="text-xs md:text-sm font-medium text-gray-500">
+                                                                Nilai terakhir diperbarui oleh
+                                                                <span id="updated_by_name_score_{{$i}}_{{$j}}_{{$k}}" class="text-primary font-semibold">
+                                                                    {{ $question->updated_by === Auth::user()->id ? 'Anda' : $question->updated_by_name }}
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div> @php $k++; @endphp
                                         @endforeach

@@ -73,7 +73,7 @@
                 <div class="flex justify-start items-center gap-2 w-full p-4 lg:px-6 rounded-md bg-primary text-white ">
                     <span>
                         <p class="flex justify-start items-center gap-2 text-xs lg:text-sm text-warning lg:tracking-wide font-semibold mb-2">
-                            Skor Pelayanan Informasi Publik Unit Kerja {{ $row["work_unit.name"] }}
+                            Skor Keterbukaan Pelayanan Informasi Publik Unit Kerja {{ $row["work_unit.name"] }}
                         </p>
                         <span class="flex justify-start items-center gap-3">
                             <p class="text-xl lg:text-2xl w-[4.5rem] text-center font-extrabold bg-primary-80 text-white p-2 px-3 rounded-md">

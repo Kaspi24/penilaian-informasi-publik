@@ -40,7 +40,7 @@
         </div>
         <div class="flex justify-center items-center gap-2">
             <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-8 w-auto" alt="">
-            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden">KETERBUKAAN INFORMASI PUBLIK</p>
+            <p class="block m-0 text-xs xl:text-sm xl:text-center">PENILAIAN ANUGERAH<br class="lg:hidden"> KETERBUKAAN INFORMASI PUBLIK</p>
         </div>
     </nav>
 

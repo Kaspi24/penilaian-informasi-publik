@@ -14,6 +14,7 @@ use App\Models\RespondentAnswerChildren;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Database\Eloquent\Collection;
+use OwenIt\Auditing\Models\Audit;
 
 class QuestionnaireController extends Controller
 {
@@ -26,6 +27,7 @@ class QuestionnaireController extends Controller
                 ->select(
                     'questions.id                   AS id',
                     'questions.*',
+                    'respondent_answer.id               AS respondent_answer_id',
                     'respondent_answer.answer           AS answer',
                     'respondent_answer.attachment       AS attachment',
                     'respondent_answer.score            AS score',
@@ -215,6 +217,19 @@ class QuestionnaireController extends Controller
     {
         $respondent = User::with(['work_unit','answers'])->firstWhere('id',$respondent_id);
         $indicators = $this->load_respondent_question_answers($respondent_id);
+        foreach ($indicators as $indicator => $categories) {
+            foreach ($categories as $category => $questions) {
+                foreach ($questions as $question) {
+                    $question->audits = Audit::query()
+                        ->select('audits.*','users.name')
+                        ->leftJoin('users', 'audits.user_id','=','users.id')
+                        ->where('auditable_id',$question->respondent_answer_id)
+                        ->whereNot('user_id',$respondent_id)
+                        ->get();
+                }
+            }
+        }
+        // dd($indicators["INDIKATOR I"]["PPID"][0]);
         $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
         if($submission->is_done_filling && (Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id))){
             return view('pages.questionnaire.evaluate', compact('respondent', 'indicators', 'submission'));

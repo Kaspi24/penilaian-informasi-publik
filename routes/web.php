@@ -13,9 +13,9 @@ use App\Http\Middleware\RespondentMiddleware;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Middleware\ProfileCompletedMiddleware;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Route::get('/test-123', function () {
 //     $token = 123456;
@@ -25,14 +25,21 @@ use App\Http\Middleware\ProfileCompletedMiddleware;
 //     // return view('welcome');
 // });
 
+// Route::get('/test-123', function () {
+//     $user = \App\Models\User::find(5);
+//     $reponses = \App\Models\RespondentAnswer::with('audits')->where('respondent_id',$user->id)->get();
+//     dd($reponses[0]);
+//     // return view('welcome');
+// });
 
 
-Route::middleware('guest')->get('/', function () {
-    return redirect('login');
-});
-Route::middleware('auth')->get('/', function () {
-    return redirect('dashboard');
-});
+
+// Route::middleware('guest')->get('/', function () {
+//     return redirect('login');
+// });
+// Route::middleware('auth')->get('/', function () {
+//     return redirect('dashboard');
+// });
 
 // Dashboard
 Route::middleware(['auth'])->controller(DashboardController::class)->group(function() {
