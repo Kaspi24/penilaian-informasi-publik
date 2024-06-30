@@ -23,6 +23,7 @@
             background: rgb(227,227,241);
             background: linear-gradient(90deg, rgba(227,227,241,1) 0%, rgba(231,231,255,1) 35%, rgba(255,255,255,1) 100%);
         }
+        
     </style>
 </head>
 <body class="antialiased">
@@ -53,6 +54,9 @@
                             </x-nav-link>
                             <x-nav-link href="#alur" :active="request()->routeIs('dashboard')">
                                 {{ __('Alur') }}
+                            </x-nav-link>
+                            <x-nav-link href="#timeline" :active="request()->routeIs('dashboard')">
+                                {{ __('Timeline') }}
                             </x-nav-link>
                             <x-nav-link href="#panduan" :active="request()->routeIs('dashboard')">
                                 {{ __('Panduan Pengisian') }}
@@ -93,6 +97,9 @@
                     <x-responsive-nav-link href="#alur" :active="request()->routeIs('questionnaire.index')">
                         {{ __('Alur') }}
                     </x-responsive-nav-link>
+                    <x-responsive-nav-link href="#timeline" :active="request()->routeIs('questionnaire.index')">
+                        {{ __('Timeline') }}
+                    </x-responsive-nav-link>
                     <x-responsive-nav-link href="#panduan" :active="request()->routeIs('questionnaire.index')">
                         {{ __('Panduan Pengisian') }}
                     </x-responsive-nav-link>
@@ -132,12 +139,18 @@
                 </div>
             </section>
             <!-- SECTION 2 -->
-            <section id="alur" class="p-4 md:p-8 ">
-                <div class="max-w-7xl mx-auto lg:p-10">
-                    <img src="{{ asset('design/PANDUAN.png') }}" class="w-full " alt="">
+            <section id="timeline" class="p-4 md:p-8 xl:h-screen xl:flex xl:flex-col xl:justify-center">
+                <div class="max-w-7xl mx-auto shadow-md rounded-md overflow-hidden shadow-primary-30/50">
+                    <img src="{{ asset('design/TIMELINE.png') }}" class="w-full " alt="">
                 </div>
             </section>
             <!-- SECTION 3 -->
+            <section id="alur" class="p-4 md:p-8 xl:h-screen xl:flex xl:flex-col xl:justify-center">
+                <div class="max-w-7xl mx-auto shadow-md rounded-md overflow-hidden shadow-primary-30/50">
+                    <img src="{{ asset('design/PANDUAN.png') }}" class="w-full " alt="">
+                </div>
+            </section>
+            <!-- SECTION 4 -->
             <section id="panduan" class="bg-primary p-4 md:p-16 xl:p-44 flex justify-between">
                 <div class="">
                     <p class="w-fit text-base md:text-4xl lg:text-6xl font-['Impact'] text-white mb-2 md:mb-4">Panduan Pengisian Jawaban</p>

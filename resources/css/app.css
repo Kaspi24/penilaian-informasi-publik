@@ -90,6 +90,10 @@
     .category-progress-33 { @apply bg-amber-600 }
     .category-progress-container-default { @apply border-gray-400 bg-gray-200 }
     .category-progress-default { @apply bg-gray-400 }
+
+    .bg-texture {
+        background-image: url('/design/low-poly-grid-haikei-6.png');
+    }
 } 
 
 @keyframes pulse-0 {
