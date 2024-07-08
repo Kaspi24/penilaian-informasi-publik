@@ -29,18 +29,21 @@
 
         <div class="">
             <x-input-label for="unit_head_name" :value="__('Nama Kepala Unit Kerja')" />
+            <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan nama kepala unit kerja</small>
             <x-text-input id="unit_head_name" name="head_name" type="text" class="mt-1 block w-full" :value="old('head_name', $user->work_unit->head_name)" required autocomplete="off"/>
             <x-input-error class="mt-2" :messages="$errors->get('head_name')" />
         </div>
 
         <div>
             <x-input-label for="unit_email" :value="__('Email Kantor Unit Kerja')" />
+            <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan alamat email aktif unit kerja</small>
             <x-text-input id="unit_email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->work_unit->email)" required autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
 
         <div>
             <x-input-label for="unit_phone" :value="__('Nomor Telepon Kantor Unit Kerja')" />
+            <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan nomor telepon kantor unit kerja</small>
             <x-text-input id="unit_phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->work_unit->phone)" required autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>

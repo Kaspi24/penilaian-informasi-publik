@@ -107,7 +107,7 @@ class QuestionnaireTable extends DataTableComponent
             Column::make("Juri", "score.jury.name")
                 ->label(function($row) {
                     if (!$row->score->jury_id) {
-                        return "<p class=\"w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-gray-200 text-gray-500\">BELUM DITENTUKAN</p>";
+                        return "<p class=\"w-40 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-yellow-200 text-yellow-500\">BELUM DITENTUKAN</p>";
                     } else {
                         return $row->score->jury->name;
                     }
@@ -119,7 +119,7 @@ class QuestionnaireTable extends DataTableComponent
                         if($row->score->is_done_filling){
                             return "<p class=\"w-32 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-red-200 text-red-800\">BELUM DINILAI</p>";
                         } else {
-                            return "<p class=\"w-32 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-gray-200 text-gray-500\">BELUM DIKIRIM</p>";
+                            return "<p class=\"w-32 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-yellow-200 text-yellow-500\">BELUM DIKIRIM</p>";
                         }
                     } else {
                         return $row->score->total_score;

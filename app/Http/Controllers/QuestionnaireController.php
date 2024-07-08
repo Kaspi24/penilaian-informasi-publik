@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\RespondentScore;
 use App\Models\QuestionChildren;
 use App\Models\RespondentAnswer;
+use OwenIt\Auditing\Models\Audit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SetJuryRequest;
 use App\Models\RespondentAnswerChildren;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Database\Eloquent\Collection;
-use OwenIt\Auditing\Models\Audit;
 
 class QuestionnaireController extends Controller
 {
@@ -85,7 +86,7 @@ class QuestionnaireController extends Controller
             return view('pages.questionnaire.jury-index',compact('juries'));
         }
         /* ADMIN */  
-        else if ($user->role === "ADMIN") {
+        else if ($user->role === "SUPERADMIN" || $user->role === "ADMIN") {
             $juries         = User::where('role','JURY')->get();
             return view('pages.questionnaire.admin-index', compact('juries'));
         } else {
@@ -231,10 +232,11 @@ class QuestionnaireController extends Controller
         }
         // dd($indicators["INDIKATOR I"]["PPID"][0]);
         $submission = RespondentScore::firstWhere('respondent_id',$respondent_id);
-        if($submission->is_done_filling && (Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id))){
-            return view('pages.questionnaire.evaluate', compact('respondent', 'indicators', 'submission'));
+        $juries         = User::where('role','JURY')->get();
+        if($submission->is_done_filling && (Auth::user()->role === 'SUPERADMIN' || Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id))){
+            return view('pages.questionnaire.evaluate', compact('respondent', 'indicators', 'submission', 'juries'));
         } else {
-            if (Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id)) {
+            if (Auth::user()->role === 'SUPERADMIN' || Auth::user()->role === 'ADMIN' || (Auth::user()->role === 'JURY' && $submission->jury_id === Auth::user()->id)) {
                 return Redirect::route('questionnaire.index')->with('failed', 'Tanggapan repsonden yang coba anda nilai belum selesai/dikirimkan!');
             } else {
                 abort(404);
@@ -242,6 +244,27 @@ class QuestionnaireController extends Controller
         }
     }
     
+    public function setJury(Request $request, $respondent_id)
+    {
+        $submission = RespondentScore::firstWhere('respondent_id', $respondent_id);
+        if($submission) {
+            try {
+                $submission->update([
+                    'jury_id' => $request->jury_id
+                ]);
+            } catch (\Exception $exception) {
+                return Response::json($exception);
+            } catch (\Error $error) {
+                return Response::json($error);
+            }
+            return Response::json([
+                '200'   => 'OKE',
+                'RESP'  =>  $respondent_id,
+                'JURY'  =>  $request->jury_id
+            ]);
+        }
+    }
+
     public function updateScore(Request $request, $respondent_id)
     {
         $respondent_answer  = RespondentAnswer::query()
@@ -313,6 +336,8 @@ class QuestionnaireController extends Controller
             ||
             (Auth::user()->role === 'JURY' && Auth::user()->id === $submission->jury_id)
             || 
+            Auth::user()->role === 'SUPERADMIN' 
+            ||
             Auth::user()->role === 'ADMIN'
         ) {
             return view('pages.questionnaire.show', compact('respondent', 'indicators', 'submission'));

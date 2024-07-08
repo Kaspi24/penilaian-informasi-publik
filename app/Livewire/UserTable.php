@@ -123,10 +123,10 @@ class UserTable extends DataTableComponent
             Column::make("Unit Kerja", "work_unit.name")
                 ->searchable()
                 ->sortable(),
-            // Column::make("Aksi",'id')
-            //     ->label(
-            //         fn($row) => view('components.datatable.user-datatable-actions', compact('row'))
-            //     ),
+            Column::make("Aksi",'id')
+                ->label(
+                    fn($row) => view('components.datatable.user-datatable-actions', compact('row'))
+                ),
             Column::make("Foto Kartu Pegawai", "profile_picture")
                 ->label(function($row){
                     return view('components.datatable.respondent-id-card',compact('row'));

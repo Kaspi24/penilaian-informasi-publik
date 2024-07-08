@@ -25,6 +25,7 @@
         showEndExamPopUp : false,
         showExitPopUp : false,
         showSidebar : false,
+        showSetJuryModal : {{ $errors->hasbag('set_jury') ? 'true' : 'false' }} 
     }">
 
     <!-- PAGE HEADER (EXAM TITLE) -->
@@ -534,19 +535,73 @@
                             </svg>
                         </span>
                     </button>
-                    <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                        <span>SIMPAN NILAI</span>
-                    </button>
+                    @if (Auth::user()->role !== 'JURY')
+                        @if (!$submission->jury_id)
+                            <button x-on:click="showSetJuryModal = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                        <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                    </svg>
+                                </span>
+                                <span><span id="current-text">TENTUKAN</span> JURI</span>
+                            </button>
+                        @endif
+                    @else
+                        <button x-on:click="showEndExamPopUp = true" type="button" id="submit_btn" class="hidden submit-btn gap-2 items-center justify-center uppercase w-40 text-white bg-emerald-600 hover:bg-emerald-700 border border-emerald-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-xs pr-5 pl-2.5 py-2.5">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span>SIMPAN NILAI</span>
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- SET JURY MODAL -->
+    <div class="fixed z-[2220] inset-0" x-cloak x-show="showSetJuryModal">
+        <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
+            <div class="bg-white w-10/12 md:w-1/2 lg:w-2/5 xl:w-1/3 rounded-md p-5 lg:p-8 flex flex-col justify-center items-center">
+                <div class="w-full text-center mb-3">
+                    <p class="text-lg lg:text-xl text-primary font-extrabold tracking-wide mb-4">
+                        TETAPKAN JURI
+                    </p>
+                    <p class="font-semibold text-left text-primary-50 mb-2">
+                        Anda akan menetapkan juri untuk Evaluasi Tanggapan Penilaian Unit Kerja
+                    </p>
+                    <div id="work_unit_name_container" class="text-primary text-left">
+                        <p class="text-xs rounded-md p-1 px-2 w-full bg-primary text-warning mt-1.5 uppercase font-medium text-center">{{ $respondent->work_unit->name }}</p>
+                    </div>
+                </div>
+                <form action="{{ route('questionnaire.setJury', $respondent->id) }}" method="POST" class="w-full">
+                    @csrf @method('PUT')
+                    <div class="w-full mb-4">
+                        <label for="jury_id" class="w-full text-primary-50 block m-0 my-2 font-semibold text-left">Silakan pilih juri yang akan ditugaskan</label>
+                        <select name="jury_id" id="jury_id" class="border-2 border-primary-20 text-primary-50 text-sm rounded-md focus:ring-primary-70 focus:border-primary-70 block w-full p-2.5" @disabled($juries->count() <= 0)>
+                            <option value="" selected hidden>Pilih Juri</option>
+                            @forelse ($juries as $jury)
+                                <option value="{{ $jury->id }}">{{ $jury->name }}</option>
+                            @empty
+                                <option value="" selected hidden>Belum ada juri yang didaftarkan.</option>
+                            @endforelse
+                        </select>
+                    </div>
+
+                    <div class="w-full flex justify-center items-center gap-4">
+                        <button id="closeSetJuryModal" x-on:click="showSetJuryModal = false" type="button" class="block w-[49%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
+                            KEMBALI
+                        </button>
+                        <button type="button" id="set_jury_btn" x-on:click="showSetJuryModal = false" class="block w-[49%] text-white bg-success-20 font-medium rounded-md text-sm py-2 text-center" disabled>
+                            TETAPKAN
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- SUBMIT EXAM ANSWERS POP UP -->
     <div class="fixed z-[2220] inset-0" x-cloak x-show="showAdminEndExamPopUp">
@@ -607,7 +662,7 @@
                     <button type="button" x-on:click="showEndExamPopUp = false" class="block w-[32%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
                         KEMBALI
                     </button>
-                    @if (Auth::user()->role === 'ADMIN' && $submission->jury_id)
+                    @if (Auth::user()->role === 'SUPERADMIN' || Auth::user()->role === 'ADMIN' && $submission->jury_id)
                         <button type="button" x-on:click="showEndExamPopUp = false, showAdminEndExamPopUp = true"
                             class="block w-[32%] text-white bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm py-2 text-center">
                             SIMPAN
@@ -666,6 +721,8 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/flowbite.min.js') }}"></script>
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let indicator_category_indices = [];
         let user_role;
@@ -839,10 +896,13 @@
                 $(".next-btn").removeClass("flex");
                 $(".next-btn").addClass("hidden");
 
-                if(user_role === 'ADMIN') {
-                    $("#submit_btn").removeClass("hidden");
-                    $("#submit_btn").addClass("flex");
-                }
+                // if(user_role === 'SUPERADMIN' || user_role === 'ADMIN') {
+                //     $("#submit_btn").removeClass("hidden");
+                //     $("#submit_btn").addClass("flex");
+                // }
+
+                $("#submit_btn").removeClass("hidden");
+                $("#submit_btn").addClass("flex");
 
                 $(".prev-btn").attr("id",`prev--${indicator_category_indices[target_index-1]}`);
                 $(".prev-btn").removeClass("hidden");
@@ -1017,6 +1077,62 @@
             $("#leave-evaluation").click(function (e) { 
                 e.preventDefault();
                 window.close();
+            });
+
+            $("#jury_id").change(function (e) { 
+                e.preventDefault();
+                if ($(this).val() != "") {
+                    $("#set_jury_btn").attr("disabled", false);
+                    $("#set_jury_btn").removeClass("bg-success-20");
+                    $("#set_jury_btn").addClass("bg-success hover:bg-success-70 border border-success focus:ring-4 focus:outline-none focus:ring-blue-300");
+                } else {
+                    $("#set_jury_btn").attr("disabled", true);
+                    $("#set_jury_btn").removeClass("bg-success hover:bg-success-70 border border-success focus:ring-4 focus:outline-none focus:ring-blue-300");
+                    $("#set_jury_btn").addClass("bg-success-20");
+                }
+                console.log($(this).val());
+            });
+
+            $("#closeSetJuryModal").click(function (e) { 
+                e.preventDefault();
+                $("#set_jury_btn").attr("disabled", true);
+                $("#set_jury_btn").removeClass("bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300");
+                $("#set_jury_btn").addClass("bg-primary-20");
+                $("#jury_id").val("");
+            });
+
+            $("#set_jury_btn").click(function (e) { 
+                e.preventDefault();
+                $("#set_jury_btn").attr("disabled", true);
+                $("#set_jury_btn").removeClass("bg-primary hover:bg-primary-70 border border-primary focus:ring-4 focus:outline-none focus:ring-blue-300");
+                $("#set_jury_btn").addClass("bg-primary-20");
+                
+                let jury_id = $("#jury_id").val();
+                let respondent_id = @json($respondent->id);
+
+                $.ajax({
+                    type        : "POST",
+                    url         : `{{ route('questionnaire.setJury', $respondent->id) }}`,
+                    data        : {
+                        _method     : 'PUT',
+                        _token      : '{{ csrf_token() }}',
+                        jury_id     : $("#jury_id").val()
+                    },
+                    dataType    : "JSON",
+                    success     : function (response) {
+                        console.log(response)
+                        Swal.fire({
+                            title               : 'Berhasil',
+                            text                : 'Juri berhasil ditetapkan.',
+                            icon                : 'success',
+                            showConfirmButton   : false,
+                            timer               : 2000
+                        });
+                        $('#submit_btn').remove();
+                    }
+                });
+
+
             });
         });
     </script>

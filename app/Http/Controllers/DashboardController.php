@@ -99,7 +99,7 @@ class DashboardController extends Controller
             return view('pages.dashboard.jury',compact('processed_data', 'work_units'));
         }
         /* ADMIN */  
-        else if ($user->role === "ADMIN") {
+        else if ($user->role === "SUPERADMIN" || $user->role === "ADMIN") {
             $highest_score_responses = RespondentScore::query()
                 ->with('respondent.work_unit')
                 ->orderByDesc('total_score')

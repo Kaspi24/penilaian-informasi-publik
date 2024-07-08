@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
             WorkUnitSeeder::class,
             QuestionSeeder::class,
             QuestionChildrenSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            LandingPageContentSeeder::class
         ]);
     }
 }

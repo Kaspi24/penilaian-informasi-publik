@@ -4,7 +4,7 @@
     $finished_count = $assigned->where('is_done_scoring', true)->count();
 @endphp
 @if ($assigned_count === 0)
-    <p class="w-[21.7rem] text-center text-[8pt] font-extrabold p-1 px-2 rounded-md uppercase bg-gray-200 text-gray-800">
+    <p class="w-[21.7rem] text-center text-[8pt] font-extrabold p-1 px-2 rounded-md uppercase bg-yellow-200 text-yellow-800">
         BELUM ADA UNIT KERJA YANG DITUGASKAN UNTUK DINILAI
     </p>
 @else

@@ -12,7 +12,7 @@
                 <p>MULAI PENILIAIAN</p>
             </a>
         @else
-            <button type="button" class="w-full py-1.5 pl-2 pr-3 rounded-md text-xs font-extrabold tracking-tight bg-gray-200 text-gray-500 flex gap-1.5 items-center justify-center" disabled>
+            <button type="button" class="w-full py-1.5 pl-2 pr-3 rounded-md text-xs font-extrabold tracking-tight bg-yellow-200 text-yellow-500 flex gap-1.5 items-center justify-center" disabled>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                         <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd" />
@@ -23,7 +23,7 @@
             </button>
         @endif
     @else
-        <button type="button" class="w-full py-1.5 pl-2 pr-3 rounded-md text-xs font-extrabold tracking-tight bg-emerald-800/50  text-white flex gap-1.5 items-center justify-center" disabled>
+        <button type="button" class="w-full py-1.5 pl-2 pr-3 rounded-md text-xs font-extrabold tracking-tight bg-emerald-800/80  text-white flex gap-1.5 items-center justify-center" disabled>
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                     <path fill-rule="evenodd" d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />

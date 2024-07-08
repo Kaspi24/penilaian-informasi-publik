@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-primary-70">
-            Data Pribadi {{ Auth::user()->role === 'RESPONDENT' && 'Responden' }} 
+            Data Pribadi {{ Auth::user()->role === 'RESPONDENT' ? 'Responden' : '' }} 
         </h2>
 
         <p class="mt-1 text-sm text-primary-40">
@@ -25,7 +25,7 @@
             <div class="">
                 <div class="mb-3">
                     <p class="block mb-0.5 font-medium text-sm text-gray-700">Foto Kartu Pegawai</p>
-                    <small class="block w-full text-xs mb-2 font-bold text-primary-30">File Gambar (JPG/JPEG/PNG), max. 1MB</small>
+                    <small class="block w-full text-xs mb-2 font-bold text-primary-30">Unggah foto kartu pegawai / id card unit kerja (JPG/JPEG/PNG), max. 1MB</small>
                     <input type="file" name="profile_picture" id="profile_picture" class="hidden"/>
                     <small class="{{ Auth::user()->profile_picture ? 'hidden' : 'block' }} w-full text-xs mb-2 font-bold text-danger">Foto Kartu Pegawai belum diisi.</small>
                     <div class="relative block w-1/2 aspect-[4300/2699] lg:flex lg:items-center lg:justify-center rounded-sm overflow-hidden bg-white border-2 border-primary-30 focus:ring-primary-70 focus:border-primary-70 p-1 group">
@@ -63,30 +63,37 @@
         
         <div class="">
             <x-input-label for="name" :value="__('Nama')" />
+            @if (Auth::user()->role === 'RESPONDENT')
+                <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan nama PIC penilaian AKIP</small>
+            @endif
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
             <x-input-label for="username" :value="__('Username')" />
+            <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan username yang mudah diingat (digunakan untuk login)</small>
             <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" required autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
+            <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan alamat email aktif @if (Auth::user()->role === 'RESPONDENT') PIC penilaian AKIP @endif</small>
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="off" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
         @if (Auth::user()->role === 'RESPONDENT')
             <div>
                 <x-input-label for="phone" :value="__('Nomor Telepon')" />
+                <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan nomor kontak PIC penilaian AKIP</small>
                 <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autocomplete="off" />
                 <x-input-error class="mt-2" :messages="$errors->get('phone')" />
             </div>
 
             <div>
                 <x-input-label for="whatsapp" :value="__('Nomor WhatsApp')" />
+                <small class="block w-full text-xs mb-2 font-bold text-primary-30">Isi dengan nomor WhatsApp PIC penilaian AKIP</small>
                 <x-text-input id="whatsapp" name="whatsapp" type="text" class="mt-1 block w-full" :value="old('whatsapp', $user->whatsapp)" required autocomplete="off" />
                 <x-input-error class="mt-2" :messages="$errors->get('whatsapp')" />
             </div>

@@ -57,165 +57,190 @@
     {
         "id"            : 12,
         "question_id"   : 29,
-        "text"          : "Kerangka Acuan Kerja (KAK)"
+        "text"          : "Rencana Umum Pengadaan (RUP)"
     },
     {
         "id"            : 13,
         "question_id"   : 29,
-        "text"          : "Harga Perkiraan Sendiri (HPS) serta Riwayat HPS"
+        "text"          : "Kerangka Acuan Kerja (KAK)"
     },
     {
         "id"            : 14,
         "question_id"   : 29,
-        "text"          : "Spesifikasi Teknis"
+        "text"          : "Harga Perkiraan Sendiri (HPS) serta Riwayat HPS"
     },
     {
         "id"            : 15,
         "question_id"   : 29,
-        "text"          : "Rancangan Kontrak"
+        "text"          : "Spesifikasi Teknis"
     },
     {
         "id"            : 16,
         "question_id"   : 29,
-        "text"          : "Dokumen Persyaratan Penyedia atau Lembar Data Kualifikasi"
+        "text"          : "Rancangan Kontrak"
     },
     {
         "id"            : 17,
         "question_id"   : 29,
-        "text"          : "Dokumen Persyaratan Proses Pemilihan atau Lembar Data Pemilihan"
+        "text"          : "Dokumen Persyaratan Penyedia atau Lembar Data Kualifikasi"
     },
     {
         "id"            : 18,
         "question_id"   : 29,
-        "text"          : "Daftar Kuantitas dan Harga"
+        "text"          : "Dokumen Persyaratan Proses Pemilihan atau Lembar Data Pemilihan"
     },
     {
         "id"            : 19,
         "question_id"   : 29,
-        "text"          : "Jadwal pelaksanaan dan data lokasi pekerjaan"
+        "text"          : "Daftar Kuantitas dan Harga"
     },
     {
         "id"            : 20,
         "question_id"   : 29,
-        "text"          : "Gambar Rancangan Pekerjaan"
+        "text"          : "Jadwal pelaksanaan dan data lokasi pekerjaan"
     },
     {
         "id"            : 21,
         "question_id"   : 29,
-        "text"          : "Dokumen Studi Kelayakan dan Dokumen Lingkungan Hidup, termasuk Analisis Mengenai Dampak Lingkungan"
+        "text"          : "Gambar Rancangan Pekerjaan"
     },
     {
         "id"            : 22,
         "question_id"   : 29,
-        "text"          : "Dokumen Penawaran Administratif"
+        "text"          : "Dokumen Studi Kelayakan dan Dokumen Lingkungan Hidup, termasuk Analisis Mengenai Dampak Lingkungan"
     },
     {
         "id"            : 23,
         "question_id"   : 29,
-        "text"          : "Surat Penawaran Penyedia"
+        "text"          : "Dokumen Penawaran Administratif"
     },
     {
         "id"            : 24,
         "question_id"   : 29,
-        "text"          : "Sertifikat atau Lisensi yang masih berlaku dari Direktorat Jenderal Kekayaan Intelektual Kementerian Hukum dan Hak Asasi Manusia"
+        "text"          : "Surat Penawaran Penyedia"
     },
     {
         "id"            : 25,
         "question_id"   : 29,
-        "text"          : "Berita Acara Pemberian Penjelasan"
+        "text"          : "Sertifikat atau Lisensi yang masih berlaku dari Direktorat Jenderal Kekayaan Intelektual Kementerian Hukum dan Hak Asasi Manusia"
     },
     {
         "id"            : 26,
         "question_id"   : 29,
-        "text"          : "Berita Acara Pengumuman Negosiasi"
+        "text"          : "Berita Acara Pemberian Penjelasan"
     },
     {
         "id"            : 27,
         "question_id"   : 29,
-        "text"          : "Berita Acara Sanggah dan Sanggah Banding"
+        "text"          : "Berita Acara Pengumuman Negosiasi"
     },
     {
         "id"            : 28,
         "question_id"   : 29,
-        "text"          : "Berita Acara Penetapan atau Pengumuman Penyedia"
+        "text"          : "Berita Acara Sanggah dan Sanggah Banding"
     },
     {
         "id"            : 29,
         "question_id"   : 29,
-        "text"          : "Laporan Hasil Pemilihan Penyedia"
+        "text"          : "Berita Acara Penetapan atau Pengumuman Penyedia"
     },
     {
         "id"            : 30,
         "question_id"   : 29,
-        "text"          : "Surat Penunjukan Penyedia Barang/Jasa (SPPBJ)"
+        "text"          : "Laporan Hasil Pemilihan Penyedia"
     },
     {
         "id"            : 31,
         "question_id"   : 29,
-        "text"          : "Dokumen Kontrak yang telah ditandatangani beserta Perubahan Kontrak yang tidak mengandung informasi yang dikecualikan"
+        "text"          : "Surat Penunjukan Penyedia Barang/Jasa (SPPBJ)"
     },
     {
         "id"            : 32,
         "question_id"   : 29,
-        "text"          : "Surat Perintah Mulai Kerja"
+        "text"          : "Surat Perjanjian Kemitraan"
     },
     {
         "id"            : 33,
         "question_id"   : 29,
-        "text"          : "Surat Jaminan Pelaksanaan"
+        "text"          : "Surat Penugasan atau Surat Pembentukan Tim Swakelola"
     },
     {
         "id"            : 34,
         "question_id"   : 29,
-        "text"          : "Surat Jaminan Uang Muka"
+        "text"          : "Nota Kesepahaman atau Memorandum of Understanding"
     },
     {
         "id"            : 35,
         "question_id"   : 29,
-        "text"          : "Surat Jaminan Pemeliharaan"
+        "text"          : "Dokumen Kontrak yang telah ditandatangani beserta Perubahan Kontrak yang tidak mengandung informasi yang dikecualikan"
     },
     {
         "id"            : 36,
         "question_id"   : 29,
-        "text"          : "Surat Tagihan"
+        "text"          : "Ringkasan Kontrak yang sekurang-kurangnya mencantumkan informasi mengenai para pihak yang bertandatangan, nama direktur dan pemilik usaha, alamat penyedia, NPWP, nilai kontrak, rincian pekerjaan, spesifikasi pekerjaan, lokasi pekerjaan, waktu pekerjaan, sumber dana, jenis kontrak, serta ringkasan perubahan kontrak"
     },
     {
         "id"            : 37,
         "question_id"   : 29,
-        "text"          : "Surat Pesanan E-purchasing"
+        "text"          : "Surat Perintah Mulai Kerja"
     },
     {
         "id"            : 38,
         "question_id"   : 29,
-        "text"          : "Surat Perintah Membayar"
+        "text"          : "Surat Jaminan Pelaksanaan"
     },
     {
         "id"            : 39,
         "question_id"   : 29,
-        "text"          : "Surat Perintah Pencairan Dana"
+        "text"          : "Surat Jaminan Uang Muka"
     },
     {
         "id"            : 40,
         "question_id"   : 29,
-        "text"          : "Laporan Pelaksanaan Pekerjaan"
+        "text"          : "Surat Jaminan Pemeliharaan"
     },
     {
         "id"            : 41,
         "question_id"   : 29,
-        "text"          : "Laporan Penyelesaian Pekerjaan"
+        "text"          : "Surat Tagihan"
     },
     {
         "id"            : 42,
         "question_id"   : 29,
-        "text"          : "Berita Acara Pemeriksaan Hasil Pekerjaan"
+        "text"          : "Surat Pesanan E-purchasing"
     },
     {
         "id"            : 43,
         "question_id"   : 29,
-        "text"          : "Berita Acara Serah Terima Sementara atau Provisional Hand Over"
+        "text"          : "Surat Perintah Membayar"
     },
     {
         "id"            : 44,
+        "question_id"   : 29,
+        "text"          : "Surat Perintah Pencairan Dana"
+    },
+    {
+        "id"            : 45,
+        "question_id"   : 29,
+        "text"          : "Laporan Pelaksanaan Pekerjaan"
+    },
+    {
+        "id"            : 46,
+        "question_id"   : 29,
+        "text"          : "Laporan Penyelesaian Pekerjaan"
+    },
+    {
+        "id"            : 47,
+        "question_id"   : 29,
+        "text"          : "Berita Acara Pemeriksaan Hasil Pekerjaan"
+    },
+    {
+        "id"            : 48,
+        "question_id"   : 29,
+        "text"          : "Berita Acara Serah Terima Sementara atau Provisional Hand Over"
+    },
+    {
+        "id"            : 49,
         "question_id"   : 29,
         "text"          : "Berita Acara Serah Terima atau Final Hand Over"
     }

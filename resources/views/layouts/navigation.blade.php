@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16 lg:h-[4.5rem]">
             <!-- Logo -->
             <div class="shrink-0 flex items-center  max-w-[70%] lg:max-w-[30%]">
-                <a href="{{ route('dashboard') }}" class="flex w-fit gap-2 lg:gap-3 items-center">
+                <a href="/" class="flex w-fit gap-2 lg:gap-3 items-center">
                     <img src="{{ asset('logo/KEMENHUB.png') }}" class="h-10 w-auto" alt="">
                     <span class="text-primary font-extrabold mb-0.5 lg:mb-1 sm:hidden lg:inline-block">
                         <p class="text-[0.7rem] lg:text-xs xl:text-sm font-bold tracking-tight xl:tracking-normal uppercase break-words">Penilaian Anugerah<br>Keterbukaan Informasi Publik</p>
@@ -18,9 +18,17 @@
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    {{-- <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Beranda') }}
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (Auth::user()->role === "RESPONDENT")
+                        <x-nav-link :href="asset('file/Panduan Pengisian Jawaban AKIP 2024.pdf')" target="_blank">
+                            {{ __('Panduan Penilaian') }}
+                        </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('questionnaire.index')" :active="request()->routeIs('questionnaire.index')">
                         {{ __('Penilaian') }}
                     </x-nav-link>
@@ -29,7 +37,7 @@
                             {{ __('Pertanyaan') }}
                         </x-nav-link>
                     @endif
-                    @if ( Auth::user()->role === "ADMIN")
+                    @if (Auth::user()->role === "SUPERADMIN" || Auth::user()->role === "ADMIN")
                         <x-nav-link :href="route('work-unit.index')" :active="request()->routeIs('work-unit.index')">
                             {{ __('Unit Kerja') }}
                         </x-nav-link>
@@ -38,6 +46,11 @@
                         </x-nav-link>
                         <x-nav-link :href="route('jury.index')" :active="request()->routeIs('jury.index')">
                             {{ __('Juri') }}
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()->role === "SUPERADMIN")
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                            {{ __('Admin') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -95,6 +108,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->role === "RESPONDENT")
+                <x-responsive-nav-link :href="asset('file/Panduan Pengisian Jawaban AKIP 2024.pdf')" target="_blank">
+                    {{ __('Panduan Penilaian') }}
+                </x-responsive-nav-link>
+            @endif
             <x-responsive-nav-link :href="route('questionnaire.index')" :active="request()->routeIs('questionnaire.index')">
                 {{ __('Penilaian') }}
             </x-responsive-nav-link>
@@ -103,7 +121,7 @@
                     {{ __('Pertanyaan') }}
                 </x-responsive-nav-link>
             @endif
-            @if ( Auth::user()->role === "ADMIN")
+            @if (Auth::user()->role === "SUPERADMIN" || Auth::user()->role === "ADMIN")
                 <x-responsive-nav-link :href="route('work-unit.index')" :active="request()->routeIs('work-unit.index')">
                     {{ __('Unit Kerja') }}
                 </x-responsive-nav-link>
@@ -112,6 +130,11 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('jury.index')" :active="request()->routeIs('jury.index')">
                     {{ __('Juri') }}
+                </x-responsive-nav-link>
+            @endif
+            @if (Auth::user()->role === "SUPERADMIN")
+                <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                    {{ __('Admin') }}
                 </x-responsive-nav-link>
             @endif
         </div>

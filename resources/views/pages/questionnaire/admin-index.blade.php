@@ -25,7 +25,7 @@
                         TETAPKAN JURI
                     </p>
                     <p class="font-semibold text-left text-primary-50 mb-2">
-                        Anda akan menetapkan juri untuk Penilaian Tanggapan Penilaian Unit Kerja di bawah ini :
+                        Anda akan menetapkan juri untuk Evaluasi Tanggapan Penilaian Unit Kerja di bawah ini :
                     </p>
                     <div id="work_unit_name_container" class="text-primary text-left">
                     </div>

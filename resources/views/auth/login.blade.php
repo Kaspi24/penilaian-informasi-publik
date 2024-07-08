@@ -4,12 +4,14 @@
         @include('components.auth-alert')
         <p class="text-center text-3xl text-primary font-bold px-2">Selamat Datang</p>
         <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-1/2 h-auto mx-auto my-2 lg:my-4">
-        <p class="text-center text-lg lg:text-xl text-primary font-bold px-2 mb-1 lg:mb-1.5 uppercase">
-            {{ config('app.name') }}
-        </p>
-        <p class="text-center text-sm text-primary-40 font-medium px-2 mb-2 lg:mb-4 tracking-tight">
-            Kementerian Perhubungan Republik Indonesia
-        </p>
+        <a href="/">
+            <p class="text-center text-lg lg:text-xl text-primary font-bold px-2 mb-1 lg:mb-1.5 uppercase">
+                {{ config('app.name') }}
+            </p>
+            <p class="text-center text-sm text-primary-40 font-medium px-2 mb-2 lg:mb-4 tracking-tight">
+                Kementerian Perhubungan Republik Indonesia
+            </p>
+        </a>
 
         <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-4 px-4">
             @csrf

@@ -10,7 +10,7 @@
             </p>
         @endif
     @else
-        <p class="w-36 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-gray-400 text-gray-50">
+        <p class="w-36 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-yellow-200 text-yellow-800">
             BELUM DIKIRIMKAN
         </p>
     @endif

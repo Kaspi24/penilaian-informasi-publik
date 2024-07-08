@@ -12,7 +12,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        if ($user->role !== "ADMIN") {
+        if (!($user->role == "SUPERADMIN" || $user->role == "ADMIN")) {
             abort(404);
         }
         return $next($request);

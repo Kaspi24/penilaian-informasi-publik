@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-slot name="title">Penilaian AKIP - Daftar</x-slot>
     <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/4 p-4 md:p-3 xl:p-2">
-        <div class="w-full flex justify-start items-center gap-4 py-6">
+        <a href="/" class="w-full flex justify-start items-center gap-4 py-6">
             <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-12 h-auto">
             <div class="w-[calc(100%-3.25rem)]">
                 <p class="text-left text-sm lg:text-base text-primary font-bold mb-0.5 lg:mb-1 uppercase leading-4 break-words">
@@ -11,7 +11,7 @@
                     Kementerian Perhubungan Republik Indonesia
                 </p>
             </div>
-        </div>
+        </a>
         <p class="text-left text-2xl text-primary font-bold mb-4">Pendaftaran Responden</p>
         {{-- <img src="{{ asset('logo/KEMENHUB.png') }}" alt="" class="w-3/4 h-auto mx-auto my-3"> --}}
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
