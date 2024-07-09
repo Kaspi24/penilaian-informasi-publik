@@ -15,13 +15,14 @@ class QuestionnaireTable extends DataTableComponent
 {
     protected $model = User::class;
 
-    protected $listeners = ['setJuryForAllWorkUnit'];
+    protected $listeners = ['setJuryForAllWorkUnit','publishAllWorkUnit'];
 
     public function configure(): void
     {
         $this->setPrimaryKey('id');
         $this->setSortingEnabled();
         $this->setFiltersEnabled();
+        // $this->setDebugEnabled();
     }
 
     public function builder(): Builder
@@ -32,7 +33,7 @@ class QuestionnaireTable extends DataTableComponent
                 'score.jury',
                 'answers.children'
             ])
-            ->where('role', 'RESPONDENT');
+            ->where('users.role', 'RESPONDENT');
     }
 
     public function filters(): array
@@ -51,13 +52,31 @@ class QuestionnaireTable extends DataTableComponent
                 ->filter(function(Builder $builder, string $value) {
                     $builder->where('work_unit.category', $value);
                 }),
+            SelectFilter::make('Status Penilaian')
+                ->options([
+                    0 => "Semua",
+                    1 => "Belum Dikirimkan",
+                    2 => "Menunggu Dinilai",
+                    3 => "Sudah Dinilai",
+                    4 => "Sudah Di-publish",
+                ])
+                ->filter(function(Builder $builder, string $value) {
+                    switch ($value) {
+                        case 1: $builder->where('score.is_done_filling', false); break;
+                        case 2: $builder->where('score.is_done_filling', true)->where('score.is_done_scoring',false); break;
+                        case 3: $builder->where('score.is_done_scoring', true)->where('score.is_published', false); break;
+                        case 4: $builder->where('score.is_published', true); break;
+                        default : $builder; break;
+                    }
+                }),
         ];
     }
 
     public function bulkActions(): array
     {
         return [
-            'setJury' => 'Tentukan Juri'
+            'setJury' => 'Tentukan Juri',
+            'publish' => 'Publish Nilai',
         ];
     }
 
@@ -84,6 +103,32 @@ class QuestionnaireTable extends DataTableComponent
     {
         RespondentScore::whereIn('respondent_id', $id_arr)->update([
             'jury_id' => $jury_id
+        ]);
+    }
+
+    public function publish()
+    {
+        if (count($this->getSelected())) {
+            $this->dispatch('publishAll', [
+                'work_units' => User::query()
+                    ->select(
+                        'work_units.name as work_unit_name',
+                        'work_units.id as unit_id'
+                    )
+                    ->leftJoin('work_units', 'users.work_unit_id', '=', 'work_units.id')
+                    ->whereIn('users.id',$this->getSelected())
+                    ->pluck('work_unit_name','unit_id'),
+                'users' => $this->getSelected(),
+                'total' => count($this->getSelected())
+            ]);
+        }
+        $this->clearSelected();
+    }
+
+    public function publishAllWorkUnit($id_arr)
+    {
+        RespondentScore::whereIn('respondent_id', $id_arr)->update([
+            'is_published' => true
         ]);
     }
 
@@ -135,15 +180,19 @@ class QuestionnaireTable extends DataTableComponent
                 )
                 ->collapseAlways(),
             // HIDDEN COLUMNS
-            Column::make("hide", "id")->hideIf(true),
-            Column::make("hide", "name")->hideIf(true),
-            Column::make("hide", "role")->hideIf(true),
-            Column::make("hide", "email")->hideIf(true),
-            Column::make("hide", "phone")->hideIf(true),
-            Column::make("hide", "whatsapp")->hideIf(true),
-            Column::make("hide", "work_unit.head_name")->hideIf(true),
-            Column::make("hide", "work_unit.email")->hideIf(true),
-            Column::make("hide", "work_unit.phone")->hideIf(true)
+            Column::make("hidden", "id")->hideIf(true),
+            Column::make("hidden", "name")->hideIf(true),
+            Column::make("hidden", "role")->hideIf(true),
+            Column::make("hidden", "email")->hideIf(true),
+            Column::make("hidden", "phone")->hideIf(true),
+            Column::make("hidden", "whatsapp")->hideIf(true),
+            Column::make("hidden", "work_unit.head_name")->hideIf(true),
+            Column::make("hidden", "work_unit.email")->hideIf(true),
+            Column::make("hidden", "work_unit.phone")->hideIf(true),
+            Column::make("hidden", "score.id")->hideIf(true),
+            Column::make("hidden", "score.is_done_filling")->hideIf(true),
+            Column::make("hidden", "score.is_done_scoring")->hideIf(true),
+            Column::make("hidden", "score.is_published")->hideIf(true)
         ];
     }
 }

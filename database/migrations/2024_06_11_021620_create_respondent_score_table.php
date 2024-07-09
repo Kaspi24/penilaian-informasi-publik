@@ -23,6 +23,7 @@ return new class extends Migration
             // Status 'is done'
             $table->boolean('is_done_filling')->default(false);
             $table->boolean('is_done_scoring')->default(false);
+            $table->boolean('is_published')->default(false);
             // Total Score
             $table->float('total_score')->default(0);
             $table->timestamps();

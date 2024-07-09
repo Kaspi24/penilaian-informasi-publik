@@ -101,7 +101,7 @@
                     </div>
                 @endif
             @else
-                @if (!$submission->is_done_scoring)
+                @if (!$submission->is_published)
                     <div class="w-full bg-white p-3">
                         <div class="w-full p-3 rounded-lg bg-primary-10/40 text-primary-50 block lg:flex">
                             <div class="w-full lg:w-2/3 p-6 flex gap-3 items-center">

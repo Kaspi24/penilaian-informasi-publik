@@ -49,16 +49,18 @@ class UserTable extends DataTableComponent
                 }),
             SelectFilter::make('Status Penilaian')
                 ->options([
-                    0  => "Semua",
+                    0 => "Semua",
                     1 => "Belum Dikirimkan",
                     2 => "Menunggu Dinilai",
-                    3 => "Sudah Dinilai"
+                    3 => "Sudah Dinilai",
+                    4 => "Sudah Di-publish",
                 ])
                 ->filter(function(Builder $builder, string $value) {
                     switch ($value) {
                         case 1: $builder->where('score.is_done_filling', false); break;
                         case 2: $builder->where('score.is_done_filling', true)->where('score.is_done_scoring',false); break;
-                        case 3: $builder->where('score.is_done_scoring', true); break;
+                        case 3: $builder->where('score.is_done_scoring', true)->where('score.is_published', false); break;
+                        case 4: $builder->where('score.is_published', true); break;
                         default : $builder; break;
                     }
                 }),
@@ -141,6 +143,7 @@ class UserTable extends DataTableComponent
             Column::make("hidden", "score.id")->hideIf(true),
             Column::make("hidden", "score.is_done_filling")->hideIf(true),
             Column::make("hidden", "score.is_done_scoring")->hideIf(true),
+            Column::make("hidden", "score.is_published")->hideIf(true)
         ];
     }
 }

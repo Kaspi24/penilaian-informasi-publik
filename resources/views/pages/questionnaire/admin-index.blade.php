@@ -54,12 +54,39 @@
         </div>
     </div>
 
+    <div id="publishModal" class="fixed hidden z-[2220] inset-0">
+        <div class="absolute z-[2222] inset-0 bg-primary-90 bg-opacity-30 flex justify-center items-center py-4">
+            <div class="bg-white w-10/12 md:w-1/2 lg:w-2/5 xl:w-1/3 rounded-md p-5 lg:p-8 flex flex-col justify-center items-center">
+                <div class="w-full text-center mb-3">
+                    <p class="text-lg lg:text-xl text-primary font-extrabold tracking-wide mb-4">
+                        PUBLISH HASIL EVALUSAI PENILAIAN
+                    </p>
+                    <p class="font-semibold text-left text-primary-50 mb-2">
+                        Setelah di-publish Responden dari Unit Kerja berikut akan dapat melihat hasil Penilaiannya :
+                    </p>
+                    <div id="publish_work_unit_name_container" class="text-primary text-left">
+                    </div>
+                </div>
+
+                <div class="w-full flex justify-center items-center gap-4">
+                    <button id="closePublishModal" type="button" class="block w-[49%] text-primary bg-white border border-primary focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium hover:font-semibold rounded-md text-sm py-2 text-center">
+                        KEMBALI
+                    </button>
+                    <button id="publish_btn" type="button" class="block w-[49%] text-white bg-success hover:bg-success-70 border border-subg-success focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-md text-sm py-2 text-center">  
+                        PUBLISH
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <x-slot name="scripts">
         
         <script>
             $(document).ready(function () {
                 let workUnitToBeSet;
 
+                // SET JURY
                 window.addEventListener('setJuryForAll', event => {
                     workUnitToBeSet = event.detail[0].users;
                     $("#setJuryModal").removeClass("hidden");
@@ -121,6 +148,52 @@
                     Swal.fire({
                         title: 'Berhasil',
                         text: 'Juri berhasil ditetapkan.',
+                        icon: 'success',
+                        showConfirmButton : false,
+                        timer: 2000
+                    });
+                });
+
+                // PUBLISH EVALUATION
+                window.addEventListener('publishAll', event => {
+                    workUnitToBeSet = event.detail[0].users;
+                    $("#publishModal").removeClass("hidden");
+                    $("#publish_work_unit_name_container").html("");
+                    if (event.detail[0].total > 5) {
+                        let i = 0;
+                        $.each(event.detail[0].work_units, function (id, name) { 
+                            $("#publish_work_unit_name_container").append(`
+                                <p class="text-xs rounded-md p-1 px-2 w-full bg-primary text-warning mt-1.5 uppercase font-medium">${name}</p>
+                            `);
+                            i++;
+                            if (i==5) {
+                                return false;
+                            }
+                        });
+                        $("#publish_work_unit_name_container").append(`
+                            <p class="rounded-md p-1 w-fit mt-1 font-bold">Dan ${parseInt(event.detail[0].total)-5} lainnya</p>
+                        `);
+                    } else {
+                        $.each(event.detail[0].work_units, function (id, name) { 
+                            $("#publish_work_unit_name_container").append(`<p class="text-xs rounded-md p-1 px-2 w-full bg-primary text-warning mt-1.5 uppercase font-medium">${name}</p>`);
+                        });
+                    }
+                });
+
+                $("#closePublishModal").click(function (e) { 
+                    e.preventDefault();
+                    $("#publishModal").addClass("hidden");
+                    $("#publish_work_unit_name_container").html("");
+                });
+
+                $("#publish_btn").click(function (e) { 
+                    e.preventDefault();
+                    Livewire.dispatch('publishAllWorkUnit', {id_arr: workUnitToBeSet})
+                    $("#publishModal").addClass("hidden");
+                    $("#publish_work_unit_name_container").html("");
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Penilaian telah di-publish.',
                         icon: 'success',
                         showConfirmButton : false,
                         timer: 2000

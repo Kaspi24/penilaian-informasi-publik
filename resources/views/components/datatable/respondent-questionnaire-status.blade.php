@@ -1,9 +1,15 @@
 <div class="w-fit">
     @if ($row->score->is_done_filling)
         @if ($row->score->is_done_scoring)
-            <p class="w-36 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-emerald-200 text-emerald-800">
-                SUDAH DINILAI
-            </p>
+            @if ($row->score->is_published)
+                <p class="w-36 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-emerald-600 text-emerald-200">
+                    SUDAH DIPUBLISH
+                </p>
+            @else
+                <p class="w-36 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-emerald-200 text-emerald-800">
+                    SUDAH DINILAI
+                </p>
+            @endif
         @else
             <p class="w-36 text-center text-xs font-extrabold p-1 px-2 rounded-md uppercase bg-red-200 text-red-800">
                 MENUNGGU DINILAI

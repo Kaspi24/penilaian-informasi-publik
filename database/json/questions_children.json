@@ -243,5 +243,15 @@
         "id"            : 49,
         "question_id"   : 29,
         "text"          : "Berita Acara Serah Terima atau Final Hand Over"
+    },
+    {
+        "id"            : 50,
+        "question_id"   : 30,
+        "text"          : "Dari PPID Pelaksana UPT ke PPID Pelaksana"
+    },
+    {
+        "id"            : 51,
+        "question_id"   : 30,
+        "text"          : "Dari PPID Pelaksana ke PPID Utama"
     }
 ]

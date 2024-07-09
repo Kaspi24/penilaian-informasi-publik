@@ -14,6 +14,7 @@ class RespondentScore extends Model
         'jury_id',
         'is_done_filling',
         'is_done_scoring',
+        'is_published',
         'total_score',
         'updated_by',
         'updated_by_name',

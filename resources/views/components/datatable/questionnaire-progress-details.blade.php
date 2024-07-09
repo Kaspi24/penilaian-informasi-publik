@@ -16,6 +16,7 @@
     }
 @endphp
 <div class="w-full">
+    <!-- PROFILE NOT COMPLETE -->
     @if (
             $row->name == null || 
             $row->email == null || 
@@ -34,6 +35,7 @@
             <span>RESPONDEN BELUM MELENGKAPI PROFIL</span>
         </p>
     @else
+        <!-- PROFILE NOT COMPLETE -->
         @if (!$row->score->is_done_filling)
             <div class="w-full p-4 rounded-lg bg-primary-10/40 text-primary-50 block lg:flex">
                 <div class="w-full">
