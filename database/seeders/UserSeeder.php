@@ -70,50 +70,50 @@ class UserSeeder extends Seeder
             'role'          => UserRole::JURY,
         ]);
         
-        $work_units = WorkUnit::whereNot('category','PUSAT')->get();
-        $questions  = Question::with('children')->get();
+        // $work_units = WorkUnit::whereNot('category','PUSAT')->get();
+        // $questions  = Question::with('children')->get();
 
-        foreach ($work_units as $work_unit) {
-            $number = rand(0,3);
+        // foreach ($work_units as $work_unit) {
+        //     $number = rand(0,3);
 
-            if($number === 0 || $number === 1) {
-                $user = User::factory()->create([
-                    'username'          => fake()->userName(),
-                    'work_unit_id'      => $work_unit->id,
-                    'role'              => UserRole::RESPONDENT,
-                    'email'             => fake()->safeEmail(),
-                    'name'              => $number === 0 ? null : fake()->name(),
-                    'phone'             => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
-                    'whatsapp'          => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
-                    'email_verified_at' => $number === 0 ? null : now(),
-                ]);
+        //     if($number === 0 || $number === 1) {
+        //         $user = User::factory()->create([
+        //             'username'          => fake()->userName(),
+        //             'work_unit_id'      => $work_unit->id,
+        //             'role'              => UserRole::RESPONDENT,
+        //             'email'             => fake()->safeEmail(),
+        //             'name'              => $number === 0 ? null : fake()->name(),
+        //             'phone'             => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
+        //             'whatsapp'          => $number === 0 ? null : fake()->numerify('+6281 ##-###-####'),
+        //             'email_verified_at' => $number === 0 ? null : now(),
+        //         ]);
 
-                if ($number === 1) {
-                    $work_unit->update([   
-                        'head_name' => fake()->name(),
-                        'email'     => fake()->safeEmail(),
-                        'phone'     => fake()->numerify('+6281 ##-###-####')
-                    ]);
-                }
-                foreach ($questions as $question) {
-                    $respondent_answer = RespondentAnswer::create([
-                        'respondent_id' => $user->id,
-                        'question_id'   => $question->id
-                    ]);
+        //         if ($number === 1) {
+        //             $work_unit->update([   
+        //                 'head_name' => fake()->name(),
+        //                 'email'     => fake()->safeEmail(),
+        //                 'phone'     => fake()->numerify('+6281 ##-###-####')
+        //             ]);
+        //         }
+        //         foreach ($questions as $question) {
+        //             $respondent_answer = RespondentAnswer::create([
+        //                 'respondent_id' => $user->id,
+        //                 'question_id'   => $question->id
+        //             ]);
                     
-                    foreach ($question->children as $question_child) {
-                        RespondentAnswerChildren::create([
-                            'respondent_answer_id'  => $respondent_answer->id,
-                            'respondent_id'         => $user->id,
-                            'question_children_id'  => $question_child->id,
-                            'question_id'           => $question->id
-                        ]);
-                    }
-                }
-                RespondentScore::create([
-                    'respondent_id'         => $user->id
-                ]);
-            }
-        }
+        //             foreach ($question->children as $question_child) {
+        //                 RespondentAnswerChildren::create([
+        //                     'respondent_answer_id'  => $respondent_answer->id,
+        //                     'respondent_id'         => $user->id,
+        //                     'question_children_id'  => $question_child->id,
+        //                     'question_id'           => $question->id
+        //                 ]);
+        //             }
+        //         }
+        //         RespondentScore::create([
+        //             'respondent_id'         => $user->id
+        //         ]);
+        //     }
+        // }
     }
 }
