@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EmailVerified;
 use App\Http\Controllers\JuryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WorkUnitController;
@@ -15,6 +15,7 @@ use App\Http\Middleware\SuperadminMiddleware;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Middleware\ProfileCompletedMiddleware;
+use App\Http\Middleware\ResponseNotSubmittedMiddleware;
 
 // Route::get('/', [LandingPageController::class, 'index'])->name('welcome');
 Route::controller(LandingPageController::class)->group(function(){
@@ -66,7 +67,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function() {
 Route::middleware(['auth', ProfileCompletedMiddleware::class, EmailVerified::class])->controller(QuestionnaireController::class)->as('questionnaire.')->group(function() {
     Route::get('penilaian',             'index')->name('index');
     Route::middleware(RespondentMiddleware::class)->group(function() {
-        Route::get('isi-penilaian',         'start')->name('start');
+        Route::get('isi-penilaian',         'start')->middleware(ResponseNotSubmittedMiddleware::class)->name('start');
         Route::put('update-answer',         'updateAnswer')->name('updateAnswer');
         Route::put('update-answer-child',   'updateAnswerChild')->name('updateAnswerChild');
         Route::put('submit-response',       'submitResponse')->name('submitResponse');

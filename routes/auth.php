@@ -8,10 +8,11 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Middleware\PeriodIsOverMiddleware;
 
 Route::middleware('guest')->group(function () {
     // REGISTER
-    Route::get('register',  [RegisteredUserController::class, 'create'])->name('register');
+    Route::get('register',  [RegisteredUserController::class, 'create'])->middleware(PeriodIsOverMiddleware::class)->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
     
     // LOGIN
